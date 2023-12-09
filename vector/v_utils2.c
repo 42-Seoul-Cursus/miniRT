@@ -6,11 +6,11 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:39:43 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:42:14 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/09 23:51:28 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "vector.h"
 #include <math.h>
 
 double	v_length2(const t_vec3 vec)

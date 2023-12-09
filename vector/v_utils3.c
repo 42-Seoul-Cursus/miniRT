@@ -6,11 +6,11 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:42:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:43:46 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/09 23:51:18 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "vector.h"
 
 t_vec3	vp_minus(t_vec3 vec, const double x, const double y, const double z)
 {
