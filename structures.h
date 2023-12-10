@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/10 22:41:26 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/10 23:51:19 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_vec3		t_point3;
 typedef struct s_vec3		t_color3;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
-
+typedef struct s_mlx_data	t_mlx_data;
 
 struct s_vec3
 {
@@ -69,7 +69,23 @@ struct s_cylinder
 	double		radius;
 	double		height;
 	t_color3	rgb;
-}
+};
 
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_DESTROY = 17
+};
+
+struct s_mlx_data
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+};
 
 #endif
