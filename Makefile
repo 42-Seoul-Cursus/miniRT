@@ -4,7 +4,9 @@ CC = cc
 CFLAG = -Wall -Wextra -Werror
 RM = rm -f
 
-SRCS = minirt.c
+SRCS = minirt.c \
+	   mlx.c
+
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
