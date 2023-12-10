@@ -73,8 +73,8 @@ static void	make_fractional(char *s, double *fractional)
 
 static void	error(void)
 {
-	ft_putendl_fd("Error\nFile Format Error\n", 2);
-	exit(1);
+	ft_putendl_fd("Error\nFile Format Error", 2);
+	exit(EXIT_FAILURE);
 }
 
 #include <stdio.h>
