@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include "structures.h"
+#include "libft.h"
 #include <stdlib.h>
 
 int	main(int argc, char *argv[])
