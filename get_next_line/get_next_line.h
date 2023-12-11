@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 12:13:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 14:19:48 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/11 15:24:19 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 #  define OPEN_MAX 1048575
 # endif
 
-# include <unistd.h>
-# include <stdlib.h>
+# include <sys/types.h>
 
 char	*get_next_line(int fd);
 char	*repeat_read(char **backup, int fd, char *buf, int size);
