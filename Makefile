@@ -5,7 +5,11 @@ CFLAG = -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = minirt.c \
-	   mlx.c
+	   mlx.c \
+	   parse/parse.c \
+	   parse/check_arg.c \
+	   get_next_line/get_next_line.c \
+	   get_next_line/get_next_line_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
@@ -24,7 +28,7 @@ $(MLX):
 	cd mlx && $(MAKE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx
+	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx -I get_next_line
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS) .bonus

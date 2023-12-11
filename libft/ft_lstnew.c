@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 16:47:51 by sunko            ###   ########.fr       */
+/*   Created: 2023/03/17 14:44:41 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/11 16:31:41 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+t_list	*ft_lstnew(void *content, enum e_type type)
 {
-	if (n == 0)
-		return ;
-	ft_memset(s, 0, n);
+	t_list	*new;
+
+	new = ft_calloc(1, sizeof(t_list));
+	new->content = content;
+	new->type = type;
+	new->next = 0;
+	return (new);
 }

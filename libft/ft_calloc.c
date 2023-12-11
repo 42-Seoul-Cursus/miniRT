@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 16:47:51 by sunko            ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:46 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/11 15:52:13 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (n == 0)
-		return ;
-	ft_memset(s, 0, n);
+	char	*mem;
+
+	mem = malloc(size * count);
+	if (!mem)
+		ft_error("Failed to allocate memory.");
+	ft_bzero(mem, size * count);
+	return ((void *) mem);
 }
