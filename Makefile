@@ -6,8 +6,11 @@ RM = rm -f
 
 SRCS = minirt.c \
 	   mlx.c \
+	   init.c \
 	   parse/parse.c \
 	   parse/check_arg.c \
+	   parse/gen_env.c \
+	   parse/gen_objs.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
 

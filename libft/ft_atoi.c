@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 19:43:27 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/11 18:28:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minirt.h"
-#include "structures.h"
 #include "libft.h"
+#include "stdlib.h"
 
-int	main(int argc, char *argv[])
+int	ft_atoi(const char *str)
 {
-	t_vars		vars;
-	t_mlx_data	mlx_data;
+	long long	num;
+	int			min;
+	int			i;
 
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	init_mlx(&mlx_data);
-	execute_mlx(&mlx_data);
-	return (0);
+	num = 0;
+	min = 1;
+	i = 0;
+	while (str[i] == ' ')
+		++i;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			min *= -1;
+		++i;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		if (num > 214748364 || (num == 214748364 && str[i] > '7'))
+			ft_error("File Format Error");
+		num = num * 10 + str[i] - '0';
+		++i;
+	}
+	return (min * num);
 }

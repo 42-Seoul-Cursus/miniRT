@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 19:43:27 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/11 17:01:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minirt.h"
-#include "structures.h"
-#include "libft.h"
+#include "sys/types.h"
 
-int	main(int argc, char *argv[])
+size_t	ft_strlen(const char *s)
 {
-	t_vars		vars;
-	t_mlx_data	mlx_data;
+	size_t	len;
 
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	init_mlx(&mlx_data);
-	execute_mlx(&mlx_data);
-	return (0);
+	len = 0;
+	while (s[len] != '\0')
+		++len;
+	return (len);
 }
