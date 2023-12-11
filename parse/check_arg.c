@@ -1,4 +1,3 @@
-#include "../minirt.h"
 #include "libft.h"
 
 void	is_valid_arg(int ac, char *av[])

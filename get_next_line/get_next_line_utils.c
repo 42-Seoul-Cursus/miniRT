@@ -6,13 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 12:13:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 15:26:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/11 15:36:47 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "get_next_line.h"
-
 
 size_t	ft_strlen(const char *s)
 {

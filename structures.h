@@ -6,12 +6,14 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 14:53:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/11 16:35:03 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# include "libft/libft.h"
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
@@ -34,7 +36,9 @@ struct s_vec3
 
 struct s_ambient
 {
-	double	lighting_ratio;
+	double		lighting_ratio;
+	t_color3	rgb;
+	int			b_start;
 };
 
 struct s_camera
@@ -42,6 +46,7 @@ struct s_camera
 	t_point3	view_point;
 	t_vec3		direct_v;
 	int			fov;
+	int			b_start;
 };
 
 struct s_light
@@ -49,6 +54,7 @@ struct s_light
 	t_point3	light_point;
 	double		brightness_ratio;
 	t_color3	rgb;
+	int			b_start;
 };
 
 struct s_sphere
@@ -57,6 +63,7 @@ struct s_sphere
 	double		radius;
 	double		diameter;
 	t_color3	rgb;
+	int			b_start;
 };
 
 
@@ -96,7 +103,10 @@ struct s_mlx_data
 
 struct s_vars
 {
-	int	fd;
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		light;
+	t_list		objects;
 };
 
 #endif
