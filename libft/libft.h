@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 18:28:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/11 22:50:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_error(char *msg);
 int		ft_isdigit(int c);
+int		ft_issign(char c);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content, enum e_type type);

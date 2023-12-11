@@ -12,6 +12,7 @@ SRCS = \
 	ft_calloc.c \
 	ft_error.c \
 	ft_isdigit.c \
+	ft_issign.c \
 	ft_lstadd_back.c \
 	ft_lstlast.c \
 	ft_lstnew.c \
