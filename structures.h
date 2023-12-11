@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/10 23:51:19 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:53:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ typedef struct s_vec3		t_point3;
 typedef struct s_vec3		t_color3;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
+typedef struct s_light		t_light;
+typedef struct s_sphere		t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_cylinder	t_cylinder;
 typedef struct s_mlx_data	t_mlx_data;
+typedef struct s_vars		t_vars;
 
 struct s_vec3
 {
@@ -54,6 +59,7 @@ struct s_sphere
 	t_color3	rgb;
 };
 
+
 struct s_plane
 {
 	t_point3	point;
@@ -86,6 +92,11 @@ struct s_mlx_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+};
+
+struct s_vars
+{
+	int	fd;
 };
 
 #endif
