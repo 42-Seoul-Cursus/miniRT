@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:12:14 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/11 16:00:47 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/11 16:00:55 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# include "structures.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*b_tmp;
 
-void	init_mlx(t_mlx_data *mlx_data);
-void	execute_mlx(t_mlx_data *mlx_data);
-
-#endif
+	b_tmp = (unsigned char *)b;
+	i = 0;
+	while (i < len)
+	{
+		b_tmp[i] = (unsigned char)c;
+		i++;
+	}
+	return (b_tmp);
+}

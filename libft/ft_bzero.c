@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:12:14 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/11 16:00:59 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/11 16:01:06 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# include "structures.h"
-
-void	init_mlx(t_mlx_data *mlx_data);
-void	execute_mlx(t_mlx_data *mlx_data);
-
-#endif
+void	ft_bzero(void *s, size_t n)
+{
+	if (n == 0)
+		return ;
+	ft_memset(s, 0, n);
+}
