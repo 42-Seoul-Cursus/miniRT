@@ -5,8 +5,12 @@
 #include "libft.h"
 #include "../minirt.h"
 
-#include <stdio.h>
-static void	check_identifier(t_vars *vars, char *buf);
+#define TRUE 1
+#define FALSE 0
+
+static void	check_identifier(t_vars *vars, char *line);
+double		parse_double(char **line);
+t_vec3		parse_vec(char **line, int is_endl);
 static void	make_ambient(t_vars *vars, char *line);
 static void	make_camera(t_vars *vars, char *line);
 static void	make_light(t_vars *vars, char *line);
@@ -14,13 +18,13 @@ static void	make_sphere(t_vars *vars, char *line);
 static void	make_plane(t_vars *vars, char *line);
 static void	make_cylinder(t_vars *vars, char *line);
 static int	protected_open(char *path);
-void static	parse_test(t_vars *vars);
 
 void	init_vars(t_vars *vars)
 {
-	vars->ambient.b_start = 0;
-	vars->camera.b_start = 0;
-	vars->light.b_start = 0;
+	vars->ambient.cnt = 0;
+	vars->camera.cnt = 0;
+	vars->light.cnt = 0;
+	vars->objects = NULL;
 }
 
 void	parse_rt(t_vars *vars, char *path)
@@ -37,7 +41,6 @@ void	parse_rt(t_vars *vars, char *path)
 		check_identifier(vars, line);
 		free(line);
 	}
-	parse_test(vars);
 }
 
 static void	check_identifier(t_vars *vars, char *line)
@@ -62,215 +65,111 @@ static void	check_identifier(t_vars *vars, char *line)
 		ft_error("File Format Error");
 }
 
-// double	parse_double(char *line)
-// {
-
-// }
-
-// t_vec3	parse_vec(char *line)
-// {
-
-// }
-
-static void	make_ambient(t_vars *vars, char *line)
+double	parse_double(char **line)
 {
+	double	ans;
 	char	*tmp;
 	int		i;
 
-	// ratio
-	while (*line == ' ')
-		++line;
+	while (**line == ' ')
+		++(*line);
 	i = 0;
-	while (ft_isdigit(line[i]) || line[i] == '.')
+	if (ft_issign((*line)[i]))
 		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->ambient.lighting_ratio = ft_strtod(tmp);
+	while (ft_isdigit((*line)[i]) || (*line)[i] == '.')
+		++i;
+	tmp = ft_substr(*line, 0, i);
+	ans = ft_strtod(tmp);
 	free(tmp);
-	line += i;
+	*line += i;
+	return (ans);
+}
 
-	// r
-	while (*line == ' ')
+t_vec3	parse_vec(char **line, int is_endl)
+{
+	t_vec3	ans;
+
+	ans.x = parse_double(line);
+	while (**line == ' ')
 		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->ambient.rgb.x = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
+	if (**line != ',')
 		ft_error("File Format Error");
-
-	// g
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->ambient.rgb.y = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
+	++(*line);
+	ans.y = parse_double(line);
+	while (**line == ' ')
+		++(*line);
+	if (**line != ',')
 		ft_error("File Format Error");
-
-	// b
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->ambient.rgb.z = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line != '\n')
+	++(*line);
+	ans.z = parse_double(line);
+	while (is_endl && **line == ' ')
+		++(*line);
+	if (**line != '\n' && **line != ' ')
 		ft_error("File Format Error");
+	return (ans);
+}
 
-	vars->ambient.b_start = 1;
+static void	make_ambient(t_vars *vars, char *line)
+{
+	vars->ambient.lighting_ratio = parse_double(&line);
+	vars->ambient.rgb = parse_vec(&line, TRUE);
+	++(vars->ambient.cnt);
 }
 
 static void	make_camera(t_vars *vars, char *line)
 {
-	int		i;
-	char	*tmp;
-
-	// x
+	vars->camera.view_point = parse_vec(&line, FALSE);
+	vars->camera.direct_v = parse_vec(&line, FALSE);
+	vars->camera.fov = parse_double(&line);
 	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.view_point.x = ft_strtod(tmp); // FIXME: why exit
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
+		line++;
+	if (*line != '\n')
 		ft_error("File Format Error");
-
-	// y
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.view_point.y = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
-		ft_error("File Format Error");
-
-	// z
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.view_point.z = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	if (*line != ' ')
-		ft_error("File Format Error");
-
-	// x
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.direct_v.x = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
-		ft_error("File Format Error");
-
-	// y
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.direct_v.y = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	while (*line == ' ')
-		++line;
-	if (*line == ',')
-		++line;
-	else
-		ft_error("File Format Error");
-
-	// z
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->camera.direct_v.z = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-	if (*line != ' ')
-		ft_error("File Format Error");
-
-	// fov
-	while (*line == ' ')
-		++line;
-	i = 0;
-	while (ft_isdigit(line[i]) || line[i] == '.')
-		++i;
-	tmp = ft_substr(line, 0, i);
-	vars->ambient.lighting_ratio = ft_strtod(tmp);
-	free(tmp);
-	line += i;
-
-	vars->camera.b_start = 1;
+	++(vars->camera.cnt);
 }
+
 static void	make_light(t_vars *vars, char *line)
 {
-	while (*line == ' ')
-		line++;
+	vars->light.light_point = parse_vec(&line, FALSE);
+	vars->light.brightness_ratio = parse_double(&line);
+	vars->light.rgb = parse_vec(&line, TRUE);
+	++(vars->light.cnt);
 }
+
 static void	make_sphere(t_vars *vars, char *line)
 {
-	while (*line == ' ')
-		line++;
+	t_sphere	*sphere;
+
+	sphere = (t_sphere *)ft_calloc(1, sizeof(t_sphere));
+	sphere->center = parse_vec(&line, FALSE);
+	sphere->diameter = parse_double(&line);
+	sphere->radius = sphere->diameter / 2;
+	sphere->rgb = parse_vec(&line, TRUE);
+	ft_lstadd_back(&(vars->objects), ft_lstnew(sphere, SPHERE));
 }
+
 static void	make_plane(t_vars *vars, char *line)
 {
-	while (*line == ' ')
-		line++;
+	t_plane	*plane;
+
+	plane = (t_plane *)ft_calloc(1, sizeof(t_plane));
+	plane->point = parse_vec(&line, FALSE);
+	plane->normal_v = parse_vec(&line, FALSE);
+	plane->rgb = parse_vec(&line, TRUE);
+	ft_lstadd_back(&(vars->objects), ft_lstnew(plane, PLANE));
 }
 static void	make_cylinder(t_vars *vars, char *line)
 {
-	while (*line == ' ')
-		line++;
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder *)ft_calloc(1, sizeof(t_cylinder));
+	cylinder->center = parse_vec(&line, FALSE);
+	cylinder->normal_v = parse_vec(&line, FALSE);
+	cylinder->diameter = parse_double(&line);
+	cylinder->radius = cylinder->diameter / 2;
+	cylinder->height = parse_double(&line);
+	cylinder->rgb = parse_vec(&line, TRUE);
+	ft_lstadd_back(&(vars->objects), ft_lstnew(cylinder, CYLINDER));
 }
 
 static int	protected_open(char *path)
@@ -281,28 +180,4 @@ static int	protected_open(char *path)
 	if (fd == -1)
 		ft_error("Path Error");
 	return (fd);
-}
-
-void static parse_test(t_vars *vars)
-{
-	printf("vars->ambient.lighting_ratio : %f\n", vars->ambient.lighting_ratio);
-	printf("vars->ambient.color.r : %f\n", vars->ambient.rgb.x);
-	printf("vars->ambient.color.g : %f\n", vars->ambient.rgb.y);
-	printf("vars->ambient.color.b : %f\n", vars->ambient.rgb.z);
-
-	printf("vars->camera.view_point.x : %f\n", vars->camera.view_point.x);
-	printf("vars->camera.view_point.y : %f\n", vars->camera.view_point.y);
-	printf("vars->camera.view_point.z : %f\n", vars->camera.view_point.z);
-	printf("vars->camera.direct_v.x : %f\n", vars->camera.direct_v.x);
-	printf("vars->camera.direct_v.y : %f\n", vars->camera.direct_v.y);
-	printf("vars->camera.direct_v.z : %f\n", vars->camera.direct_v.z);
-	printf("vars->camera.next->fov : %d\n", vars->camera.fov);
-
-	printf("vars->light.brightness_ratio : %f\n", vars->light.brightness_ratio);
-	printf("vars->light.light_point.x : %f\n", vars->light.light_point.x);
-	printf("vars->light.light_point.y : %f\n", vars->light.light_point.y);
-	printf("vars->light.light_point.z : %f\n", vars->light.light_point.z);
-	printf("vars->light.rgb.x : %f\n", vars->light.rgb.x);
-	printf("vars->light.rgb.y : %f\n", vars->light.rgb.y);
-	printf("vars->light.rgb.z : %f\n", vars->light.rgb.z);
 }
