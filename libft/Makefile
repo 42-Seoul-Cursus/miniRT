@@ -11,6 +11,9 @@ SRCS = \
 	ft_calloc.c \
 	ft_error.c \
 	ft_isdigit.c \
+	ft_lstadd_back.c \
+	ft_lstlast.c \
+	ft_lstnew.c \
 	ft_memset.c \
 	ft_putchar_fd.c \
 	ft_putendl_fd.c \

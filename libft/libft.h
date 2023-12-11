@@ -6,18 +6,41 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 15:34:21 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/11 16:33:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <sys/types.h>
+
+typedef struct s_list	t_list;
+
+enum	e_type
+{
+	AMBIENT,
+	CAMERA,
+	LIGHT,
+	SPHERE,
+	PLANE,
+	CYLINDER
+};
+
+struct s_list
+{
+	void			*content;
+	enum e_type		type;
+	struct s_list	*next;
+};
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_error(char *msg);
 int		ft_isdigit(int c);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(void *content, enum e_type type);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_putchar_fd(const char c, int fd);
 void	ft_putstr_fd(const char *s, int fd);

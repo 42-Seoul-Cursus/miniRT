@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 18:08:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 15:52:13 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/17 14:46:29 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 19:08:36 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_list	*ft_lstlast(t_list *lst)
 {
-	char	*mem;
-
-	mem = malloc(size * count);
-	if (!mem)
-		ft_error("Failed to allocate memory.");
-	ft_bzero(mem, size * count);
-	return ((void *) mem);
+	if (lst == 0)
+		return (0);
+	while (lst->next != 0)
+		lst = lst->next;
+	return (lst);
 }
