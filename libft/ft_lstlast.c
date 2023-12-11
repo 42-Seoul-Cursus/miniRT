@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:34:25 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/17 14:46:29 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 19:08:36 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# include "structures.h"
-
-void	init_mlx(t_mlx_data *mlx_data);
-void	execute_mlx(t_mlx_data *mlx_data);
-
-/* parse */
-
-// parse.c
-void	init_vars(t_vars *vars);
-void	parse_rt(t_vars *vars, char *path);
-
-// check_arg.c
-void	is_valid_arg(int ac, char *av[]);
-
-
-#endif
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == 0)
+		return (0);
+	while (lst->next != 0)
+		lst = lst->next;
+	return (lst);
+}

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:13:30 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/19 19:35:43 by anseungwon       ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minirt.h"
-#include "structures.h"
 #include "libft.h"
 
-int	main(int argc, char *argv[])
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_vars		vars;
-	t_mlx_data	mlx_data;
+	size_t	i;
 
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	init_mlx(&mlx_data);
-	execute_mlx(&mlx_data);
-	return (0);
+	i = 0;
+	while (i < len)
+	{
+		*(unsigned char *)(b + i) = (unsigned char) c;
+		++i;
+	}
+	return (b);
 }

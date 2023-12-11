@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:34:25 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/17 14:44:41 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/11 16:31:41 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-# include "structures.h"
+t_list	*ft_lstnew(void *content, enum e_type type)
+{
+	t_list	*new;
 
-void	init_mlx(t_mlx_data *mlx_data);
-void	execute_mlx(t_mlx_data *mlx_data);
-
-/* parse */
-
-// parse.c
-void	init_vars(t_vars *vars);
-void	parse_rt(t_vars *vars, char *path);
-
-// check_arg.c
-void	is_valid_arg(int ac, char *av[]);
-
-
-#endif
+	new = ft_calloc(1, sizeof(t_list));
+	new->content = content;
+	new->type = type;
+	new->next = 0;
+	return (new);
+}
