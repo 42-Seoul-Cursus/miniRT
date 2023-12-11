@@ -6,6 +6,7 @@
 static void	make_double(char *s, double *integer, double *fractional, int *neg);
 static void	make_fractional(char *s, double *fractional);
 
+#include <stdio.h>
 double	ft_strtod(char *s)
 {
 	double	integer;
