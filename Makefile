@@ -6,7 +6,6 @@ RM = rm -f
 
 SRCS = minirt.c \
 	   mlx.c \
-	   error.c \
 	   parse/parse.c \
 	   parse/check_arg.c \
 

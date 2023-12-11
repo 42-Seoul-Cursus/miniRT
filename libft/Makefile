@@ -7,6 +7,7 @@ ARFLAGS = r
 RM = rm -f
 
 SRCS = \
+	ft_error.c \
 	ft_isdigit.c \
 	ft_putchar_fd.c \
 	ft_putendl_fd.c \

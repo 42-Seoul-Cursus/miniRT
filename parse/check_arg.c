@@ -1,4 +1,5 @@
 #include "../minirt.h"
+#include "libft.h"
 
 void	is_valid_arg(int ac, char *av[])
 {
@@ -6,7 +7,7 @@ void	is_valid_arg(int ac, char *av[])
 	int	slash;
 
 	if (ac != 2)
-		exit_with_msg("Invalid number of arguments");
+		ft_error("Invalid number of arguments");
 	i = 0;
 	slash = 0;
 	while (av[1][i] != '\0')
@@ -17,5 +18,5 @@ void	is_valid_arg(int ac, char *av[])
 	}
 	if (i - slash < 4 || av[1][i - 1] != 't'
 		|| av[1][i - 2] != 'r' || av[1][i - 3] != '.')
-		exit_with_msg("The file must end with a \'.rt\'\n");
+		ft_error("The file must end with a \'.rt\'");
 }
