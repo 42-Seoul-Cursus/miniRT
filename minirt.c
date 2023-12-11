@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/10 23:48:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:42:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ int	main(int argc, char *argv[])
 {
 	t_mlx_data	mlx_data;
 
-	if (argc != 2)
-	{
-		ft_putendl_fd("Error\nInvaild number of arguments", 2);
-		exit(EXIT_FAILURE);
-	}
+	is_valid_arg(argc, argv);
 	init_mlx(&mlx_data);
 	execute_mlx(&mlx_data);
 	return (0);

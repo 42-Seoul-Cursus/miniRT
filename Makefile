@@ -5,7 +5,10 @@ CFLAG = -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = minirt.c \
-	   mlx.c
+	   mlx.c \
+	   error.c \
+	   parse/parse.c \
+	   parse/check_arg.c \
 
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
