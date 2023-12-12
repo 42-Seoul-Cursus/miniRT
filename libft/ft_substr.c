@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:29:19 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 14:01:47 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 14:37:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (str);
 	}
 	else if (len > s_len - start)
-		str = ft_calloc( s_len - start + 1, sizeof(char));
+		str = ft_calloc(s_len - start + 1, sizeof(char));
 	else
 		str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
