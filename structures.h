@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 15:45:43 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:33:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "libft/libft.h"
 
-#define WIDTH	960
-#define HEIGHT	540
-#define IMG_RATIO	1.7778
+# define WIDTH	960
+# define HEIGHT	540
+# define IMG_RATIO	1.7778
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
