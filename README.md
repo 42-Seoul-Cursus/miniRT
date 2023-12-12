@@ -1,16 +1,34 @@
-# miniRT - 간단한 레이 트레이싱 렌더링 엔진
+# miniRT Project
 
-miniRT는 42 School의 그래픽스 프로젝트 중 하나로, 레이 트레이싱을 이용하여 간단한 렌더링 엔진을 만드는 과제입니다.
+## Project Overview
+miniRT is a simple 3D graphic renderer using ray tracing. This project is created to enhance understanding of computer graphics and ray tracing principles.
 
-## 설치 및 실행
+## Getting Started
 
-프로젝트를 복제한 후, 다음과 같은 단계를 따라 실행할 수 있습니다.
+### System Requirements
+- macOS or Linux operating system
+- Installation of OpenGL and other necessary dependencies
 
+### Installation and Build
+1. Clone the repository.
+```bash
+git clone https://github.com/your-username/miniRT.git
+cd miniRT
+```
+2. Run the build script.
+```
+make
+```
 
-1. 기능 및 제한사항
-구 형상 (구, 원통, 원뿔)의 물체 렌더링
-픽셀별 레이 트레이싱
-빛 및 그림자 처리
-기본적인 카메라 및 뷰 포인트 제어
+### Execution
+After the build is complete, you can run the program with the following command.
+```bash
+./miniRT scene.rt
+```
 
-이것을 참고하여 필요한 부분을 수정하고 개인적인 정보를 추가하여 프로젝트에 맞게 최적화하세요.
+## Usage
+- Press the `ESC` key to exit the program during rendering.
+
+## Examples
+Test various rendering examples included in the `scenes` folder with different `.rt` files.
+
