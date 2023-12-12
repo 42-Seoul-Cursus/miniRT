@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/12 14:45:47 by seunan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdlib.h>
 #include "get_next_line.h"
 #include "libft.h"
-#include "../minirt.h"
+#include "parse.h"
 
 static void	check_identifier(t_vars *vars, char *line);
 static int	protected_open(char *path);

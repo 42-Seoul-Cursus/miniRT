@@ -36,7 +36,7 @@ $(MLX):
 	cd mlx && $(MAKE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx -I get_next_line -I matrix -I vector
+	$(CC) $(CFLAGS) -c -o $@ $< -I mlx -I libft -I get_next_line -I parse -I matrix -I vector
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS) .bonus
