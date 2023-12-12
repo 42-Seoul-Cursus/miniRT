@@ -15,17 +15,21 @@
 
 # include "structures.h"
 
-void	init_mlx(t_mlx_data *mlx_data);
-void	execute_mlx(t_mlx_data *mlx_data);
+void		init_mlx(t_mlx_data *mlx_data);
+void		execute_mlx(t_mlx_data *mlx_data);
 
 // utils.c
-void	is_valid_arg(int ac, char *av[]);
-void	init_vars(t_vars *vars);
-void	is_valid_rt(t_vars *vars);
+void		is_valid_arg(int ac, char *av[]);
+void		init_vars(t_vars *vars);
+void		is_valid_rt(t_vars *vars);
+
+// color.c
+t_color3	get_color_int_to_real(t_color3 rgb);
+t_color3	get_color_real_to_int(t_color3 rgb);
 
 /* world2view */
 
 // world2view.c
-void	world2view(t_vars *vars);
+void		world2view(t_vars *vars);
 
 #endif
