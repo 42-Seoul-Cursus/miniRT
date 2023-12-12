@@ -5,5 +5,6 @@
 # include <../minirt.h>
 
 void	test_parse(t_vars *vars);
+void	leak(void);
 
 #endif
