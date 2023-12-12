@@ -6,14 +6,14 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:46:33 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 22:49:05 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 11:55:03 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "structures.h"
+# include "../structures.h"
 
 t_vec3		vec3(const double x, const double y, const double z);
 t_point3	point3(const double x, const double y, const double z);

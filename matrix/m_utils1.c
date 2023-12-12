@@ -6,11 +6,11 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 23:01:25 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 12:00:41 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "../structures.h"
 #include "libft.h"
 #include "matrix.h"
 

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 00:10:49 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 13:57:55 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,27 @@
 #include "matrix.h"
 #include "vector.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_4x4matrix	get_view_rotate_matrix(t_camera camera)
 {
 	t_4x4matrix	m;
 	t_vec3		view_x;
 	t_vec3		view_y;
+	t_vec3		view_z;
 
+	view_z = vt_mul(camera.direct_v, -1);
 	if (camera.direct_v.y >= 1.0 - 10e-4 || camera.direct_v.y <= -1.0 + 10e-4)
 		view_x = vec3(1.0, 0.0, 0.0);
 	else
-		view_x = v_unit(v_cross(camera.view_point, vec3(0.0, 1.0, 0.0)));
-	view_y = v_cross(camera.view_point, view_x);
+		view_x = v_unit(v_cross(view_z, vec3(0.0, 1.0, 0.0)));
+	view_y = v_cross(view_z, view_x);
 	m = _4x4matrix(vec4(view_x, 0.0), vec4(view_y, 0.0),
-			vec4(camera.direct_v, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
+			vec4(view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
 	return (m);
 }
 
-static void	change_world2view(t_list *cur,
+static void	change_world2view_obj(t_list *cur,
 	t_4x4matrix rotate, t_point3 view_point)
 {
 	if (cur->type == SPHERE)
@@ -62,7 +65,7 @@ void	world2view(t_vars *vars)
 	t_4x4matrix	rotate_matrix;
 
 	rotate_matrix = get_view_rotate_matrix(vars->camera);
-	cur = &vars->objects;
+	cur = vars->objects;
 	while (cur)
 	{
 		change_world2view_obj(cur, rotate_matrix, vars->camera.view_point);

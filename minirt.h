@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:40:24 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 14:00:36 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "structures.h"
 
-#define TRUE 1
-#define FALSE 0
+# define TRUE 1
+# define FALSE 0
 
 void	init_mlx(t_mlx_data *mlx_data);
 void	execute_mlx(t_mlx_data *mlx_data);
@@ -41,5 +41,10 @@ void	gen_cylinder(t_vars *vars, char *line);
 
 // check_arg.c
 void	is_valid_arg(int ac, char *av[]);
+
+/* world2view */
+
+// world2view.c
+void	world2view(t_vars *vars);
 
 #endif

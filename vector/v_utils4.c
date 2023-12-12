@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 22:49:07 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 12:00:31 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vec3	v_unit(t_vec3 vec)
 {
 	double	len;
 
-	len = get_vec_length(vec);
+	len = v_length(vec);
 	if (len == 0)
 	{
 		ft_putstr_fd("Error\n0 is not divisible", 2);

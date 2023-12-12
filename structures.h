@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:40:52 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 11:53:08 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ struct s_camera
 {
 	t_point3	view_point;
 	t_vec3		direct_v;
-<<<<<<< HEAD
 	double		fov;
-	int			b_start;
-=======
-	int			fov;
 	int			cnt;
->>>>>>> main
 };
 
 struct s_light
