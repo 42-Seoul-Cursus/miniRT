@@ -16,6 +16,7 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 SRCS = minirt.c \
 	   mlx.c \
 	   utils.c \
+	   color.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
