@@ -1,8 +1,17 @@
+.SUFFIXES : .c .o
+
 NAME = miniRT
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
+MEMORY = -g3 -fsanitize=address
+LLDB = -g
+
 RM = rm -f
+INCLUDE = -I./mlx -I./libft -I./get_next_line -I./parse -I./matrix -I./vector
+LIBFT = libft/libft.a
+MLX = mlx/libmlx.a
+MLXFLAGS = -framework OpenGL -framework AppKit
 
 SRCS = minirt.c \
 	   mlx.c \
@@ -20,38 +29,43 @@ SRCS = minirt.c \
 	   vector/v_utils3.c \
 	   vector/v_utils4.c \
 	   matrix/m_utils1.c
-
 OBJS = $(SRCS:.c=.o)
-LIBFT = libft/libft.a
-MLX = mlx/libmlx.a
-MLXFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $^ $(MLXFLAGS)
+$(MLX):
+	$(MAKE) -C ./mlx
 
 $(LIBFT):
-	cd libft && $(MAKE)
+	$(MAKE) -C ./libft
 
-$(MLX):
-	cd mlx && $(MAKE)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I mlx -I libft -I get_next_line -I parse -I matrix -I vector
+	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS) .bonus
-	cd libft && $(MAKE) $@
-	cd mlx && $(MAKE) $@
+	$(MAKE) clean -C ./mlx
+	$(MAKE) clean -C ./libft
+	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) fclean -C ./libft
 	$(RM) $(NAME)
-	cd libft && $(MAKE) $@
-	cd mlx && $(MAKE) $<
 
 re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: clean fclean re all
+mem:
+	$(MAKE) fclean
+	$(MAKE) mem -C ./libft
+	$(MAKE) all CFLAGS="$(DEBUG)"
+
+lldb:
+	$(MAKE) fclean
+	$(MAKE) lldb -C ./libft
+	$(MAKE) all CFLAGS="$(LLDB)"
+
+.PHONY: all clean fclean re mem lldb

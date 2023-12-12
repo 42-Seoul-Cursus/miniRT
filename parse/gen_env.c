@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:27:41 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:48:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "vector.h"
 
-void	gen_ambient(t_vars *vars, char *line)
+void	gen_ambient(t_ambient *ambient, char *line)
 {
-	vars->ambient.lighting_ratio = parse_double(&line);
-	vars->ambient.rgb = parse_vec(&line, TRUE);
-	++(vars->ambient.cnt);
-	check_ambient(vars->ambient);
+	ambient->lighting_ratio = parse_double(&line);
+	ambient->rgb = parse_vec(&line, TRUE);
+	++(ambient->cnt);
+	check_ambient(ambient);
 }
 
-void	gen_camera(t_vars *vars, char *line)
+void	gen_camera(t_camera *camera, char *line)
 {
-	vars->camera.view_point = parse_vec(&line, FALSE);
-	vars->camera.direct_v = parse_vec(&line, FALSE);
-	vars->camera.fov = parse_double(&line);
+	camera->view_point = parse_vec(&line, FALSE);
+	camera->direct_v = parse_vec(&line, FALSE);
+	camera->fov = parse_double(&line);
 	while (*line == ' ')
 		line++;
 	if (*line != '\n')
 		ft_error("File Format Error");
-	++(vars->camera.cnt);
-	check_camera(vars->camera);
-	vars->camera.viewport_width = 2;
-	vars->camera.viewport_height = 2 * IMG_RATIO;
-	vars->camera.viewport_u = vec3(vars->camera.viewport_width, 0, 0);
-	vars->camera.viewport_v = vec3(0, -vars->camera.viewport_height, 0);
-	vars->camera.pixel_delta_u = vt_divide(vars->camera.viewport_u, WIDTH);
-	vars->camera.pixel_delta_v = vt_divide(vars->camera.viewport_v, HEIGHT);
+	++(camera->cnt);
+	check_camera(camera);
+	camera->viewport_width = 2;
+	camera->viewport_height = 2 * IMG_RATIO;
+	camera->viewport_u = vec3(camera->viewport_width, 0, 0);
+	camera->viewport_v = vec3(0, -camera->viewport_height, 0);
+	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);
+	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
 }
 
-void	gen_light(t_vars *vars, char *line)
+void	gen_light(t_light *light, char *line)
 {
-	vars->light.light_point = parse_vec(&line, FALSE);
-	vars->light.brightness_ratio = parse_double(&line);
-	vars->light.rgb = parse_vec(&line, TRUE);
-	++(vars->light.cnt);
-	check_light(vars->light);
+	light->light_point = parse_vec(&line, FALSE);
+	light->brightness_ratio = parse_double(&line);
+	light->rgb = parse_vec(&line, TRUE);
+	++(light->cnt);
+	check_light(light);
 }
