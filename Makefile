@@ -10,6 +10,8 @@ SRCS = minirt.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
+	   parse/check_env.c \
+	   parse/check_objs.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
 	   world2view.c \

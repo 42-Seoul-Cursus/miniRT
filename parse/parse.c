@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 14:45:47 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/12 15:04:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,6 @@ void	parse_rt(t_vars *vars, char *path)
 	}
 }
 
-static void	check_identifier(t_vars *vars, char *line)
-{
-	while (*line == ' ')
-		line++;
-	if (ft_strncmp(line, "A ", 2) == 0)
-		gen_ambient(vars, line + 1);
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		gen_camera(vars, line + 1);
-	else if (ft_strncmp(line, "L ", 2) == 0)
-		gen_light(vars, line + 1);
-	else if (ft_strncmp(line, "sp ", 3) == 0)
-		gen_sphere(vars, line + 2);
-	else if (ft_strncmp(line, "pl ", 3) == 0)
-		gen_plane(vars, line + 2);
-	else if (ft_strncmp(line, "cy ", 3) == 0)
-		gen_cylinder(vars, line + 2);
-	else if (*line == '\n' && *(line + 1) == '\0')
-		return ;
-	else
-		ft_error("File Format Error");
-}
-
 double	parse_double(char **line)
 {
 	double	ans;
@@ -77,7 +55,7 @@ double	parse_double(char **line)
 	return (ans);
 }
 
-t_vec3	parse_vec(char **line, int is_endl)
+t_vec3	parse_vec(char **line, enum e_bool is_endl)
 {
 	t_vec3	ans;
 
@@ -99,6 +77,28 @@ t_vec3	parse_vec(char **line, int is_endl)
 	if (**line != '\n' && **line != ' ')
 		ft_error("File Format Error");
 	return (ans);
+}
+
+static void	check_identifier(t_vars *vars, char *line)
+{
+	while (*line == ' ')
+		line++;
+	if (ft_strncmp(line, "A ", 2) == 0)
+		gen_ambient(vars, line + 1);
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		gen_camera(vars, line + 1);
+	else if (ft_strncmp(line, "L ", 2) == 0)
+		gen_light(vars, line + 1);
+	else if (ft_strncmp(line, "sp ", 3) == 0)
+		gen_sphere(vars, line + 2);
+	else if (ft_strncmp(line, "pl ", 3) == 0)
+		gen_plane(vars, line + 2);
+	else if (ft_strncmp(line, "cy ", 3) == 0)
+		gen_cylinder(vars, line + 2);
+	else if (*line == '\n' && *(line + 1) == '\0')
+		return ;
+	else
+		ft_error("File Format Error");
 }
 
 static int	protected_open(char *path)
