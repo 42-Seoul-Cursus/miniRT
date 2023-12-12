@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 15:50:16 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:53:53 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,17 @@ static void	check_identifier(t_vars *vars, char *line)
 	while (*line == ' ')
 		line++;
 	if (ft_strncmp(line, "A ", 2) == 0)
-		gen_ambient(vars, line + 1);
+		gen_ambient(&(vars->ambient), line + 1);
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		gen_camera(vars, line + 1);
+		gen_camera(&(vars->camera), line + 1);
 	else if (ft_strncmp(line, "L ", 2) == 0)
-		gen_light(vars, line + 1);
+		gen_light(&(vars->light), line + 1);
 	else if (ft_strncmp(line, "sp ", 3) == 0)
-		gen_sphere(vars, line + 2);
+		gen_sphere(&(vars->objects), line + 2);
 	else if (ft_strncmp(line, "pl ", 3) == 0)
-		gen_plane(vars, line + 2);
+		gen_plane(&(vars->objects), line + 2);
 	else if (ft_strncmp(line, "cy ", 3) == 0)
-		gen_cylinder(vars, line + 2);
+		gen_cylinder(&(vars->objects), line + 2);
 	else if (*line == '\n' && *(line + 1) == '\0')
 		return ;
 	else

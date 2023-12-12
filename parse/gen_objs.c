@@ -6,13 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 15:22:02 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/12 16:49:18 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	gen_sphere(t_vars *vars, char *line)
+void	gen_sphere(t_list **objects, char *line)
 {
 	t_sphere	*sphere;
 
@@ -22,10 +22,10 @@ void	gen_sphere(t_vars *vars, char *line)
 	sphere->radius = sphere->diameter / 2;
 	sphere->rgb = parse_vec(&line, TRUE);
 	check_sphere(sphere);
-	ft_lstadd_back(&(vars->objects), ft_lstnew(sphere, SPHERE));
+	ft_lstadd_back(objects, ft_lstnew(sphere, SPHERE));
 }
 
-void	gen_plane(t_vars *vars, char *line)
+void	gen_plane(t_list **objects, char *line)
 {
 	t_plane	*plane;
 
@@ -34,10 +34,10 @@ void	gen_plane(t_vars *vars, char *line)
 	plane->normal_v = parse_vec(&line, FALSE);
 	plane->rgb = parse_vec(&line, TRUE);
 	check_plane(plane);
-	ft_lstadd_back(&(vars->objects), ft_lstnew(plane, PLANE));
+	ft_lstadd_back(objects, ft_lstnew(plane, PLANE));
 }
 
-void	gen_cylinder(t_vars *vars, char *line)
+void	gen_cylinder(t_list **objects, char *line)
 {
 	t_cylinder	*cylinder;
 
@@ -49,5 +49,5 @@ void	gen_cylinder(t_vars *vars, char *line)
 	cylinder->height = parse_double(&line);
 	cylinder->rgb = parse_vec(&line, TRUE);
 	check_cylinder(cylinder);
-	ft_lstadd_back(&(vars->objects), ft_lstnew(cylinder, CYLINDER));
+	ft_lstadd_back(objects, ft_lstnew(cylinder, CYLINDER));
 }
