@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 14:40:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 00:42:47 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ t_color3	get_color_real_to_int(t_color3 rgb);
 // world2view.c
 void		world2view(t_vars *vars);
 
+/* render */
+// render.c
+void		render(t_vars *vars, t_mlx_data *mlx);
+void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
+int			create_trgb(int t, t_color3 *color);
 #endif

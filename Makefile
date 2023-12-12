@@ -8,7 +8,7 @@ MEMORY = -g3 -fsanitize=address
 LLDB = -g
 
 RM = rm -f
-INCLUDE = -I./mlx -I./libft -I./get_next_line -I./parse -I./matrix -I./vector
+INCLUDE = -I./mlx -I./libft -I./get_next_line -I./parse -I./matrix -I./vector -I./ray
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
@@ -22,6 +22,7 @@ SRCS = minirt.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
+	   ray/ray.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
 	   world2view.c \
@@ -29,7 +30,8 @@ SRCS = minirt.c \
 	   vector/v_utils2.c \
 	   vector/v_utils3.c \
 	   vector/v_utils4.c \
-	   matrix/m_utils1.c
+	   matrix/m_utils1.c \
+	   render.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
