@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:53:08 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 15:45:43 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define STRUCTURES_H
 
 # include "libft/libft.h"
+
+#define WIDTH	960
+#define HEIGHT	540
+#define IMG_RATIO	1.7778
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
@@ -56,6 +60,15 @@ struct s_camera
 	t_point3	view_point;
 	t_vec3		direct_v;
 	double		fov;
+	double		fov_len;
+	double		viewport_width;
+	double		viewport_height;
+	t_vec3		viewport_u;
+	t_vec3		viewport_v;
+	t_vec3		pixel_delta_u;
+	t_vec3		pixel_delta_v;
+	t_vec3		viewport_upper_left;
+	t_vec3		poxel_00_loc;
 	int			cnt;
 };
 

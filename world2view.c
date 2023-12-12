@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 13:57:55 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:29:42 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "matrix.h"
 #include "vector.h"
 #include <math.h>
-#include <stdio.h>
 
 static t_4x4matrix	get_view_rotate_matrix(t_camera camera)
 {
@@ -74,4 +73,12 @@ void	world2view(t_vars *vars)
 	vars->camera.view_point = point3(0, 0, 0);
 	vars->camera.direct_v = mv_mul(
 			rotate_matrix, vec4(vars->camera.direct_v, 1));
+	vars->camera.fov_len = atan(vars->camera.fov / 2 * M_PI / 180);
+	vars->camera.viewport_upper_left = v_minus(v_minus(v_minus(\
+		vars->camera.view_point, vec3(0, 0, vars->camera.fov_len))\
+		, vt_mul(vars->camera.viewport_u, 0.5))\
+		, vt_mul(vars->camera.viewport_v, 0.5));
+	vars->camera.poxel_00_loc = v_plus(\
+	vars->camera.viewport_upper_left\
+	, vt_mul(v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
 }
