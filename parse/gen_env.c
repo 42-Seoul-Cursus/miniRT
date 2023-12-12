@@ -1,5 +1,26 @@
 #include "../minirt.h"
 
+void	check_range(double dst, double from, double to)
+{
+	if (!(from <= dst && dst <= to))
+		ft_error("File Format Error");
+}
+
+void	check_rgb(t_color3 rgb)
+{
+	int	val;
+
+	val = (int) rgb.x;
+	if (rgb.x < 0.0 || rgb.x > 255.0 || val * 10 != rgb.x * 10)
+		ft_error("File Format Error");
+	val = (int) rgb.y;
+	if (rgb.y < 0.0 || rgb.y > 255.0 || val * 10 != rgb.y * 10)
+		ft_error("File Format Error");
+	val = (int) rgb.z;
+	if (rgb.z < 0.0 || rgb.z > 255.0 || val * 10 != rgb.z * 10)
+		ft_error("File Format Error");
+}
+
 void	gen_ambient(t_vars *vars, char *line)
 {
 	vars->ambient.lighting_ratio = parse_double(&line);

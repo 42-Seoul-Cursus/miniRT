@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minirt.h"
-#include "structures.h"
-#include "libft.h"
 
 int	main(int argc, char *argv[])
 {
@@ -23,6 +20,7 @@ int	main(int argc, char *argv[])
 	is_valid_arg(argc, argv);
 	init_vars(&vars);
 	parse_rt(&vars, argv[1]);
+	is_valid_rt(&vars);
 	init_mlx(&mlx_data);
 	execute_mlx(&mlx_data);
 	return (0);

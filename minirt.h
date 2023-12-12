@@ -21,6 +21,11 @@
 void	init_mlx(t_mlx_data *mlx_data);
 void	execute_mlx(t_mlx_data *mlx_data);
 
+// utils.c
+void	is_valid_arg(int ac, char *av[]);
+void	init_vars(t_vars *vars);
+void	is_valid_rt(t_vars *vars);
+
 /* parse */
 
 // parse.c
