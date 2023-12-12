@@ -7,10 +7,12 @@ ARFLAGS = r
 RM = rm -f
 
 SRCS = \
+	ft_atoi.c \
 	ft_bzero.c \
 	ft_calloc.c \
 	ft_error.c \
 	ft_isdigit.c \
+	ft_issign.c \
 	ft_lstadd_back.c \
 	ft_lstlast.c \
 	ft_lstnew.c \
@@ -19,8 +21,10 @@ SRCS = \
 	ft_putendl_fd.c \
 	ft_putstr_fd.c \
 	ft_strchr.c \
+	ft_strlen.c \
 	ft_strncmp.c \
-	ft_strtod.c
+	ft_strtod.c \
+	ft_substr.c
 
 OBJS = $(SRCS:.c=.o)
 

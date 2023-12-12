@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -11,8 +12,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+=======
+>>>>>>> main
 #include <float.h>
-#include "../minirt.h"
 #include "libft.h"
 
 static void	make_double(char *s, double *integer, double *fractional, int *neg);
