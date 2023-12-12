@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 16:47:51 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/11 16:12:37 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/12 11:53:22 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MATRIX_H
+# define MATRIX_H
 
-void	ft_bzero(void *s, size_t n)
-{
-	if (n == 0)
-		return ;
-	ft_memset(s, 0, n);
-}
+t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
+t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
+
+#endif
