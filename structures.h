@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 16:33:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:56:23 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_mlx_data	t_mlx_data;
 typedef struct s_vars		t_vars;
 typedef struct s_vec4		t_vec4;
 typedef struct s_4x4matrix	t_4x4matrix;
-
+typedef struct s_ray		t_ray;
 struct s_vec3
 {
 	double	x;
@@ -136,6 +136,12 @@ struct s_4x4matrix
 	t_vec4	r2;
 	t_vec4	r3;
 	t_vec4	r4;
+};
+
+struct s_ray
+{
+	t_point3	orig;
+	t_vec3		dir;
 };
 
 #endif
