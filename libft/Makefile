@@ -1,7 +1,11 @@
+.SUFFIXES : .c .o
+
 NAME = libft.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+MEMORY = -g3 -fsanitize=address
+LLDB = -g
 AR = ar
 ARFLAGS = r
 RM = rm -f
@@ -46,4 +50,10 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: clean fclean re all
+mem:
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+
+lldb:
+	$(MAKE) all CFLAGS="$(CFLAGS) $(LLDB)"
+
+.PHONY: clean fclean re all mem lldb
