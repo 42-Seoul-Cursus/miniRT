@@ -6,14 +6,13 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:12:37 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:13:05 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 23:01:48 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATRIX_H
 # define MATRIX_H
 
-double	*get_move_matrix(t_point3 p);
-double	*get_rotate_matrix(t_vec3 x, t_vec3 y, t_vec3 z);
-
+t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
+t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
 #endif

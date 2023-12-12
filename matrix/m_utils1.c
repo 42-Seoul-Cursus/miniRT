@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:42:54 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 23:01:25 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,46 @@
 #include "libft.h"
 #include "matrix.h"
 
-double	*get_move_matrix(t_point3 p)
+t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4)
 {
-	double	m[4][4];
+	t_4x4matrix	m;
 
-	ft_bzero(&m, sizeof(double) * 16);
-	m[0][0] = 1;
-	m[1][1] = 1;
-	m[2][2] = 1;
-	m[3][3] = 1;
-	m[0][3] = -p.x;
-	m[1][3] = -p.y;
-	m[2][3] = -p.z;
+	ft_bzero(&m, sizeof(t_4x4matrix));
+	m.r1.x = r1.x;
+	m.r1.y = r1.y;
+	m.r1.z = r1.z;
+	m.r1.w = r1.w;
+	m.r2.x = r2.x;
+	m.r2.y = r2.y;
+	m.r2.z = r2.z;
+	m.r2.w = r2.w;
+	m.r3.x = r3.x;
+	m.r3.y = r3.y;
+	m.r3.z = r3.z;
+	m.r3.w = r3.w;
+	m.r4.x = r4.x;
+	m.r4.y = r4.y;
+	m.r4.z = r4.z;
+	m.r4.w = r4.w;
 	return (m);
 }
 
-double	*get_rotate_matrix(t_vec3 x, t_vec3 y, t_vec3 z)
+t_vec3	mv_mul(t_4x4matrix m, t_vec4 v)
 {
-	double	m[4][4];
+	t_vec3	rst;
 
-	ft_bzero(&m, sizeof(double) * 16);
-	m[0][0] = x.x;
-	m[0][1] = x.y;
-	m[0][2] = x.z;
-	m[1][0] = y.x;
-	m[1][1] = y.y;
-	m[1][2] = y.z;
-	m[2][0] = z.x;
-	m[2][1] = z.y;
-	m[2][2] = z.z;
-	m[3][3] = 1;
-	return (m);
-}
-
-t_point3	mp_mul(const double **m, t_point3 p)
-{
-	int			i;
-	int			j;
-	double		p2m[4];
-	double		m_rst[4];
-	t_point3	rst;
-
-	i = -1;
-	j = -1;
-	p2m[0] = p.x;
-	p2m[1] = p.y;
-	p2m[2] = p.z;
-	p2m[3] = 1;
-	while (++i < 4)
-	{
-		while (++j < 4)
-			m_rst[i] += m[i][j] * p2m[j];
-		i++;
-	}
-	rst.x = m_rst[0];
-	rst.y = m_rst[1];
-	rst.z = m_rst[2];
+	ft_bzero(&rst, sizeof(t_vec3));
+	rst.x += m.r1.x * v.x;
+	rst.x += m.r1.y * v.y;
+	rst.x += m.r1.z * v.z;
+	rst.x += m.r1.w * v.w;
+	rst.y += m.r2.x * v.x;
+	rst.y += m.r2.y * v.y;
+	rst.y += m.r2.z * v.z;
+	rst.y += m.r2.w * v.w;
+	rst.z += m.r3.x * v.x;
+	rst.z += m.r3.y * v.y;
+	rst.z += m.r3.z * v.z;
+	rst.z += m.r3.w * v.w;
 	return (rst);
 }

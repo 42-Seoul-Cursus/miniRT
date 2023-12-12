@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/12/11 16:12:14 by sunko            ###   ########.fr       */
-=======
-/*   Updated: 2023/12/11 16:34:25 by seunan           ###   ########.fr       */
->>>>>>> a42cc170d1dfede14e28fcc5c7ddfbe3a87f5c38
+/*   Updated: 2023/12/12 00:09:33 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +26,5 @@ void	parse_rt(t_vars *vars, char *path);
 
 // check_arg.c
 void	is_valid_arg(int ac, char *av[]);
-
 
 #endif

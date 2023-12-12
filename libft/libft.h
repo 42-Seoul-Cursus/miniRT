@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:48:51 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 17:13:22 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ typedef struct s_list	t_list;
 
 enum	e_type
 {
-	AMBIENT,
-	CAMERA,
-	LIGHT,
 	SPHERE,
 	PLANE,
 	CYLINDER

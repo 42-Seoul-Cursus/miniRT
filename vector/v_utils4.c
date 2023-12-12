@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:51:01 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/11 22:49:07 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,15 @@ t_vec3	v_unit(t_vec3 vec)
 	vec.y /= len;
 	vec.z /= len;
 	return (vec);
+}
+
+t_vec4	vec4(t_vec3 v, const double w)
+{
+	t_vec4	v4;
+
+	v4.x = v.x;
+	v4.y = v.y;
+	v4.z = v.z;
+	v4.w = w;
+	return (v4);
 }

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/11 16:53:57 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 00:09:57 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,22 @@ typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_mlx_data	t_mlx_data;
 typedef struct s_vars		t_vars;
+typedef struct s_vec4		t_vec4;
+typedef struct s_4x4matrix	t_4x4matrix;
 
 struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
+};
+
+struct s_vec4
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 };
 
 struct s_ambient
@@ -65,7 +75,6 @@ struct s_sphere
 	t_color3	rgb;
 	int			b_start;
 };
-
 
 struct s_plane
 {
@@ -101,8 +110,6 @@ struct s_mlx_data
 	int		endian;
 };
 
-<<<<<<< HEAD
-=======
 struct s_vars
 {
 	t_ambient	ambient;
@@ -110,6 +117,13 @@ struct s_vars
 	t_light		light;
 	t_list		objects;
 };
->>>>>>> main
+
+struct s_4x4matrix
+{
+	t_vec4	r1;
+	t_vec4	r2;
+	t_vec4	r3;
+	t_vec4	r4;
+};
 
 #endif
