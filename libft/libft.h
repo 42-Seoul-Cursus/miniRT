@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:55:18 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 15:27:56 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 double	ft_strtod(char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 #endif
