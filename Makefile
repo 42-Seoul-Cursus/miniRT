@@ -13,6 +13,12 @@ SRCS = minirt.c \
 	   parse/gen_objs.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
+	   world2view.c \
+	   vector/v_utils1.c \
+	   vector/v_utils2.c \
+	   vector/v_utils3.c \
+	   vector/v_utils4.c \
+	   matrix/m_utils1.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
@@ -31,7 +37,7 @@ $(MLX):
 	cd mlx && $(MAKE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx -I get_next_line
+	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx -I get_next_line -I matrix -I vector
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS) .bonus

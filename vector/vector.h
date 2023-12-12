@@ -6,14 +6,14 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:46:33 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:54:15 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/12 11:55:03 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "structures.h"
+# include "../structures.h"
 
 t_vec3		vec3(const double x, const double y, const double z);
 t_point3	point3(const double x, const double y, const double z);
@@ -36,5 +36,6 @@ t_vec3		vt_divide(t_vec3 vec, double t);
 double		v_dot(t_vec3 vec, t_vec3 vec2);
 t_vec3		v_cross(t_vec3 vec, t_vec3 vec2);
 t_vec3		v_unit(t_vec3 vec);
+t_vec4		vec4(t_vec3 v, const double w);
 
 #endif

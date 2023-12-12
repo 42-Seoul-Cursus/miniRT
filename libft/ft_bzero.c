@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
-/*   Updated: 2023/03/20 17:30:53 by seunan           ###   ########seoul.kr  */
+/*   Updated: 2023/12/11 16:47:51 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
+	if (n == 0)
+		return ;
 	ft_memset(s, 0, n);
 }

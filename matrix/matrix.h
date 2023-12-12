@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 13:59:56 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 13:59:59 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/11 16:12:37 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/12 11:53:22 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include <stdlib.h>
+#ifndef MATRIX_H
+# define MATRIX_H
 
-void	init_vars(t_vars *vars)
-{
-	vars->ambient.cnt = 0;
-	vars->camera.cnt = 0;
-	vars->light.cnt = 0;
-	vars->objects = NULL;
-}
+t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
+t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
+
+#endif
