@@ -6,11 +6,12 @@ RM = rm -f
 
 SRCS = minirt.c \
 	   mlx.c \
-	   init.c \
+	   utils.c \
 	   parse/parse.c \
-	   parse/check_arg.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
+	   parse/check_env.c \
+	   parse/check_objs.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
 	   world2view.c \
@@ -37,7 +38,7 @@ $(MLX):
 	cd mlx && $(MAKE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I libft -I mlx -I get_next_line -I matrix -I vector
+	$(CC) $(CFLAGS) -c -o $@ $< -I mlx -I libft -I get_next_line -I parse -I matrix -I vector
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS) .bonus

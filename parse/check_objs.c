@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   check_objs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 14:44:57 by seunan           ###   ########.fr       */
+/*   Created: 2023/12/12 15:15:06 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/12 15:23:05 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "parse.h"
 
-int	main(int argc, char *argv[])
+void	check_sphere(t_sphere *sphere)
 {
-	t_mlx_data	mlx_data;
-	t_vars		vars;
+	check_vec(sphere->rgb, 0, 255, TRUE);
+}
 
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	is_valid_rt(&vars);
-	init_mlx(&mlx_data);
-	world2view(&vars);
-	execute_mlx(&mlx_data);
-	return (0);
+void	check_plane(t_plane *plane)
+{
+	check_vec(plane->normal_v, -1, 1, FALSE);
+	check_vec(plane->rgb, 0, 255, TRUE);
+}
+
+void	check_cylinder(t_cylinder *cylinder)
+{
+	check_vec(cylinder->normal_v, -1, 1, FALSE);
+	check_vec(cylinder->rgb, 0, 255, TRUE);
 }
