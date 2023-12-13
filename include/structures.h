@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:03:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 21:14:35 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_mlx_data	t_mlx_data;
+typedef struct s_mlx_args	t_mlx_args;
 typedef struct s_vars		t_vars;
 typedef struct s_vec4		t_vec4;
 typedef struct s_4x4matrix	t_4x4matrix;
@@ -112,6 +113,15 @@ enum
 	ON_DESTROY = 17
 };
 
+enum e_keycode
+{
+	FRONT = 13,
+	LEFT = 0,
+	BACK = 1,
+	RIGHT = 2,
+	ESC = 53
+};
+
 struct s_mlx_data
 {
 	void	*mlx;
@@ -121,6 +131,7 @@ struct s_mlx_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	t_vars	*vars;
 };
 
 struct s_vars
@@ -129,6 +140,12 @@ struct s_vars
 	t_camera	camera;
 	t_list		*light;
 	t_list		*objects;
+};
+
+struct s_mlx_args
+{
+	t_vars		*vars;
+	t_mlx_data	*mlx_data;
 };
 
 struct s_4x4matrix
