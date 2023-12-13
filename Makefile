@@ -16,15 +16,15 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 SRC_DIR = src
 
 SRCS = main.c \
-	   mlx.c \
 	   phong.c \
-	   utils.c \
 	   color.c \
 	   hit_sphere.c \
 	   render.c \
 	   world2view.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
+	   hook/mlx.c \
+	   hook/move.c \
 	   matrix/m_utils1.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
@@ -32,6 +32,7 @@ SRCS = main.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
 	   ray/ray.c \
+	   utils/utils.c \
 	   vector/v_utils1.c \
 	   vector/v_utils2.c \
 	   vector/v_utils3.c \

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 22:02:31 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:11:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int argc, char *argv[])
 	init_mlx(&mlx_data);
 	world2view(&vars);
 	render(&vars, &mlx_data);
-	execute_mlx(&mlx_data);
+	execute_mlx(&mlx_data, &vars);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 23:53:06 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:11:41 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "structures.h"
 
 void		init_mlx(t_mlx_data *mlx_data);
-void		execute_mlx(t_mlx_data *mlx_data);
+void		execute_mlx(t_mlx_data *mlx_data, t_vars *vars);
 
 // utils.c
 void		is_valid_arg(int ac, char *av[]);
