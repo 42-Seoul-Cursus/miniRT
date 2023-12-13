@@ -4,7 +4,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        작성 예시 : "feat: 채팅 채널 추가"
+        작성 예시 : "[Feat] 로그인 기능 추가"
   - type: textarea
     id: bug-description
     attributes:
