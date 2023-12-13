@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:24:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 22:01:44 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,39 +45,49 @@ static int	destroy_window(t_mlx_data *mlx_data)
 #include <stdio.h>
 void	move_front(t_mlx_args *mlx_args)
 {
-	printf("HERE\n");
+	t_camera	camera;
+
+	camera = mlx_args->vars->camera;
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	mlx_args->vars->camera.view_point = \
-		v_plus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
+		v_minus(mlx_args->vars->camera.view_point, vec3(0, 0, 10));
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	render(mlx_args->vars, mlx_args->mlx_data);
 }
 
 void	move_left(t_mlx_args *mlx_args)
 {
-	printf("HERE\n");
+	t_camera	camera;
+
+	camera = mlx_args->vars->camera;
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	mlx_args->vars->camera.view_point = \
-		v_minus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
+		v_plus(mlx_args->vars->camera.view_point, vec3(10, 0, 0));
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	render(mlx_args->vars, mlx_args->mlx_data);
 }
 
 void	move_back(t_mlx_args *mlx_args)
 {
-	printf("HERE\n");
+	t_camera	camera;
+
+	camera = mlx_args->vars->camera;
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	mlx_args->vars->camera.view_point = \
-		vp_minus(mlx_args->vars->camera.view_point, \
-		mlx_args->vars->camera.view_point.x * 0.1, \
-		mlx_args->vars->camera.view_point.y * 0.1, \
-		mlx_args->vars->camera.view_point.z * 0.1);
+		v_plus(mlx_args->vars->camera.view_point, vec3(0, 0, 10));
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	render(mlx_args->vars, mlx_args->mlx_data);
 }
 
 void	move_right(t_mlx_args *mlx_args)
 {
-	printf("HERE\n");
+	t_camera	camera;
+
+	camera = mlx_args->vars->camera;
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	mlx_args->vars->camera.view_point = \
-		vp_minus(mlx_args->vars->camera.view_point, \
-		mlx_args->vars->camera.view_point.x * 0.1, \
-		mlx_args->vars->camera.view_point.y * 0.1, \
-		mlx_args->vars->camera.view_point.z * 0.1);
+		v_minus(mlx_args->vars->camera.view_point, vec3(10, 0, 0));
+	printf("x: %lf, y: %lf, z: %lf\n", camera.view_point.x, camera.view_point.y, camera.view_point.z);
 	render(mlx_args->vars, mlx_args->mlx_data);
 }
 
