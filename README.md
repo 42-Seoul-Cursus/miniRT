@@ -23,7 +23,7 @@ make
 ### Execution
 After the build is complete, you can run the program with the following command.
 ```bash
-./miniRT scene.rt
+./miniRT scenes/[scene].rt
 ```
 
 ## Usage
