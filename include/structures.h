@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:34:04 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 23:55:55 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
 
 # define WIDTH	1920
 # define HEIGHT	1080
@@ -36,7 +35,6 @@ typedef struct s_ray		t_ray;
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_light		t_light;
 typedef struct s_list		t_list;
-
 
 struct s_vec3
 {

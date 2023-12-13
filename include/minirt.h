@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:34:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 23:53:06 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ int			hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec);
 
 int			create_trgb(int t, t_color3 *color);
 void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
+
+t_color3	execute_phong(t_vars *vars);
+int			in_shadow(t_list *object, t_ray ray, double light_len);
 
 #endif

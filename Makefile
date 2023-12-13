@@ -17,6 +17,7 @@ SRC_DIR = src
 
 SRCS = main.c \
 	   mlx.c \
+	   phong.c \
 	   utils.c \
 	   color.c \
 	   hit_sphere.c \
