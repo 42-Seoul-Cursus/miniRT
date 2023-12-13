@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hook.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:11:37 by seunan           ###   ########.fr       */
+/*   Created: 2023/12/13 20:48:16 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/13 23:02:27 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "parse.h"
-#include "vector.h"
+#ifndef HOOK_H
+# define HOOK_H
 
-int	main(int argc, char *argv[])
+enum e_keycode
 {
-	t_mlx_data	mlx_data;
-	t_vars		vars;
+	FRONT = 13,
+	LEFT = 0,
+	BACK = 1,
+	RIGHT = 2,
+	ESC = 53
+};
 
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	init_mlx(&mlx_data);
-	world2view(&vars);
-	render(&vars, &mlx_data);
-	execute_mlx(&mlx_data, &vars);
-	return (0);
-}
+void	move_front(t_mlx_args *mlx_args);
+void	move_left(t_mlx_args *mlx_args);
+void	move_back(t_mlx_args *mlx_args);
+void	move_right(t_mlx_args *mlx_args);
+
+#endif
