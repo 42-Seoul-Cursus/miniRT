@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 16:54:34 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 17:49:00 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_list	t_list;
 
 enum	e_type
 {
+	LIGHT,
 	SPHERE,
 	PLANE,
 	CYLINDER,

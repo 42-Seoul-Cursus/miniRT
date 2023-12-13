@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 11:47:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	parse_vec(char **line, enum e_bool is_endl);
 // gen_env.c
 void	gen_ambient(t_ambient *ambient, char *line);
 void	gen_camera(t_camera *camera, char *line);
-void	gen_light(t_light *light, char *line);
+void	gen_light(t_list **light, char *line);
 
 // gen_objs.c
 void	gen_sphere(t_list **objects, char *line);

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:19:11 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 17:49:14 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ struct s_light
 	t_point3	light_point;
 	double		brightness_ratio;
 	t_color3	rgb;
-	int			cnt;
 };
 
 struct s_sphere
@@ -129,12 +128,19 @@ struct s_mlx_data
 
 struct s_vars
 {
+<<<<<<< HEAD
 	t_ambient		ambient;
 	t_camera		camera;
 	t_list			*objects;
 	t_list			*light;
 	t_ray			ray;
 	t_hit_record	rec;
+=======
+	t_ambient	ambient;
+	t_camera	camera;
+	t_list		*light;
+	t_list		*objects;
+>>>>>>> main
 };
 
 struct s_4x4matrix
