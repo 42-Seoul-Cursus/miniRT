@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gen_objs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:49:18 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 18:13:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "../libft/libft.h"
 
 void	gen_sphere(t_list **objects, char *line)
 {

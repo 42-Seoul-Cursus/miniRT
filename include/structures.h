@@ -6,27 +6,25 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:49:14 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 18:10:17 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-# include "../src/libft/libft.h"
 
 # define WIDTH	1920
 # define HEIGHT	1080
 # define IMG_RATIO	1.7778
 # define SHIN_VALUE	64
-# define SPEC_VALUE	0.5;
+# define SPEC_VALUE	0.5
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
 typedef struct s_vec3		t_color3;
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
-typedef struct s_light		t_light;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
@@ -37,6 +35,8 @@ typedef struct s_4x4matrix	t_4x4matrix;
 typedef struct s_ray		t_ray;
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_light		t_light;
+typedef struct s_list		t_list;
+
 
 struct s_vec3
 {
@@ -126,31 +126,6 @@ struct s_mlx_data
 	int		endian;
 };
 
-struct s_vars
-{
-<<<<<<< HEAD
-	t_ambient		ambient;
-	t_camera		camera;
-	t_list			*objects;
-	t_list			*light;
-	t_ray			ray;
-	t_hit_record	rec;
-=======
-	t_ambient	ambient;
-	t_camera	camera;
-	t_list		*light;
-	t_list		*objects;
->>>>>>> main
-};
-
-struct s_4x4matrix
-{
-	t_vec4	r1;
-	t_vec4	r2;
-	t_vec4	r3;
-	t_vec4	r4;
-};
-
 struct s_ray
 {
 	t_point3	orig;
@@ -168,11 +143,39 @@ struct s_hit_record
 	t_color3	albedo;
 };
 
-struct s_light
+struct s_vars
 {
-	t_point3	orig;
-	t_color3	light_color;
-	double		bight_ratio;
+	t_ambient		ambient;
+	t_camera		camera;
+	t_list			*objects;
+	t_list			*light;
+	t_ray			ray;
+	t_hit_record	rec;
+};
+
+struct s_4x4matrix
+{
+	t_vec4	r1;
+	t_vec4	r2;
+	t_vec4	r3;
+	t_vec4	r4;
+};
+
+enum	e_type
+{
+	LIGHT,
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	LIGHT_POINT
+};
+
+struct s_list
+{
+	void			*content;
+	enum e_type		type;
+	struct s_list	*next;
+	t_color3		albedo;
 };
 
 #endif

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 17:10:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 18:12:19 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "vector.h"
+#include "../libft/libft.h"
 
 void	gen_ambient(t_ambient *ambient, char *line)
 {

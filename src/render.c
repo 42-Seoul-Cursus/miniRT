@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:28:42 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:27:26 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,12 @@ t_color3	execute_phong(t_vars *vars)
 
 	light_color = color3(0, 0, 0);
 	light = vars->light;
-	/*
 	while (light)
 	{
 		if (light->type == LIGHT_POINT)
 			light_color = v_plus(light_color, point_light_get(vars, (t_light *)light->content));
 		light = light->next;
 	}
-	*/
 	light_color = v_plus(light_color, vars->ambient.rgb);
 	return (v_min(v_mul(light_color, vars->rec.albedo), color3(1, 1, 1)));
 }
@@ -141,6 +139,7 @@ void	render(t_vars *vars, t_mlx_data *mlx)
 			vt_mul(vars->camera.pixel_delta_v, j)));
 			vars->ray.dir = v_minus(pixel_center, vars->camera.view_point);
 			color = ray_color(vars);
+			//color = get_color_int_to_real(color);
 			my_mlx_pixel_put(mlx, i, j, create_trgb(0, &color));
 		}
 	}
