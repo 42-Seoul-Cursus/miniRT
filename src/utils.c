@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:34 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 14:36:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ void	init_vars(t_vars *vars)
 {
 	vars->ambient.cnt = 0;
 	vars->camera.cnt = 0;
-	vars->light.cnt = 0;
+	vars->light = NULL;
 	vars->objects = NULL;
-}
-
-void	is_valid_rt(t_vars *vars)
-{
-	if (vars->ambient.cnt != 1)
-		ft_error("File Format Error");
-	if (vars->camera.cnt != 1)
-		ft_error("File Format Error");
-	if (vars->light.cnt != 1)
-		ft_error("File Format Error");
 }

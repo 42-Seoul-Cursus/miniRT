@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:34:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:17:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char *argv[])
 	is_valid_arg(argc, argv);
 	init_vars(&vars);
 	parse_rt(&vars, argv[1]);
-	is_valid_rt(&vars);
 	init_mlx(&mlx_data);
 	world2view(&vars);
 	render(&vars, &mlx_data);

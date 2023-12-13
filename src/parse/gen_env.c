@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 12:35:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:10:42 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
 }
 
-void	gen_light(t_light *light, char *line)
+void	gen_light(t_list **light, char *line)
 {
-	light->light_point = parse_vec(&line, FALSE);
-	light->brightness_ratio = parse_double(&line);
-	light->rgb = parse_vec(&line, TRUE);
-	++(light->cnt);
-	check_light(light);
+	t_light	*new;
+
+	new = (t_light *)ft_calloc(1, sizeof(t_light));
+	new->light_point = parse_vec(&line, FALSE);
+	new->brightness_ratio = parse_double(&line);
+	new->rgb = parse_vec(&line, TRUE);
+	check_light(new);
+	ft_lstadd_back(light, ft_lstnew(new, LIGHT));
 }
