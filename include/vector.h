@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:46:33 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:55:03 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 11:49:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "../structures.h"
+# include "structures.h"
 
 t_vec3		vec3(const double x, const double y, const double z);
 t_point3	point3(const double x, const double y, const double z);
