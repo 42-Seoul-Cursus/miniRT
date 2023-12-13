@@ -15,7 +15,7 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 
 SRC_DIR = src
 
-SRCS = minirt.c \
+SRCS = main.c \
 	   mlx.c \
 	   utils.c \
 	   color.c \
