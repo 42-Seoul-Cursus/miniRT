@@ -13,8 +13,8 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-# define WIDTH	1920
-# define HEIGHT	1080
+# define WIDTH	1440
+# define HEIGHT	920
 # define IMG_RATIO	1.7778
 # define SHIN_VALUE	64
 # define SPEC_VALUE	0.5

@@ -17,11 +17,9 @@
 
 void	move_front(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_plus(mlx_args->vars->camera.view_point, vec3(0, 0, 0.1));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -34,11 +32,9 @@ void	move_front(t_mlx_args *mlx_args)
 
 void	move_left(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_plus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -51,11 +47,9 @@ void	move_left(t_mlx_args *mlx_args)
 
 void	move_back(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_minus(mlx_args->vars->camera.view_point, vec3(0, 0, 0.1));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -68,11 +62,9 @@ void	move_back(t_mlx_args *mlx_args)
 
 void	move_right(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_minus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);

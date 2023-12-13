@@ -13,7 +13,6 @@
 #include "parse.h"
 #include "../libft/libft.h"
 
-
 void	check_ambient(t_ambient *ambient)
 {
 	if (ambient->cnt != 1)
