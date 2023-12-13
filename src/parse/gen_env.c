@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:48:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 12:35:24 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	gen_camera(t_camera *camera, char *line)
 	++(camera->cnt);
 	check_camera(camera);
 	camera->viewport_width = 2;
-	camera->viewport_height = 2 * IMG_RATIO;
+	camera->viewport_height = 2 / IMG_RATIO;
 	camera->viewport_u = vec3(camera->viewport_width, 0, 0);
 	camera->viewport_v = vec3(0, -camera->viewport_height, 0);
 	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);

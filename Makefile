@@ -19,19 +19,21 @@ SRCS = main.c \
 	   mlx.c \
 	   utils.c \
 	   color.c \
+	   render.c \
+	   world2view.c \
+	   get_next_line/get_next_line.c \
+	   get_next_line/get_next_line_utils.c \
+	   matrix/m_utils1.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
-	   get_next_line/get_next_line.c \
-	   get_next_line/get_next_line_utils.c \
-	   world2view.c \
+	   ray/ray.c \
 	   vector/v_utils1.c \
 	   vector/v_utils2.c \
 	   vector/v_utils3.c \
-	   vector/v_utils4.c \
-	   matrix/m_utils1.c
+	   vector/v_utils4.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 11:48:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 12:37:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../src/libft/libft.h"
 
-# define WIDTH	960
-# define HEIGHT	540
+# define WIDTH	1920
+# define HEIGHT	1080
 # define IMG_RATIO	1.7778
 
 typedef struct s_vec3		t_vec3;
@@ -33,6 +33,8 @@ typedef struct s_vars		t_vars;
 typedef struct s_vec4		t_vec4;
 typedef struct s_4x4matrix	t_4x4matrix;
 typedef struct s_ray		t_ray;
+typedef struct s_hit_record	t_hit_record;
+
 struct s_vec3
 {
 	double	x;
@@ -142,6 +144,16 @@ struct s_ray
 {
 	t_point3	orig;
 	t_vec3		dir;
+};
+
+struct s_hit_record
+{
+	t_point3	p;
+	t_vec3		normal;
+	double		tmin;
+	double		tmax;
+	double		t;
+	int			front_face;
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world2view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 16:36:23 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 12:50:32 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ static void	change_world2view_obj(t_list *cur,
 {
 	if (cur->type == SPHERE)
 	{
-		((t_sphere *)cur->content)->center = v_minus(
-				((t_sphere *)cur->content)->center, view_point);
+		((t_sphere *)cur->content)->center = \
+			v_minus(((t_sphere *)cur->content)->center, view_point);
+		((t_sphere *)cur->content)->center = \
+			mv_mul(rotate, vec4(((t_sphere *)cur->content)->center, 1));
 	}
 	else if (cur->type == PLANE)
 	{
@@ -73,7 +75,7 @@ void	world2view(t_vars *vars)
 	vars->camera.view_point = point3(0, 0, 0);
 	vars->camera.direct_v = mv_mul(
 			rotate_matrix, vec4(vars->camera.direct_v, 1));
-	vars->camera.fov_len = atan(vars->camera.fov / 2 * M_PI / 180);
+	vars->camera.fov_len = atan((vars->camera.fov / 2) * (M_PI / 180));
 	vars->camera.viewport_upper_left = v_minus(v_minus(v_minus(\
 	vars->camera.view_point, vec3(0, 0, vars->camera.fov_len)) \
 	, vt_mul(vars->camera.viewport_u, 0.5)) \
