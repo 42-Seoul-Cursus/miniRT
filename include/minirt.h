@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:27:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:43:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 15:56:27 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,11 @@ void		world2view(t_vars *vars);
 void		render(t_vars *vars, t_mlx_data *mlx);
 void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
 int			create_trgb(int t, t_color3 *color);
+
+// hit.c
+int			hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec);
+
+int			create_trgb(int t, t_color3 *color);
+void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
 
 #endif

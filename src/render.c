@@ -3,124 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:36:27 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 15:55:45 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "vector.h"
 #include "ray.h"
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 
-t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec);
-
-int	create_trgb(int t, t_color3 *color)
+int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {
-	return (t << 24 | (int)color->x << 16 | (int)color->y << 8 | (int)color->z);
+	int		is_hit;
+
+	is_hit = 0;
+	if (object->type == SPHERE)
+		is_hit = hit_sphere((t_sphere *)object->content, ray, rec);
+	return (is_hit);
 }
 
-void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color)
+int	hit(t_list *objects, t_ray *ray, t_hit_record *rec)
 {
-	char	*dst;
+	int				is_hit;
+	t_hit_record	temp_rec;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	update_nearest_hit_point(double a, double b, double c, t_hit_record *rec)
-{
-	double	root;
-	double	sqrtd;
-	double	discriminant;
-
-	discriminant = b * b - a * c;
-	sqrtd = sqrt(discriminant);
-	root = (-b - sqrtd) / a;
-	if (root < rec->tmin || rec->tmax < root)
+	is_hit = 0;
+	temp_rec = *rec;
+	while (objects)
 	{
-		root = (-b + sqrtd) / a;
-		if (root < rec->tmin || rec->tmax < root)
-			return (0);
+		if (hit_obj(objects, ray, &temp_rec))
+		{
+			is_hit = 1;
+			temp_rec.tmax = temp_rec.t;
+			*rec = temp_rec;
+		}
+		objects = objects->next;
 	}
-	rec->t = root;
-	return (1);
+	return (is_hit);
 }
 
-int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
+t_color3	ray_color(t_ray *ray, t_list *objects)
 {
-	t_vec3	oc;
-	double	a;
-	double	b;
-	double	c;
+	t_hit_record	rec;
+	t_vec3			unit_direction;
+	double			a;
 
-	oc = v_minus(ray->orig, sphere->center);
-	a = v_length2(ray->dir);
-	b = v_dot(oc, ray->dir);
-	c = v_length2(oc) - sphere->radius * sphere->radius;
-	if (b * b - a * c < 0)
-		return (0.0);
-	if (update_nearest_hit_point(a, b, c, rec) == 0)
-		return (0.0);
-	rec->p = ray_at(ray, rec->t);
-	rec->normal = get_sphere_normal_v(sphere, rec);
-	if (v_dot(ray->dir, rec->normal) < 0)
-		rec->front_face = 1;
-	else
-	{
-		rec->front_face = 0;
-		rec->normal = vt_mul(rec->normal, -1.0);
-	}
-	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
-	return (1);
-}
-
-t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec)
-{
-	t_vec3	normal_v;
-
-	normal_v = v_unit(v_minus(rec->p, sphere->center));
-	return (normal_v);
-}
-
-t_color3	get_sphere_color(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
-{
-	t_vec3	unit_direction;
-	double	a;
-	t_vec3	n;
-	double	t;
-
-	t = hit_sphere(sphere, ray, rec);
-	if (t > 0.0)
-	{
-		n = get_sphere_normal_v(sphere, rec);
+	rec.tmin = 1e-6;
+	rec.tmax = INFINITY;
+	if (hit(objects, ray, &rec))
 		return (vt_mul(\
-		color3(255.999 * (n.x + 1), 255.999 * (n.y + 1), 255.999 * (n.z + 1)), 0.5));
-	}
+		v_plus(rec.normal, \
+		color3(255.999 * (rec.normal.x + 1), 255.999 * (rec.normal.y + 1), \
+		255.999 * (rec.normal.z + 1))), 0.4));
 	unit_direction = v_unit(ray->dir);
 	a = 0.5 * (unit_direction.x + 1.0);
 	return (v_plus(\
 	vt_mul(color3(255.0, 255.0, 255.0), (1.0 - a)), \
 	vt_mul(color3(170.0, 200.0, 255.0), a)));
-}
-
-t_color3	ray_color(t_ray *ray, t_list *objects)
-{
-	t_list			*cur;
-	t_hit_record	rec;
-
-	cur = objects;
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
-	if (cur->type == SPHERE)
-		return (get_sphere_color((t_sphere *)cur->content, ray, &rec));
-	if (cur->type == PLANE)
-		return (color3(0, 0, 0));
-	else
-		return (color3(100, 100, 100));
 }
 
 void	render(t_vars *vars, t_mlx_data *mlx)

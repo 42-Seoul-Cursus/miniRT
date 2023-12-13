@@ -19,6 +19,7 @@ SRCS = main.c \
 	   mlx.c \
 	   utils.c \
 	   color.c \
+	   hit_sphere.c \
 	   render.c \
 	   world2view.c \
 	   get_next_line/get_next_line.c \
