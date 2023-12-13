@@ -38,6 +38,14 @@ SRCS = main.c \
 	   vector/v_utils4.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
+ifneq "$(filter debugger, $(MAKECMDGOALS))" ""
+	CFLAGS += $(LLDB)
+endif
+
+ifneq "$(filter sanitizer, $(MAKECMDGOALS))" ""
+	CFLAGS += $(MEMORY)
+endif
+
 all: $(NAME)
 
 $(MLX):
@@ -68,11 +76,11 @@ re:
 mem:
 	$(MAKE) fclean
 	$(MAKE) mem -C $(SRC_DIR)/libft
-	$(MAKE) all CFLAGS="$(DEBUG)"
+	$(MAKE) sanitizer $(NAME)
 
 lldb:
 	$(MAKE) fclean
 	$(MAKE) lldb -C $(SRC_DIR)/libft
-	$(MAKE) all CFLAGS="$(LLDB)"
+	$(MAKE) debugger $(NAME)
 
-.PHONY: all clean fclean re mem lldb
+.PHONY: all clean fclean re mem lldb debugger sanitizer
