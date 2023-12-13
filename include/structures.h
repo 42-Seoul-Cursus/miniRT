@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:14:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 23:02:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,6 @@ enum
 {
 	ON_KEYDOWN = 2,
 	ON_DESTROY = 17
-};
-
-enum e_keycode
-{
-	FRONT = 13,
-	LEFT = 0,
-	BACK = 1,
-	RIGHT = 2,
-	ESC = 53
 };
 
 struct s_mlx_data

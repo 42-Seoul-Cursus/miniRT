@@ -23,6 +23,7 @@ SRCS = main.c \
 	   get_next_line/get_next_line.c \
 	   get_next_line/get_next_line_utils.c \
 	   hook/mlx.c \
+	   hook/move.c \
 	   matrix/m_utils1.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
