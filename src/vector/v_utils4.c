@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 12:00:31 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:56 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,23 @@ t_vec4	vec4(t_vec3 v, const double w)
 	v4.z = v.z;
 	v4.w = w;
 	return (v4);
+}
+
+t_vec3	v_min(t_vec3 v1, t_vec3 v2)
+{
+	t_vec3	res;
+
+	if (v1.x < v2.x)
+		res.x = v1.x;
+	else
+		res.x = v2.x;
+	if (v1.y < v2.y)
+		res.y = v1.y;
+	else
+		res.y = v2.y;
+	if (v1.z < v2.z)
+		res.z = v1.z;
+	else
+		res.z = v2.z;
+	return (res);
 }

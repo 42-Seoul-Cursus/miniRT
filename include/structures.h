@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:37:14 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:19:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define WIDTH	1920
 # define HEIGHT	1080
 # define IMG_RATIO	1.7778
+# define SHIN_VALUE	64
+# define SPEC_VALUE	0.5;
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
@@ -34,6 +36,7 @@ typedef struct s_vec4		t_vec4;
 typedef struct s_4x4matrix	t_4x4matrix;
 typedef struct s_ray		t_ray;
 typedef struct s_hit_record	t_hit_record;
+typedef struct s_light		t_light;
 
 struct s_vec3
 {
@@ -126,10 +129,12 @@ struct s_mlx_data
 
 struct s_vars
 {
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		light;
-	t_list		*objects;
+	t_ambient		ambient;
+	t_camera		camera;
+	t_list			*objects;
+	t_list			*light;
+	t_ray			ray;
+	t_hit_record	rec;
 };
 
 struct s_4x4matrix
@@ -154,6 +159,14 @@ struct s_hit_record
 	double		tmax;
 	double		t;
 	int			front_face;
+	t_color3	albedo;
+};
+
+struct s_light
+{
+	t_point3	orig;
+	t_color3	light_color;
+	double		bight_ratio;
 };
 
 #endif
