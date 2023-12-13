@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:49:02 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:05:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	check_camera(t_camera *camera)
 
 void	check_light(t_light *light)
 {
-	if (light->cnt != 1)
-		ft_error("File Format Error");
 	if (!check_range(light->brightness_ratio, 0, 1))
 		ft_error("File Format Error");
 	if (!check_vec(light->rgb, 0, 255, TRUE))

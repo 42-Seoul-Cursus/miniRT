@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:37:14 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:03:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ struct s_light
 	t_point3	light_point;
 	double		brightness_ratio;
 	t_color3	rgb;
-	int			cnt;
 };
 
 struct s_sphere
@@ -128,7 +127,7 @@ struct s_vars
 {
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		light;
+	t_list		*light;
 	t_list		*objects;
 };
 
