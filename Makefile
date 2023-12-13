@@ -30,6 +30,8 @@ SRCS = main.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
 	   ray/ray.c \
+	   test/test_leak.c \
+	   test/test_parse.c \
 	   vector/v_utils1.c \
 	   vector/v_utils2.c \
 	   vector/v_utils3.c \
