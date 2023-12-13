@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   m_utils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 12:00:41 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 11:50:48 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../structures.h"
+#include "structures.h"
 #include "libft.h"
 #include "matrix.h"
 

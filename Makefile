@@ -8,10 +8,12 @@ MEMORY = -g3 -fsanitize=address
 LLDB = -g
 
 RM = rm -f
-INCLUDE = -I./mlx -I./libft -I./get_next_line -I./parse -I./matrix -I./vector
-LIBFT = libft/libft.a
-MLX = mlx/libmlx.a
+INCLUDE = -I./include -I./src/mlx -I./src/libft
+LIBFT = src/libft/libft.a
+MLX = src/mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
+
+SRC_DIR = src
 
 SRCS = minirt.c \
 	   mlx.c \
@@ -30,29 +32,29 @@ SRCS = minirt.c \
 	   vector/v_utils3.c \
 	   vector/v_utils4.c \
 	   matrix/m_utils1.c
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(MLX):
-	$(MAKE) -C ./mlx
+	$(MAKE) -C $(SRC_DIR)/mlx
 
 $(LIBFT):
-	$(MAKE) -C ./libft
+	$(MAKE) -C $(SRC_DIR)/libft
 
 $(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
-%.o: %.c
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)
 
 clean:
-	$(MAKE) clean -C ./mlx
-	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C $(SRC_DIR)/mlx
+	$(MAKE) clean -C $(SRC_DIR)/libft
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C $(SRC_DIR)/libft
 	$(RM) $(NAME)
 
 re:
@@ -61,12 +63,12 @@ re:
 
 mem:
 	$(MAKE) fclean
-	$(MAKE) mem -C ./libft
+	$(MAKE) mem -C $(SRC_DIR)/libft
 	$(MAKE) all CFLAGS="$(DEBUG)"
 
 lldb:
 	$(MAKE) fclean
-	$(MAKE) lldb -C ./libft
+	$(MAKE) lldb -C $(SRC_DIR)/libft
 	$(MAKE) all CFLAGS="$(LLDB)"
 
 .PHONY: all clean fclean re mem lldb

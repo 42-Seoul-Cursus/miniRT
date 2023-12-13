@@ -6,14 +6,14 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:48:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 11:47:52 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "../structures.h"
+# include "structures.h"
 
 enum	e_bool
 {
