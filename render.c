@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 00:44:10 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 12:28:25 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "ray.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec);
 
 int	create_trgb(int t, t_color3 *color)
 {
@@ -28,7 +31,26 @@ void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-double	hit_sphere(t_sphere *sphere, t_ray *ray)
+int	update_nearest_hit_point(double a, double b, double c, t_hit_record *rec)
+{
+	double	root;
+	double	sqrtd;
+	double	discriminant;
+
+	discriminant = b * b - a * c;
+	sqrtd = sqrt(discriminant);
+	root = (-b - sqrtd) / a;
+	if (root < rec->tmin || rec->tmax < root)
+	{
+		root = (-b + sqrtd) / a;
+		if (root < rec->tmin || rec->tmax < root)
+			return (0);
+	}
+	rec->t = root;
+	return (1);
+}
+
+int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	t_vec3	oc;
 	double	a;
@@ -41,46 +63,64 @@ double	hit_sphere(t_sphere *sphere, t_ray *ray)
 	c = v_length2(oc) - sphere->radius * sphere->radius;
 	if (b * b - a * c < 0)
 		return (0.0);
+	if (update_nearest_hit_point(a, b, c, rec) == 0)
+		return (0.0);
+	rec->p = ray_at(ray, rec->t);
+	rec->normal = get_sphere_normal_v(sphere, rec);
+	if (v_dot(ray->dir, rec->normal) < 0)
+		rec->front_face = 1;
 	else
-		return ((-b - sqrt(b * b - a * c)) / a);
+	{
+		rec->front_face = 0;
+		rec->normal = vt_mul(rec->normal, -1.0);
+	}
+	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
+	return (1);
 }
 
-t_vec3	get_sphere_normal_v(t_sphere *sphere, t_ray *ray, double t)
+t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec)
 {
 	t_vec3	normal_v;
 
-	normal_v = v_unit(v_minus(ray_at(ray, t), sphere->center));
+	normal_v = v_unit(v_minus(rec->p, sphere->center));
 	return (normal_v);
 }
 
-t_color3	ray_color(t_ray *ray, t_list *objects)
+t_color3	get_sphere_color(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	t_vec3	unit_direction;
-	t_list	*cur;
-	t_vec3	n;
 	double	a;
+	t_vec3	n;
 	double	t;
 
-	cur = objects;
-	if (cur->type == SPHERE)
+	t = hit_sphere(sphere, ray, rec);
+	if (t > 0.0)
 	{
-		t = hit_sphere((t_sphere *)cur->content, ray);
-		if (t > 0.0)
-		{
-			n = get_sphere_normal_v((t_sphere *)cur->content, ray, t);
-			return (vt_mul(\
-			color3(255.999 * (n.x + 1), 255.999 * (n.y + 1), 255.999 * (n.z + 1)), 0.5));
-		}
+		n = get_sphere_normal_v(sphere, rec);
+		return (vt_mul(\
+		color3(255.999 * (n.x + 1), 255.999 * (n.y + 1), 255.999 * (n.z + 1)), 0.5));
 	}
-	if (cur->type == PLANE)
-		return (color3(0, 0, 0));
-	if (cur->type == CYLINDER)
-		return (color3(100, 100, 100));
 	unit_direction = v_unit(ray->dir);
 	a = 0.5 * (unit_direction.x + 1.0);
 	return (v_plus(\
 	vt_mul(color3(255.0, 255.0, 255.0), (1.0 - a)), \
 	vt_mul(color3(170.0, 200.0, 255.0), a)));
+}
+
+t_color3	ray_color(t_ray *ray, t_list *objects)
+{
+	t_list			*cur;
+	t_hit_record	rec;
+
+	cur = objects;
+	rec.tmin = 0;
+	rec.tmax = INFINITY;
+	if (cur->type == SPHERE)
+		return (get_sphere_color((t_sphere *)cur->content, ray, &rec));
+	if (cur->type == PLANE)
+		return (color3(0, 0, 0));
+	else
+		return (color3(100, 100, 100));
 }
 
 void	render(t_vars *vars, t_mlx_data *mlx)
