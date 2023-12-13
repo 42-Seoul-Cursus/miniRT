@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:02:27 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 18:06:12 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,7 @@
 # define LIBFT_H
 
 # include <sys/types.h>
-
-typedef struct s_list	t_list;
-
-enum	e_type
-{
-	LIGHT,
-	SPHERE,
-	PLANE,
-	CYLINDER
-};
-
-struct s_list
-{
-	void			*content;
-	enum e_type		type;
-	struct s_list	*next;
-};
+# include "structures.h"
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);

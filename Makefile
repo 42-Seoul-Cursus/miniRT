@@ -16,6 +16,7 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 SRC_DIR = src
 
 SRCS = main.c \
+	   phong.c \
 	   color.c \
 	   hit_sphere.c \
 	   render.c \

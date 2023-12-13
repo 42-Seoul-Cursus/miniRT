@@ -37,7 +37,7 @@ all: $(NAME)
 $(NAME): $(NAME)($(OBJS))
 
 (%.o): %.c libft.h
-	$(CC) $(CFLAGS) -c -o $% $<
+	$(CC) $(CFLAGS) -c -o $% $< -I ../../include
 	$(AR) $(ARFLAGS) $@ $%
 
 clean:
