@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/12 16:53:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	parse_rt(t_vars *vars, char *path)
 		check_identifier(vars, line);
 		free(line);
 	}
+	if (vars->camera.cnt == 0 || vars->ambient.cnt == 0 || vars->light == NULL)
+		ft_error("File Format Error");
 }
 
 double	parse_double(char **line)

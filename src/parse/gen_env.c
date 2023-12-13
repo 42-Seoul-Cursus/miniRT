@@ -6,17 +6,20 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 12:35:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 21:37:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "parse.h"
 #include "vector.h"
+#include "../libft/libft.h"
 
 void	gen_ambient(t_ambient *ambient, char *line)
 {
 	ambient->lighting_ratio = parse_double(&line);
-	ambient->rgb = parse_vec(&line, TRUE);
+	ambient->i_rgb = parse_vec(&line, TRUE);
+	ambient->r_rgb = get_color_int_to_real(ambient->i_rgb);
 	++(ambient->cnt);
 	check_ambient(ambient);
 }
@@ -40,11 +43,15 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
 }
 
-void	gen_light(t_light *light, char *line)
+void	gen_light(t_list **light, char *line)
 {
-	light->light_point = parse_vec(&line, FALSE);
-	light->brightness_ratio = parse_double(&line);
-	light->rgb = parse_vec(&line, TRUE);
-	++(light->cnt);
-	check_light(light);
+	t_light	*new;
+
+	new = (t_light *)ft_calloc(1, sizeof(t_light));
+	new->light_point = parse_vec(&line, FALSE);
+	new->brightness_ratio = parse_double(&line);
+	new->i_rgb = parse_vec(&line, TRUE);
+	new->r_rgb = get_color_int_to_real(new->i_rgb);
+	check_light(new);
+	ft_lstadd_back(light, ft_lstnew(new, LIGHT));
 }

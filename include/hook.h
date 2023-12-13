@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_objs.c                                       :+:      :+:    :+:   */
+/*   hook.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 15:15:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 21:35:34 by seunan           ###   ########.fr       */
+/*   Created: 2023/12/13 20:48:16 by seunan            #+#    #+#             */
+/*   Updated: 2023/12/13 23:02:27 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#ifndef HOOK_H
+# define HOOK_H
 
-void	check_sphere(t_sphere *sphere)
+enum e_keycode
 {
-	check_vec(sphere->i_rgb, 0, 255, TRUE);
-}
+	FRONT = 13,
+	LEFT = 0,
+	BACK = 1,
+	RIGHT = 2,
+	ESC = 53
+};
 
-void	check_plane(t_plane *plane)
-{
-	check_vec(plane->normal_v, -1, 1, FALSE);
-	check_vec(plane->i_rgb, 0, 255, TRUE);
-}
+void	move_front(t_mlx_args *mlx_args);
+void	move_left(t_mlx_args *mlx_args);
+void	move_back(t_mlx_args *mlx_args);
+void	move_right(t_mlx_args *mlx_args);
 
-void	check_cylinder(t_cylinder *cylinder)
-{
-	check_vec(cylinder->normal_v, -1, 1, FALSE);
-	check_vec(cylinder->i_rgb, 0, 255, TRUE);
-}
+#endif

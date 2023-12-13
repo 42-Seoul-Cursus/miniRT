@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:46:33 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 11:49:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/13 17:05:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ double		v_dot(t_vec3 vec, t_vec3 vec2);
 t_vec3		v_cross(t_vec3 vec, t_vec3 vec2);
 t_vec3		v_unit(t_vec3 vec);
 t_vec4		vec4(t_vec3 v, const double w);
+t_vec3		v_min(t_vec3 v1, t_vec3 v2);
 
 #endif
