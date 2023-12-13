@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:48:22 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 15:55:32 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:34:48 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 #include "minirt.h"
 
-t_color3	get_color_int_to_real(t_color3 rgb)
+t_color3	get_color_int_to_real(t_color3 i_rgb)
 {
 	t_color3	out;
 
-	out.x = rgb.x / 255;
-	out.y = rgb.y / 255;
-	out.z = rgb.z / 255;
+	out.x = i_rgb.x / 255;
+	out.y = i_rgb.y / 255;
+	out.z = i_rgb.z / 255;
 	return (out);
 }
 
-t_color3	get_color_real_to_int(t_color3 rgb)
+t_color3	get_color_real_to_int(t_color3 r_rgb)
 {
 	t_color3	out;
 
-	out.x = rgb.x * 255.999;
-	out.y = rgb.y * 255.999;
-	out.z = rgb.z * 255.999;
+	out.x = r_rgb.x * 255.999;
+	out.y = r_rgb.y * 255.999;
+	out.z = r_rgb.z * 255.999;
 	return (out);
 }
 

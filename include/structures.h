@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 18:10:17 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:34:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ struct s_vec4
 struct s_ambient
 {
 	double		lighting_ratio;
-	t_color3	rgb;
+	t_color3	i_rgb;
+	t_color3	r_rgb;
 	int			cnt;
 };
 
@@ -81,7 +82,8 @@ struct s_light
 {
 	t_point3	light_point;
 	double		brightness_ratio;
-	t_color3	rgb;
+	t_color3	i_rgb;
+	t_color3	r_rgb;
 };
 
 struct s_sphere
@@ -89,14 +91,16 @@ struct s_sphere
 	t_point3	center;
 	double		diameter;
 	double		radius;
-	t_color3	rgb;
+	t_color3	i_rgb;
+	t_color3	r_rgb;
 };
 
 struct s_plane
 {
 	t_point3	point;
 	t_vec3		normal_v;
-	t_color3	rgb;
+	t_color3	i_rgb;
+	t_color3	r_rgb;
 };
 
 struct s_cylinder
@@ -106,7 +110,8 @@ struct s_cylinder
 	double		diameter;
 	double		radius;
 	double		height;
-	t_color3	rgb;
+	t_color3	i_rgb;
+	t_color3	r_rgb;
 };
 
 enum

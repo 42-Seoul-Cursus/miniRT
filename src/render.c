@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 21:27:26 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/13 21:51:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {
@@ -54,7 +55,7 @@ t_color3	get_diffuse(t_vars *vars, t_light *light)
 
 	light_dir = v_unit(v_minus(light->light_point, vars->rec.p));
 	kd = fmax(v_dot(vars->rec.normal, light_dir), 0.0);
-	return (vt_mul(light->rgb, kd));
+	return (vt_mul(light->r_rgb, kd));
 }
 
 t_vec3	get_reflect_vec(t_vec3 v, t_vec3 n)
@@ -73,7 +74,7 @@ t_color3	get_specular(t_vars *vars, t_light *light)
 	view_dir = v_unit(vt_mul(vars->ray.dir, -1));
 	reflect_dir = get_reflect_vec(vt_mul(light_dir, -1), vars->rec.normal);
 	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), SHIN_VALUE);
-	return (vt_mul(vt_mul(light->rgb, 0.5), spec));
+	return (vt_mul(vt_mul(light->r_rgb, 0.5), spec));
 }
 
 t_color3	point_light_get(t_vars *vars, t_light *light)
@@ -83,7 +84,7 @@ t_color3	point_light_get(t_vars *vars, t_light *light)
 
 	diffuse = get_diffuse(vars, light);
 	specular = get_specular(vars, light);
-	return (vt_mul(v_plus(v_plus(vars->ambient.rgb, diffuse), specular), light->brightness_ratio));
+	return (vt_mul(v_plus(v_plus(vars->ambient.r_rgb, diffuse), specular), light->brightness_ratio));
 }
 
 t_color3	execute_phong(t_vars *vars)
@@ -95,11 +96,10 @@ t_color3	execute_phong(t_vars *vars)
 	light = vars->light;
 	while (light)
 	{
-		if (light->type == LIGHT_POINT)
+		if (light->type == LIGHT)
 			light_color = v_plus(light_color, point_light_get(vars, (t_light *)light->content));
 		light = light->next;
 	}
-	light_color = v_plus(light_color, vars->ambient.rgb);
 	return (v_min(v_mul(light_color, vars->rec.albedo), color3(1, 1, 1)));
 }
 
@@ -115,8 +115,8 @@ t_color3	ray_color(t_vars *vars)
 	unit_direction = v_unit(vars->ray.dir);
 	a = 0.5 * (unit_direction.x + 1.0);
 	return (v_plus(\
-	vt_mul(color3(255.0, 255.0, 255.0), (1.0 - a)), \
-	vt_mul(color3(170.0, 200.0, 255.0), a)));
+	vt_mul(color3(0.3, 0.3, 0.3), (1.0 - a)), \
+	vt_mul(color3(0.1, 0.33, 0.3), a)));
 }
 
 void	render(t_vars *vars, t_mlx_data *mlx)
@@ -139,7 +139,7 @@ void	render(t_vars *vars, t_mlx_data *mlx)
 			vt_mul(vars->camera.pixel_delta_v, j)));
 			vars->ray.dir = v_minus(pixel_center, vars->camera.view_point);
 			color = ray_color(vars);
-			//color = get_color_int_to_real(color);
+		 	color = get_color_real_to_int(color);
 			my_mlx_pixel_put(mlx, i, j, create_trgb(0, &color));
 		}
 	}
