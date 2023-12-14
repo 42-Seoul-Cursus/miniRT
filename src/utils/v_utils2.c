@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   v_utils2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:39:43 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:51:28 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:11:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils.h"
 #include <math.h>
 
 double	v_length2(const t_vec3 vec)

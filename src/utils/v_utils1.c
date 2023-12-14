@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   v_utils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:30:53 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:52:22 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:11:55 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils.h"
 
 t_vec3	vec3(const double x, const double y, const double z)
 {

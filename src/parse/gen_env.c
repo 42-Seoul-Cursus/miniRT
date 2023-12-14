@@ -6,14 +6,15 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 21:37:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:31:10 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "parse.h"
 #include "vector.h"
-#include "../libft/libft.h"
+#include "utils.h"
+#include "print.h"
+#include "libft.h"
 
 void	gen_ambient(t_ambient *ambient, char *line)
 {

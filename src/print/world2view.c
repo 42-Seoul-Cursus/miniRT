@@ -6,14 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:50:32 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:17:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "structures.h"
-#include "matrix.h"
-#include "vector.h"
+#include "utils.h"
 #include <math.h>
 
 static t_4x4matrix	get_view_rotate_matrix(t_camera camera)
@@ -80,7 +77,7 @@ void	world2view(t_vars *vars)
 	vars->camera.view_point, vec3(0, 0, vars->camera.fov_len)) \
 	, vt_mul(vars->camera.viewport_u, 0.5)) \
 	, vt_mul(vars->camera.viewport_v, 0.5));
-	vars->camera.poxel_00_loc = v_plus(\
+	vars->camera.pixel_00_loc = v_plus(\
 	vars->camera.viewport_upper_left \
 	, vt_mul(\
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   v_utils3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:42:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/09 23:51:18 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:12:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils.h"
 
 t_vec3	vp_minus(t_vec3 vec, const double x, const double y, const double z)
 {

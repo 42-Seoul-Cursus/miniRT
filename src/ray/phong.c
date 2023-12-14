@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 23:54:52 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:30:21 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "vector.h"
+#include "utils.h"
 #include "ray.h"
 #include <math.h>
 
