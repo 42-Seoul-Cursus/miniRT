@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 21:35:08 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 22:05:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "vector.h"
+#include "utils.h"
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {
@@ -65,30 +63,4 @@ t_color3	ray_color(t_vars *vars)
 	if (hit(vars->objects, &vars->ray, &vars->rec))
 		return (execute_phong(vars));
 	return (color3(0.9, 0.9, 0.9));
-}
-
-void	render(t_vars *vars, t_mlx_data *mlx)
-{
-	int			i;
-	int			j;
-	t_vec3		pixel_center;
-	t_color3	color;
-
-	i = -1;
-	j = -1;
-	vars->ray.orig = vars->camera.view_point;
-	while (++j < HEIGHT)
-	{
-		i = 0;
-		while (++i < WIDTH)
-		{
-			pixel_center = v_plus(vars->camera.poxel_00_loc, \
-			v_plus(vt_mul(vars->camera.pixel_delta_u, i), \
-			vt_mul(vars->camera.pixel_delta_v, j)));
-			vars->ray.dir = v_minus(pixel_center, vars->camera.view_point);
-			color = ray_color(vars);
-			color = get_color_real_to_int(color);
-			my_mlx_pixel_put(mlx, i, j, create_trgb(0, &color));
-		}
-	}
 }

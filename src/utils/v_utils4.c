@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   v_utils4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 17:04:56 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:12:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils.h"
 #include "libft.h"
 #include <stdlib.h>
 

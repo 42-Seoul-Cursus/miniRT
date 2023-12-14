@@ -6,13 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 11:50:48 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:30:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 #include "libft.h"
-#include "matrix.h"
 
 t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4)
 {

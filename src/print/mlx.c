@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 15:44:41 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:21:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "structures.h"
-#include "minirt.h"
 #include "mlx.h"
+#include "vector.h"
 #include "libft.h"
+#include "hook.h"
 
 void	init_mlx(t_mlx_data *mlx_data)
 {
@@ -41,17 +41,29 @@ static int	destroy_window(t_mlx_data *mlx_data)
 	return (0);
 }
 
-static int	handle_key_press(int keycode, t_mlx_data *mlx_data)
+static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
 {
-	if (keycode == 53)
-		destroy_window(mlx_data);
+	if (keycode == ESC)
+		destroy_window(mlx_args->mlx_data);
+	if (keycode == FRONT)
+		move_front(mlx_args);
+	if (keycode == LEFT)
+		move_left(mlx_args);
+	if (keycode == BACK)
+		move_back(mlx_args);
+	if (keycode == RIGHT)
+		move_right(mlx_args);
 	return (0);
 }
 
-void	execute_mlx(t_mlx_data *mlx_data)
+void	execute_mlx(t_mlx_data *mlx_data, t_vars *vars)
 {
+	t_mlx_args	mlx_args;
+
+	mlx_args.mlx_data = mlx_data;
+	mlx_args.vars = vars;
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
 	mlx_hook(mlx_data->win, ON_DESTROY, 0, destroy_window, mlx_data);
-	mlx_hook(mlx_data->win, ON_KEYDOWN, 0, handle_key_press, mlx_data);
+	mlx_hook(mlx_data->win, ON_KEYDOWN, 0, handle_key_press, &mlx_args);
 	mlx_loop(mlx_data->mlx);
 }

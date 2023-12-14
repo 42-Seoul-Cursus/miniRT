@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:48:22 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 21:09:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 22:05:28 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
-#include "minirt.h"
 
 t_color3	get_color_int_to_real(t_color3 i_rgb)
 {

@@ -6,13 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 21:35:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:31:13 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "../libft/libft.h"
-
+#include "libft.h"
 
 void	check_ambient(t_ambient *ambient)
 {
