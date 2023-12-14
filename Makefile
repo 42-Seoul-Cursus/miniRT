@@ -9,7 +9,6 @@ LLDB = -g
 
 RM = rm -f
 INCLUDE = -I./include -I./src/mlx -I./src/libft
-LIBFT = src/libft/libft.a
 MLX = src/mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
 
@@ -17,29 +16,18 @@ SRC_DIR = src
 
 SRCS = \
 	main.c \
-	color.c \
-	hit_sphere.c \
-	phong.c \
-	render.c \
-	world2view.c \
-	hook/mlx.c \
-	hook/move.c \
-	matrix/m_utils1.c \
-	parse/get_next_line/get_next_line.c \
-	parse/get_next_line/get_next_line_utils.c \
-	parse/parse.c \
-	parse/gen_env.c \
-	parse/gen_objs.c \
-	parse/check_env.c \
-	parse/check_objs.c \
-	ray/ray.c \
-	test/test_parse.c \
-	test/test_leak.c \
-	utils/utils.c \
-	vector/v_utils1.c \
-	vector/v_utils2.c \
-	vector/v_utils3.c \
-	vector/v_utils4.c
+	parse/get_next_line.c \
+	parse/get_next_line_utils.c \
+	minilibx/draw.c \
+	minilibx/hook.c \
+	minilibx/init.c \
+	scene/canvas.c \
+	scene/object_create.c \
+	scene/scene.c \
+	trace/ray/ray.c \
+	trace/hit/hit_sphere.c \
+	utils/vec3_utils.c
+
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 ifneq "$(filter debugger, $(MAKECMDGOALS))" ""
@@ -55,10 +43,7 @@ all: $(NAME)
 $(MLX):
 	$(MAKE) -C $(SRC_DIR)/mlx
 
-$(LIBFT):
-	$(MAKE) -C $(SRC_DIR)/libft
-
-$(NAME): $(MLX) $(LIBFT) $(OBJS)
+$(NAME): $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
@@ -66,11 +51,9 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	$(MAKE) clean -C $(SRC_DIR)/mlx
-	$(MAKE) clean -C $(SRC_DIR)/libft
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(SRC_DIR)/libft
 	$(RM) $(NAME)
 
 re:
@@ -79,7 +62,6 @@ re:
 
 mem:
 	$(MAKE) fclean
-	$(MAKE) mem -C $(SRC_DIR)/libft
 	$(MAKE) sanitizer $(NAME)
 
 lldb:
