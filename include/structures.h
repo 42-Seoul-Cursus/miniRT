@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 23:55:55 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:36:52 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ struct s_hit_record
 	double		tmax;
 	double		t;
 	int			front_face;
-	t_color3	albedo;
+	t_color3	color;
 };
 
 struct s_vars
@@ -178,7 +178,6 @@ struct s_list
 	void			*content;
 	enum e_type		type;
 	struct s_list	*next;
-	t_color3		albedo;
 };
 
 #endif
