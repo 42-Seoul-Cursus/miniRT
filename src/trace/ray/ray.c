@@ -34,10 +34,17 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 // 레이 트레이싱을 통해 광선이 최종적으로 얻게된 픽셀의 색상 값을 리턴.
 t_color3	ray_color(t_ray *r, t_sphere *sp)
 {
-	double  t;
+	double	t;
+	t_vec3	n; // 정규화된 법선
 
-	if (hit_sphere(sp, r))
-		return (color3(1, 0, 0));
+	t = hit_sphere(sp, r);
+	if (t > 0.0)
+	{
+		// 정규화된 구 표면에서의 법선
+		n = vunit(vminus(ray_at(r, t), sp->center));
+		// 법선의 각 성분을 0 ~ 1 사이의 값으로 변환
+		return (vmult(color3(n.x + 1, n.y + 1, n.z + 1), 0.5));
+	}
 	else
 	{
 		// ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.

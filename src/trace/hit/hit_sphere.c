@@ -18,5 +18,8 @@ t_bool	hit_sphere(t_sphere *sp, t_ray *ray)
 	discriminant = b * b - 4 * a * c;
 
 	// 판별식이 0보다 크다면 광선이 구를 hit한 것!
-	return (discriminant > 0);
+	if (discriminant < 0) // 판별식이 0보다 작을 때 : 실근 없을 때,
+		return (-1.0);
+	else
+		return ((-b - sqrt(discriminant)) / (2.0 * a)); // 두 근 중 작은 근
 }
