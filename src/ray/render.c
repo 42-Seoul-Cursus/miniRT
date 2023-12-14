@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:30:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 22:05:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 	is_hit = 0;
 	if (object->type == SPHERE)
 		is_hit = hit_sphere((t_sphere *)object->content, ray, rec);
-	rec->albedo = object->albedo;
 	return (is_hit);
 }
 
@@ -63,5 +62,5 @@ t_color3	ray_color(t_vars *vars)
 	vars->rec.tmax = INFINITY;
 	if (hit(vars->objects, &vars->ray, &vars->rec))
 		return (execute_phong(vars));
-	return (color3(0.2, 0.4, 0.9));
+	return (color3(0.9, 0.9, 0.9));
 }

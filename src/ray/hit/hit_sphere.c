@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:30:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 22:05:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 	if (b * b - a * c < 0 \
 	|| update_nearest_hit_point(a, b, c, rec) == 0)
 		return (0.0);
+	rec->color = sphere->r_rgb;
 	rec->p = ray_at(ray, rec->t);
 	rec->normal = get_sphere_normal_v(sphere, rec);
 	if (v_dot(ray->dir, rec->normal) < 0)

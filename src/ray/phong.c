@@ -6,13 +6,14 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:30:21 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 22:05:17 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_color3	get_diffuse(t_vars *vars, t_light *light)
 {
@@ -55,14 +56,11 @@ static t_color3	point_light_get(t_vars *vars, t_light *light)
 	light_len = v_length(light_dir);
 	light_ray = ray(\
 	v_plus(vars->rec.p, vt_mul(vars->rec.normal, 1e-6)), light_dir);
-	if (in_shadow(vars->objects, light_ray, light_len))
-		return (color3(0, 0, 0));
 	diffuse = get_diffuse(vars, light);
+	if (in_shadow(vars->objects, light_ray, light_len))
+		return (v_plus(diffuse, color3(0, 0, 0)));
 	specular = get_specular(vars, light);
-	return (vt_mul(\
-	v_plus(v_plus(\
-	vt_mul(vars->ambient.r_rgb, vars->ambient.lighting_ratio), \
-	diffuse), specular), light->brightness_ratio));
+	return (v_plus(diffuse, specular));
 }
 
 t_color3	execute_phong(t_vars *vars)
@@ -79,5 +77,5 @@ t_color3	execute_phong(t_vars *vars)
 			point_light_get(vars, (t_light *)light->content));
 		light = light->next;
 	}
-	return (v_min(light_color, color3(1, 1, 1)));
+	return (v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)));
 }

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:06:44 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 22:06:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ struct s_hit_record
 	double		tmax;
 	double		t;
 	int			front_face;
-	t_color3	albedo;
+	t_color3	color;
 };
 
 struct s_vars
@@ -186,7 +186,6 @@ struct s_list
 	void			*content;
 	enum e_type		type;
 	struct s_list	*next;
-	t_color3		albedo;
 };
 
 #endif
