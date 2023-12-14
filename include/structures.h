@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 22:06:16 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:03:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,6 @@ struct s_cylinder
 	t_color3	r_rgb;
 };
 
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_DESTROY = 17
-};
-
 struct s_mlx_data
 {
 	void	*mlx;
@@ -128,7 +122,6 @@ struct s_mlx_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	t_vars	*vars;
 };
 
 struct s_ray

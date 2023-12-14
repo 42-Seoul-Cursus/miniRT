@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:17:01 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:51:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ static void	change_world2view_obj(t_list *cur,
 	}
 	else if (cur->type == PLANE)
 	{
-		((t_plane *)cur->content)->point = v_minus(
-				((t_plane *)cur->content)->point, view_point);
-		((t_plane *)cur->content)->normal_v = mv_mul(
-				rotate, vec4(((t_plane *)cur->content)->normal_v, 1));
+		((t_plane *)cur->content)->point = \
+			v_minus(((t_plane *)cur->content)->point, view_point);
+		((t_plane *)cur->content)->normal_v = \
+			mv_mul(rotate, vec4(((t_plane *)cur->content)->normal_v, 1));
 	}
 	else if (cur->type == CYLINDER)
 	{
-		((t_cylinder *)cur->content)->center = v_minus(
-				((t_cylinder *)cur->content)->center, view_point);
-		((t_cylinder *)cur->content)->normal_v = mv_mul(
-				rotate, vec4(((t_cylinder *)cur->content)->normal_v, 1));
+		((t_cylinder *)cur->content)->center = \
+			v_minus(((t_cylinder *)cur->content)->center, view_point);
+		((t_cylinder *)cur->content)->normal_v = \
+			mv_mul(rotate, vec4(((t_cylinder *)cur->content)->normal_v, 1));
 	}
 }
 
@@ -81,4 +81,5 @@ void	world2view(t_vars *vars)
 	vars->camera.viewport_upper_left \
 	, vt_mul(\
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
+	vars->camera.direct_v = v_unit(vars->camera.direct_v);
 }
