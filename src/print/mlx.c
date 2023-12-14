@@ -6,12 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 23:02:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:21:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "minirt.h"
 #include "mlx.h"
 #include "vector.h"
 #include "libft.h"

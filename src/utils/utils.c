@@ -6,11 +6,10 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:34 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 17:06:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:22:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "libft.h"
 #include <stdlib.h>
 

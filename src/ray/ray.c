@@ -6,12 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 00:15:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 12:35:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:30:30 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
-#include "vector.h"
+#include "utils.h"
 
 t_ray	ray(t_point3 orig, t_vec3 dir)
 {

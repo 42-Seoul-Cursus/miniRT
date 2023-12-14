@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 23:02:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:06:44 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-# define WIDTH	1920
-# define HEIGHT	1080
+# define WIDTH	1440
+# define HEIGHT	920
 # define IMG_RATIO	1.7778
 # define SHIN_VALUE	64
 # define SPEC_VALUE	0.5
@@ -73,7 +73,7 @@ struct s_camera
 	t_vec3		pixel_delta_u;
 	t_vec3		pixel_delta_v;
 	t_vec3		viewport_upper_left;
-	t_vec3		poxel_00_loc;
+	t_vec3		pixel_00_loc;
 	int			cnt;
 };
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/13 16:50:56 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/14 20:30:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils.h"
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>

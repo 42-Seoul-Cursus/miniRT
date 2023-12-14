@@ -6,22 +6,20 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:01:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 23:05:49 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:29:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "vector.h"
+#include "utils.h"
 #include "mlx.h"
 #include "hook.h"
+#include "print.h"
 
 void	move_front(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_plus(mlx_args->vars->camera.view_point, vec3(0, 0, 0.1));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -34,11 +32,9 @@ void	move_front(t_mlx_args *mlx_args)
 
 void	move_left(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_plus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -51,11 +47,9 @@ void	move_left(t_mlx_args *mlx_args)
 
 void	move_back(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_minus(mlx_args->vars->camera.view_point, vec3(0, 0, 0.1));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
@@ -68,11 +62,9 @@ void	move_back(t_mlx_args *mlx_args)
 
 void	move_right(t_mlx_args *mlx_args)
 {
-	t_camera	camera;
 	t_mlx_data	*mlx_data;
 
 	mlx_data = mlx_args->mlx_data;
-	camera = mlx_args->vars->camera;
 	mlx_args->vars->camera.view_point = \
 		v_minus(mlx_args->vars->camera.view_point, vec3(0.1, 0, 0));
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img);

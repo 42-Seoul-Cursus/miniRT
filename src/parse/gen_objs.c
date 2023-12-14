@@ -6,13 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 21:38:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:31:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "parse.h"
-#include "../libft/libft.h"
+#include "print.h"
+#include "libft.h"
 
 void	gen_sphere(t_list **objects, char *line)
 {

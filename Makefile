@@ -16,27 +16,28 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 SRC_DIR = src
 
 SRCS = main.c \
-	   phong.c \
-	   color.c \
-	   hit_sphere.c \
-	   render.c \
-	   world2view.c \
-	   get_next_line/get_next_line.c \
-	   get_next_line/get_next_line_utils.c \
-	   hook/mlx.c \
-	   hook/move.c \
-	   matrix/m_utils1.c \
+ 	   parse/get_next_line/get_next_line.c \
+	   parse/get_next_line/get_next_line_utils.c \
 	   parse/parse.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
+	   print/color.c \
+	   print/mlx.c \
+	   print/move.c \
+	   print/print.c \
+	   print/world2view.c \
+	   ray/hit/hit_sphere.c \
+	   ray/phong.c \
 	   ray/ray.c \
+	   ray/render.c \
 	   utils/utils.c \
-	   vector/v_utils1.c \
-	   vector/v_utils2.c \
-	   vector/v_utils3.c \
-	   vector/v_utils4.c
+	   utils/m_utils1.c \
+	   utils/v_utils1.c \
+	   utils/v_utils2.c \
+	   utils/v_utils3.c \
+	   utils/v_utils4.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
