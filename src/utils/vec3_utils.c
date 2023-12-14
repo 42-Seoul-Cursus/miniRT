@@ -117,12 +117,18 @@ t_vec3	vdivide(t_vec3 vec, double t)
 }
 
 // 벡터 내적
+// A * B = |A||B|cosθ
+// 동일한 벡터의 내적은 벡터 길이의 제곱이며 단위 벡터 끼리 내적은 cosθ가 된다.
+// 결과값이 0이라면 두 벡터는 직각, 양수라면 예각, 음수라면 둔각이다.
 double	vdot(t_vec3 vec, t_vec3 vec2)
 {
 	return (vec.x * vec2.x + vec.y * vec2.y + vec.z * vec2.z);
 }
 
 // 벡터 외적
+// 크기 : 두 벡터를 변으로 하는 평행사변형의 넓이
+// 방향 : 두 벡터와 동시에 수직인 방향
+// 단위 벡터끼리 외적하면 단위 벡터가 나온다.
 t_vec3	vcross(t_vec3 vec, t_vec3 vec2)
 {
 	t_vec3 new;

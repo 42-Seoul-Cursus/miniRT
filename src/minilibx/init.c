@@ -60,16 +60,17 @@ int	open_window(void)
 
 	scene = scene_init();
 
-	for (int i = 0; i < scene->canvas.height; ++i)
+	for (int y = 0; y < scene->canvas.height; ++y)
 	{
-		for (int j = 0; j < scene->canvas.width; ++j)
+		for (int x = 0; x < scene->canvas.width; ++x)
 		{
-			double v = (double)i / (scene->canvas.width - 1);
-			double u = (double)j / (scene->canvas.height - 1);
+			// left_bottom에서 u, v 만큼 올라간 곳이 현재 픽셀
+			double u = (double)x / (scene->canvas.width - 1);
+			double v = (double)y / (scene->canvas.height - 1);
 			//ray from camera origin to pixel
 			scene->ray = ray_primary(&scene->camera, u, v);
 			pixel_color = ray_color(scene);
-			my_mlx_pixel_put(&image, j, i, create_trgb(0, pixel_color));
+			my_mlx_pixel_put(&image, x, y, create_trgb(0, pixel_color));
 		}
 	}
 

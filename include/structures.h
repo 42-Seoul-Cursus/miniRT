@@ -51,10 +51,10 @@ struct  s_camera
 	t_point3	orig;  // 카메라 원점(위치)
 	double		viewport_h; // 뷰포트 세로길이
 	double		viewport_w; // 뷰포트 가로길이
-	t_vec3		horizontal; // 수평길이 벡터
-	t_vec3		vertical; // 수직길이 벡터
+	t_vec3		horizontal; // +x축 방향 크기가 viewport_width인 벡터
+	t_vec3		vertical; // +y축 방향 크기가 viewport_height인 벡터
 	double		focal_len; // focal length
-	t_point3	left_bottom; // 왼쪽 아래 코너점
+	t_point3	left_bottom; // 왼쪽 아래 코너점, 이 점을 기준으로 u, v 만큼 올라간 곳에 픽셀을 그린다.
 };
 
 struct  s_canvas
