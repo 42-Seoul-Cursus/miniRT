@@ -6,14 +6,14 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:01:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 23:05:49 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:29:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "vector.h"
+#include "utils.h"
 #include "mlx.h"
 #include "hook.h"
+#include "print.h"
 
 void	move_front(t_mlx_args *mlx_args)
 {
