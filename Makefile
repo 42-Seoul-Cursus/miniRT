@@ -25,8 +25,12 @@ SRCS = \
 	scene/object_create.c \
 	scene/scene.c \
 	trace/ray/ray.c \
+	trace/ray/phong_lighting.c \
 	trace/hit/hit_sphere.c \
-	utils/vec3_utils.c
+	trace/hit/hit.c \
+	trace/hit/normal.c \
+	utils/vec3_utils.c \
+	utils/object_utils.c
 
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 

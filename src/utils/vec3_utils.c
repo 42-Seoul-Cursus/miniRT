@@ -149,7 +149,7 @@ t_vec3	vunit(t_vec3 vec)
 }
 
 // 두 벡터의 원소를 비교하여 작은 값들만 반환
-t_vec3	vmi(t_vec3 vec1, t_vec3 vec2)
+t_vec3	vmin(t_vec3 vec1, t_vec3 vec2)
 {
 	if (vec1.x > vec2.x)
 		vec1.x = vec2.x;

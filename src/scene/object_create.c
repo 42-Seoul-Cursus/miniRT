@@ -1,11 +1,38 @@
- #include "structures.h"
+#include "scene.h"
 
-	t_sphere	make_sphere(t_point3 center, double radius)
-	{
-		t_sphere sp;
+t_object	*make_object(t_type type, void *element, t_color3 albedo)
+{
+	t_object	*new;
 
-		sp.center = center;
-		sp.radius = radius;
-		sp.radius2 = radius * radius;
-		return (sp);
-	}
+	if (!(new = (t_object *)malloc(sizeof(t_object))))
+		return (NULL);
+	new->type = type;
+	new->element = element;
+	new->albedo = albedo;
+	new->next = NULL;
+	return (new);
+}
+
+t_sphere	*make_sphere(t_point3 center, double radius)
+{
+	t_sphere	*sp;
+
+	if(!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
+		return (NULL);
+	sp->center = center;
+	sp->radius = radius;
+	sp->radius2 = radius * radius;
+	return (sp);
+}
+
+t_light	*make_light(t_point3 light_origin, t_color3 light_color, double bright_ratio)
+{
+	t_light *light;
+
+	if(!(light = (t_light *)malloc(sizeof(t_light))))
+		return (NULL);
+	light->orig = light_origin;
+	light->color = light_color;
+	light->bright_ratio = bright_ratio;
+	return (light);
+}
