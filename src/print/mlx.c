@@ -6,13 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:21:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:52:13 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
-#include "vector.h"
 #include "libft.h"
 #include "hook.h"
 
@@ -53,6 +52,14 @@ static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
 		move_back(mlx_args);
 	if (keycode == RIGHT)
 		move_right(mlx_args);
+	if (keycode == ROTATE_UP)
+		rotate_up(mlx_args);
+	if (keycode == ROTATE_LEFT)
+		rotate_left(mlx_args);
+	if (keycode == ROTATE_DOWN)
+		rotate_down(mlx_args);
+	if (keycode == ROTATE_RIGHT)
+		rotate_right(mlx_args);
 	return (0);
 }
 

@@ -27,12 +27,14 @@ SRCS = main.c \
 	   print/mlx.c \
 	   print/move.c \
 	   print/print.c \
+	   print/rotate.c \
 	   print/world2view.c \
 	   ray/hit/hit_sphere.c \
 	   ray/phong.c \
 	   ray/ray.c \
 	   ray/render.c \
 	   utils/utils.c \
+	   utils/rotate_utils.c \
 	   utils/m_utils1.c \
 	   utils/v_utils1.c \
 	   utils/v_utils2.c \
@@ -70,7 +72,7 @@ re:
 mem:
 	$(MAKE) fclean
 	$(MAKE) mem -C $(SRC_DIR)/libft
-	$(MAKE) all CFLAGS="$(DEBUG)"
+	$(MAKE) all CFLAGS="$(MEMORY)"
 
 lldb:
 	$(MAKE) fclean

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 20:22:56 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:31:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
 
 // world2view.c
 void		world2view(t_vars *vars);
+void		rotate_object(t_vars *vars, t_4x4matrix rotate_matrix);
+void		change_world2view_obj(t_list *cur,
+				t_4x4matrix rotate, t_point3 view_point);
+void		update_viewport(t_vars *vars);
 
 void		render(t_vars *vars, t_mlx_data *mlx);
 

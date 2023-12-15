@@ -6,12 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:26:29 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:58:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "vector.h"
 #include "print.h"
 #include "utils.h"
 
