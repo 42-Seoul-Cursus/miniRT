@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world2view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 00:12:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 00:57:27 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_4x4matrix	get_view_rotate_matrix(t_camera *camera)
 	return (m);
 }
 
-t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
+static t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
 {
 	t_vec3 result;
 
