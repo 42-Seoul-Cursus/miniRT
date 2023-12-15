@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 22:09:17 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:01:42 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "vector.h"
 #include "utils.h"
 #include "print.h"
 #include "libft.h"
