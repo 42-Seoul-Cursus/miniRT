@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 00:18:07 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 23:02:31 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:30:51 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ int			hit_obj(t_list *object, t_ray *ray, t_hit_record *rec);
 int			hit(t_list *objects, t_ray *ray, t_hit_record *rec);
 int			in_shadow(t_list *object, t_ray ray, double light_len);
 t_color3	ray_color(t_vars *vars);
-
 
 #endif
