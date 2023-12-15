@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 17:50:05 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:05:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "print.h"
 #include "utils.h"
 
-#include "test.h"
 int	main(int argc, char *argv[])
 {
 	t_mlx_data	mlx_data;
@@ -23,7 +22,6 @@ int	main(int argc, char *argv[])
 	is_valid_arg(argc, argv);
 	init_vars(&vars);
 	parse_rt(&vars, argv[1]);
-	test_parse(&vars);
 	init_mlx(&mlx_data);
 	world2view(&vars);
 	render(&vars, &mlx_data);

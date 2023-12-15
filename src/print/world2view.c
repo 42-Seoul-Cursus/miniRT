@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world2view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 21:21:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:06:24 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,11 @@ void	update_viewport(t_vars *vars)
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
 }
 
-#include "test.h"
 void	world2view(t_vars *vars)
 {
 	t_4x4matrix	rotate_matrix;
 
-	test_parse(vars);
 	rotate_matrix = get_view_rotate_matrix(&vars->camera);
 	rotate_object(vars, rotate_matrix);
 	update_viewport(vars);
-	test_parse(vars);
 }
