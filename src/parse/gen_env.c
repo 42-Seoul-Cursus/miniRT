@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 16:20:32 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:51:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->viewport_width = 2;
 	camera->viewport_height = 2 / IMG_RATIO;
 	camera->viewport_u = vec3(camera->viewport_width, 0, 0);
-	camera->viewport_v = vec3(0, -camera->viewport_height, 0);
+	camera->viewport_v = vec3(0, camera->viewport_height, 0);
 	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
 }
