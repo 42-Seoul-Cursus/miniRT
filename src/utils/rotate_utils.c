@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:09:26 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 16:09:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 20:24:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ t_4x4matrix	create_view_matrix(t_camera camera, float angle_x, float angle_y)
 	t_vec3		right;
 	t_vec3		up;
 
-	right = vec3(1.0f, 0.0f, 0.0f);
-	up = vec3(0.0f, 1.0f, 0.0f);
+	if (camera.direct_v.y >= 1.0 - 10e-4 || camera.direct_v.y <= -1.0 + 10e-4)
+		right = vec3(1.0, 0.0, 0.0);
+	else
+		right = v_unit(v_cross(vec3(0.0, 1.0, 0.0), camera.direct_v));
+	up = v_cross(camera.direct_v, right);
 	rotation_matrix = rotate_matrix(right, angle_y);
 	rotation_matrix = mm_mul(rotation_matrix, rotate_matrix(up, angle_x));
 	view_matrix = unit_matrix();
