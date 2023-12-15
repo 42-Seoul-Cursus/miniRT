@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 17:10:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 17:55:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "hook.h"
 
+#include "test.h"
 void	init_mlx(t_mlx_data *mlx_data)
 {
 	mlx_data->mlx = mlx_init();
@@ -60,6 +61,7 @@ static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
 		rotate_down(mlx_args);
 	if (keycode == ROTATE_RIGHT)
 		rotate_right(mlx_args);
+	test_parse(mlx_args->vars);
 	return (0);
 }
 

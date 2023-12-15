@@ -8,6 +8,8 @@ void	test_parse(t_vars *vars)
 	t_sphere	*sphere;
 	t_cylinder	*cylinder;
 
+	printf("---------------------PARSE---------------------\n");
+
 	// ambient
 	printf("A %.1f %.1f,%.1f,%.1f\n", vars->ambient.lighting_ratio, vars->ambient.i_rgb.x, vars->ambient.i_rgb.y, vars->ambient.i_rgb.z);
 	printf("\n");
@@ -46,4 +48,5 @@ void	test_parse(t_vars *vars)
 		}
 		tmp = tmp->next;
 	}
+	printf("-----------------------------------------------\n\n");
 }
