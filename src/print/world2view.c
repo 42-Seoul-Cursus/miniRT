@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 23:51:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:05:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_4x4matrix	get_view_rotate_matrix(t_camera camera)
 	return (m);
 }
 
-static void	change_world2view_obj(t_list *cur,
+void	change_world2view_obj(t_list *cur,
 	t_4x4matrix rotate, t_point3 view_point)
 {
 	if (cur->type == SPHERE)
@@ -57,21 +57,34 @@ static void	change_world2view_obj(t_list *cur,
 	}
 }
 
-void	world2view(t_vars *vars)
+void	rotate_object(t_vars *vars, t_4x4matrix rotate_matrix)
 {
 	t_list		*cur;
-	t_4x4matrix	rotate_matrix;
+	t_4x4matrix	inverse_m;
 
-	rotate_matrix = get_view_rotate_matrix(vars->camera);
+	inverse_m = get_inverse_rotate_m(rotate_matrix);
 	cur = vars->objects;
 	while (cur)
 	{
-		change_world2view_obj(cur, rotate_matrix, vars->camera.view_point);
+		change_world2view_obj(cur, inverse_m, vars->camera.view_point);
+		cur = cur->next;
+	}
+	cur = vars->light;
+	while (cur)
+	{
+		((t_light *)cur->content)->light_point = v_minus(\
+			((t_light *)cur->content)->light_point, vars->camera.view_point);
+		((t_light *)cur->content)->light_point = mv_mul(\
+			inverse_m, vec4(((t_light *)cur->content)->light_point, 1));
 		cur = cur->next;
 	}
 	vars->camera.view_point = point3(0, 0, 0);
-	vars->camera.direct_v = mv_mul(
-			rotate_matrix, vec4(vars->camera.direct_v, 1));
+	vars->camera.direct_v = mv_mul(\
+	rotate_matrix, vec4(vars->camera.direct_v, 1));
+}
+
+void	update_viewport(t_vars *vars)
+{
 	vars->camera.fov_len = atan((vars->camera.fov / 2) * (M_PI / 180));
 	vars->camera.viewport_upper_left = v_minus(v_minus(v_minus(\
 	vars->camera.view_point, vec3(0, 0, vars->camera.fov_len)) \
@@ -81,5 +94,13 @@ void	world2view(t_vars *vars)
 	vars->camera.viewport_upper_left \
 	, vt_mul(\
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
-	vars->camera.direct_v = v_unit(vars->camera.direct_v);
+}
+
+void	world2view(t_vars *vars)
+{
+	t_4x4matrix	rotate_matrix;
+
+	rotate_matrix = get_view_rotate_matrix(vars->camera);
+	rotate_object(vars, rotate_matrix);
+	update_viewport(vars);
 }

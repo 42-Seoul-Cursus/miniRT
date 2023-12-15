@@ -51,7 +51,7 @@ re:
 	$(MAKE) all
 
 mem:
-	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+	$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
 
 lldb:
 	$(MAKE) all CFLAGS="$(CFLAGS) $(LLDB)"
