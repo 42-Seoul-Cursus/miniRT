@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 01:16:03 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/16 01:20:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	change_obj(t_list *cur,
 	}
 	else if (cur->type == PLANE)
 	{
+		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, ((t_plane *)cur->content)->normal_v);
 		((t_plane *)cur->content)->point = \
 			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
-		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, ((t_plane *)cur->content)->normal_v);
 	}
 	else if (cur->type == CYLINDER)
 	{
