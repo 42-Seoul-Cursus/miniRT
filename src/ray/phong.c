@@ -6,14 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 22:05:17 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/14 23:51:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
-#include <stdio.h>
 
 static t_color3	get_diffuse(t_vars *vars, t_light *light)
 {

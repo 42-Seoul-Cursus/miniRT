@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 23:02:01 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:20:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
 		move_back(mlx_args);
 	if (keycode == RIGHT)
 		move_right(mlx_args);
+	if (keycode == ROTATE_UP)
+		rotate_up(mlx_args);
+	if (keycode == ROTATE_LEFT)
+		rotate_left(mlx_args);
+	if (keycode == ROTATE_DOWN)
+		rotate_down(mlx_args);
+	if (keycode == ROTATE_RIGHT)
+		rotate_right(mlx_args);
 	return (0);
 }
 
