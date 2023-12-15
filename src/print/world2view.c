@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 21:21:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 00:12:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@
 static t_4x4matrix	get_view_rotate_matrix(t_camera *camera)
 {
 	t_4x4matrix	m;
+	t_vec3		view_x;
+	t_vec3		view_y;
+	t_vec3		view_z;
 
-	camera->view_z = vt_mul(camera->direct_v, -1);
+	view_z = vt_mul(camera->direct_v, -1);
 	if (camera->direct_v.y >= 1.0 - 10e-4 || camera->direct_v.y <= -1.0 + 10e-4)
-		camera->view_x = vec3(1.0, 0.0, 0.0);
+		view_x = vec3(1.0, 0.0, 0.0);
 	else
-		camera->view_x = v_unit(v_cross(camera->view_z, vec3(0.0, 1.0, 0.0)));
-	camera->view_y = v_cross(camera->view_z, camera->view_x);
-	m = _4x4matrix(vec4(camera->view_x, 0.0), vec4(camera->view_y, 0.0),
-			vec4(camera->view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
+		view_x = v_unit(v_cross(view_z, vec3(0.0, 1.0, 0.0)));
+	view_y = v_cross(view_z, view_x);
+	m = _4x4matrix(vec4(view_x, 0.0), vec4(view_y, 0.0),
+			vec4(view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
 	return (m);
 }
 
@@ -36,7 +39,7 @@ t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
 	result.y = rotate.r2.x * vector.x + rotate.r2.y * vector.y + rotate.r2.z * vector.z;
 	result.z = rotate.r3.x * vector.x + rotate.r3.y * vector.y + rotate.r3.z * vector.z;
 
-	return result;
+	return (result);
 }
 
 void	change_world2view_obj(t_list *cur,
@@ -112,5 +115,8 @@ void	world2view(t_vars *vars)
 	rotate_matrix = get_view_rotate_matrix(&vars->camera);
 	rotate_object(vars, rotate_matrix);
 	update_viewport(vars);
+	vars->camera.euler_angles = vec3(\
+		asin(vars->camera.direct_v.y / v_length(vars->camera.direct_v)), \
+		atan2(vars->camera.direct_v.x, vars->camera.direct_v.z), 0);
 	test_parse(vars);
 }

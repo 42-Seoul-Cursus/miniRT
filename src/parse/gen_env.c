@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 20:30:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:42:42 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->viewport_v = vec3(0, camera->viewport_height, 0);
 	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
+	camera->up_v = vec3(0, 1, 0);
 }
 
 void	gen_light(t_list **light, char *line)
