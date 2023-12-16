@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_utils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 16:09:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 15:58:41 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,48 +58,44 @@ t_vec3	mv_mul(t_4x4matrix m, t_vec4 v)
 	return (rst);
 }
 
-static t_vec4	mv_mul_(t_4x4matrix m, t_vec4 v)
+t_4x4matrix	get_rotate_matrix(t_camera *camera)
 {
-	t_vec4	rst;
+	t_4x4matrix	m;
+	t_vec3		view_x;
+	t_vec3		view_y;
+	t_vec3		view_z;
 
-	ft_bzero(&rst, sizeof(t_vec4));
-	rst.x += m.r1.x * v.x;
-	rst.x += m.r1.y * v.y;
-	rst.x += m.r1.z * v.z;
-	rst.x += m.r1.w * v.w;
-	rst.y += m.r2.x * v.x;
-	rst.y += m.r2.y * v.y;
-	rst.y += m.r2.z * v.z;
-	rst.y += m.r2.w * v.w;
-	rst.z += m.r3.x * v.x;
-	rst.z += m.r3.y * v.y;
-	rst.z += m.r3.z * v.z;
-	rst.z += m.r3.w * v.w;
-	rst.w += m.r4.x * v.x;
-	rst.w += m.r4.y * v.y;
-	rst.w += m.r4.z * v.z;
-	rst.w += m.r4.w * v.w;
-	return (rst);
+	view_z = vt_mul(camera->direct_v, -1);
+	if (camera->direct_v.y >= 1.0 - 10e-4 || camera->direct_v.y <= -1.0 + 10e-4)
+		view_x = vec3(-1.0, 0.0, 0.0);
+	else
+		view_x = vt_mul(v_unit(v_cross(view_z, vec3(0.0, 1.0, 0.0))), -1);
+	view_y = v_cross(view_z, view_x);
+	m = _4x4matrix(vec4(view_x, 0.0), vec4(view_y, 0.0),
+			vec4(view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
+	return (m);
 }
 
-t_4x4matrix	mm_mul(t_4x4matrix mat1, t_4x4matrix mat2)
+t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate)
 {
-	t_4x4matrix	rst;
+	t_4x4matrix	inverse_rotate;
 
-	ft_bzero(&rst, sizeof(t_4x4matrix));
-	rst.r1 = mv_mul_(mat1, mat2.r1);
-	rst.r2 = mv_mul_(mat1, mat2.r2);
-	rst.r3 = mv_mul_(mat1, mat2.r3);
-	rst.r4 = mv_mul_(mat1, mat2.r4);
-	return (rst);
+	inverse_rotate.r1.x = rotate.r1.x;
+	inverse_rotate.r1.y = rotate.r2.x;
+	inverse_rotate.r1.z = rotate.r3.x;
+	inverse_rotate.r1.w = 0;
+	inverse_rotate.r2.x = rotate.r1.y;
+	inverse_rotate.r2.y = rotate.r2.y;
+	inverse_rotate.r2.z = rotate.r3.y;
+	inverse_rotate.r2.w = 0;
+	inverse_rotate.r3.x = rotate.r1.z;
+	inverse_rotate.r3.y = rotate.r2.z;
+	inverse_rotate.r3.z = rotate.r3.z;
+	inverse_rotate.r3.w = 0;
+	inverse_rotate.r4.x = 0;
+	inverse_rotate.r4.y = 0;
+	inverse_rotate.r4.z = 0;
+	inverse_rotate.r4.w = 1;
+	return (inverse_rotate);
 }
 
-t_4x4matrix	unit_matrix(void)
-{
-	t_4x4matrix	mat;
-
-	mat = _4x4matrix(\
-		vec4(vec3(1, 0, 0), 0), vec4(vec3(0, 1, 0), 0), \
-		vec4(vec3(0, 0, 1), 0), vec4(vec3(0, 0, 0), 1));
-	return (mat);
-}
