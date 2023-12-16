@@ -6,67 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:09:26 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 20:24:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 13:45:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "structures.h"
 #include "utils.h"
-
-t_4x4matrix	rotate_matrix(t_vec3 axis, float angle)
-{
-	t_4x4matrix	mat;
-	float		s;
-	float		c;
-	float		t;
-
-	axis = v_unit(axis);
-	s = sin(angle);
-	c = cos(angle);
-	t = 1.0f - c;
-	mat = unit_matrix();
-	mat.r1.x = t * axis.x * axis.x + c;
-	mat.r1.y = t * axis.x * axis.y - s * axis.z;
-	mat.r1.z = t * axis.x * axis.z + s * axis.y;
-	mat.r2.x = t * axis.x * axis.y + s * axis.z;
-	mat.r2.y = t * axis.y * axis.y + c;
-	mat.r2.z = t * axis.y * axis.z - s * axis.x;
-	mat.r3.x = t * axis.x * axis.z - s * axis.y;
-	mat.r3.y = t * axis.y * axis.z + s * axis.x;
-	mat.r3.z = t * axis.z * axis.z + c;
-	return (mat);
-}
-
-t_4x4matrix	create_view_matrix(t_camera camera, float angle_x, float angle_y)
-{
-	t_4x4matrix	rotation_matrix;
-	t_4x4matrix	view_matrix;
-	t_vec3		right;
-	t_vec3		up;
-
-	if (camera.direct_v.y >= 1.0 - 10e-4 || camera.direct_v.y <= -1.0 + 10e-4)
-		right = vec3(1.0, 0.0, 0.0);
-	else
-		right = v_unit(v_cross(vec3(0.0, 1.0, 0.0), camera.direct_v));
-	up = v_cross(camera.direct_v, right);
-	rotation_matrix = rotate_matrix(right, angle_y);
-	rotation_matrix = mm_mul(rotation_matrix, rotate_matrix(up, angle_x));
-	view_matrix = unit_matrix();
-	view_matrix.r1.x = rotation_matrix.r1.x;
-	view_matrix.r1.y = rotation_matrix.r2.x;
-	view_matrix.r1.z = rotation_matrix.r3.x;
-	view_matrix.r2.x = rotation_matrix.r1.y;
-	view_matrix.r2.y = rotation_matrix.r2.y;
-	view_matrix.r2.z = rotation_matrix.r3.y;
-	view_matrix.r3.x = rotation_matrix.r1.z;
-	view_matrix.r3.y = rotation_matrix.r2.z;
-	view_matrix.r3.z = rotation_matrix.r3.z;
-	view_matrix.r4.x = -v_dot(right, camera.view_point);
-	view_matrix.r4.y = -v_dot(up, camera.view_point);
-	view_matrix.r4.z = v_dot(camera.direct_v, camera.view_point);
-	return (view_matrix);
-}
 
 t_4x4matrix	get_inverse_rotate_m(t_4x4matrix rotate)
 {
@@ -89,4 +35,44 @@ t_4x4matrix	get_inverse_rotate_m(t_4x4matrix rotate)
 	inverse_rotate.r4.z = 0;
 	inverse_rotate.r4.w = 1;
 	return (inverse_rotate);
+}
+
+t_vec3	rotate_left_matrix(t_vec3 v)
+{
+	t_vec3		v1;
+
+	v1.x = v.x * cos(0.1) - v.z * sin(0.1);
+	v1.y = v.y;
+	v1.z = v.x * sin(0.1) + v.z * cos(0.1);
+	return (v1);
+}
+
+t_vec3	rotate_right_matrix(t_vec3 v)
+{
+	t_vec3		v1;
+
+	v1.x = v.x * cos(0.1) + v.z * sin(0.1);
+	v1.y = v.y;
+	v1.z = -v.x * sin(0.1) + v.z * cos(0.1);
+	return (v1);
+}
+
+t_vec3	rotate_up_matrix(t_vec3 v)
+{
+	t_vec3		v1;
+
+	v1.x = v.x;
+	v1.y = v.y * cos(0.1) - v.z * sin(0.1);
+	v1.z = v.y * sin(0.1) + v.z * cos(0.1);
+	return (v1);
+}
+
+t_vec3	rotate_down_matrix(t_vec3 v)
+{
+	t_vec3		v1;
+
+	v1.x = v.x;
+	v1.y = v.y * cos(0.1) + v.z * sin(0.1);
+	v1.z = -v.y * sin(0.1) + v.z * cos(0.1);
+	return (v1);
 }

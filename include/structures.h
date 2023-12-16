@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 20:13:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:42:17 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ struct s_camera
 {
 	t_point3	view_point;
 	t_vec3		direct_v;
+	t_vec3		up_v;
+	t_vec3		euler_angles;
 	double		fov;
 	double		fov_len;
 	double		viewport_width;
@@ -74,9 +76,6 @@ struct s_camera
 	t_vec3		pixel_delta_v;
 	t_vec3		viewport_upper_left;
 	t_vec3		pixel_00_loc;
-	t_vec3		view_x;
-	t_vec3		view_y;
-	t_vec3		view_z;
 	int			cnt;
 };
 

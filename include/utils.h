@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:10:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 16:10:08 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 13:43:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_vec3		v_cross(t_vec3 vec, t_vec3 vec2);
 t_vec3		v_unit(t_vec3 vec);
 t_vec4		vec4(t_vec3 v, const double w);
 t_vec3		v_min(t_vec3 v1, t_vec3 v2);
+t_vec3		rotate_vec3(t_4x4matrix rotate, t_vec3 vector);
 
 // m_utils.c
 t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
@@ -50,8 +51,10 @@ void		is_valid_arg(int ac, char *av[]);
 void		init_vars(t_vars *vars);
 
 // rotate_utils.c
-t_4x4matrix	rotate_matrix(t_vec3 axis, float angle);
-t_4x4matrix	create_view_matrix(t_camera camera, float angle_x, float angle_y);
 t_4x4matrix	get_inverse_rotate_m(t_4x4matrix rotate);
+t_vec3		rotate_left_matrix(t_vec3 v);
+t_vec3		rotate_right_matrix(t_vec3 v);
+t_vec3		rotate_up_matrix(t_vec3 v);
+t_vec3		rotate_down_matrix(t_vec3 v);
 
 #endif
