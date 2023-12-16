@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 13:43:47 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 13:49:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,4 @@ void	world2view(t_vars *vars)
 	rotate_matrix = get_view_rotate_matrix(&vars->camera);
 	rotate_object(vars, rotate_matrix);
 	update_viewport(vars);
-	vars->camera.euler_angles = vec3(\
-		asin(vars->camera.direct_v.y / v_length(vars->camera.direct_v)), \
-		atan2(vars->camera.direct_v.x, vars->camera.direct_v.z), 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 16:33:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:27:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ int	in_shadow(t_list *object, t_ray ray, double light_len)
 {
 	t_hit_record	rec;
 
-	(void) light_len;
 	rec.tmin = 1e-6;
-	rec.tmax = 10000000000;
+	rec.tmax = light_len;
 	if (hit(object, &ray, &rec))
 		return (1);
 	return (0);
