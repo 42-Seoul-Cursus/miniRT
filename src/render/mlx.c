@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 17:00:36 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 17:07:02 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	destroy_window(t_mlx_data *mlx_data)
 	return (0);
 }
 
-#include "test.h"
 static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
 {
 	if (keycode == ESC)
