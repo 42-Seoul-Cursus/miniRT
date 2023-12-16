@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 15:31:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 16:13:48 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#ifndef RENDER_H
+# define RENDER_H
 
 # include "structures.h"
 
@@ -21,16 +21,16 @@ t_color3	get_color_real_to_int(t_color3 r_rgb);
 int			create_trgb(int t, t_color3 *color);
 void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
 
+// mlx.c
+void		reset_mlx(t_mlx_data *mlx_data);
+void		execute_mlx(t_mlx_data *mlx_data, t_vars *vars);
+void		init_mlx(t_mlx_data *mlx_data);
+
 // world2view.c
 void		world2view(t_vars *vars);
-void		rotate_object(t_vars *vars, t_4x4matrix rotate_matrix);
-void		change_world2view_obj(t_list *cur,
-				t_4x4matrix rotate, t_point3 view_point);
 void		update_viewport(t_vars *vars);
 
+// print.c
 void		render(t_vars *vars, t_mlx_data *mlx);
-
-void		init_mlx(t_mlx_data *mlx_data);
-void		execute_mlx(t_mlx_data *mlx_data, t_vars *vars);
 
 #endif

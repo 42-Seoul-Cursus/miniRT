@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:10:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 13:43:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 16:04:58 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ t_vec3		rotate_vec3(t_4x4matrix rotate, t_vec3 vector);
 // m_utils.c
 t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
 t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
-t_4x4matrix	mm_mul(t_4x4matrix mat1, t_4x4matrix mat2);
-t_4x4matrix	unit_matrix(void);
+t_4x4matrix	get_rotate_matrix(t_camera *camera);
+t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);
 
 // utils.c
 void		is_valid_arg(int ac, char *av[]);
 void		init_vars(t_vars *vars);
 
 // rotate_utils.c
-t_4x4matrix	get_inverse_rotate_m(t_4x4matrix rotate);
+t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);
 t_vec3		rotate_left_matrix(t_vec3 v);
 t_vec3		rotate_right_matrix(t_vec3 v);
 t_vec3		rotate_up_matrix(t_vec3 v);
