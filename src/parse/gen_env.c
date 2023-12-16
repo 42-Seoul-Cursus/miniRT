@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 13:48:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 16:11:30 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "utils.h"
-#include "print.h"
+#include "render.h"
 #include "libft.h"
 
 void	gen_ambient(t_ambient *ambient, char *line)
@@ -39,7 +39,7 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->viewport_width = 2;
 	camera->viewport_height = 2 / IMG_RATIO;
 	camera->viewport_u = vec3(camera->viewport_width, 0, 0);
-	camera->viewport_v = vec3(0, camera->viewport_height, 0);
+	camera->viewport_v = vec3(0, -camera->viewport_height, 0);
 	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
 	camera->up_v = vec3(0, 1, 0);

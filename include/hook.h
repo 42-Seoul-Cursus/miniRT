@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:48:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 23:02:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 16:04:31 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ enum e_event
 	ON_DESTROY = 17
 };
 
-void	move_front(t_mlx_args *mlx_args);
-void	move_left(t_mlx_args *mlx_args);
-void	move_back(t_mlx_args *mlx_args);
-void	move_right(t_mlx_args *mlx_args);
-void	rotate_left(t_mlx_args *mlx_args);
-void	rotate_right(t_mlx_args *mlx_args);
-void	rotate_up(t_mlx_args *mlx_args);
-void	rotate_down(t_mlx_args *mlx_args);
+void	reset_mlx(t_mlx_data *mlx_data);
+void	rotate_hook(t_mlx_args *mlx_args, int keycode);
+void	move_hook(t_mlx_args *mlx_args, int keycode);
 
 #endif

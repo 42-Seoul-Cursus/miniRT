@@ -23,20 +23,19 @@ SRCS = main.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \
 	   parse/check_objs.c \
-	   print/color.c \
-	   print/mlx.c \
-	   print/move.c \
-	   print/print.c \
-	   print/rotate.c \
-	   print/world2view.c \
+	   render/color.c \
+	   render/mlx.c \
+	   render/render.c \
+	   render/hook.c \
+	   render/world2view.c \
 	   ray/hit/hit_plane.c \
 	   ray/hit/hit_sphere.c \
 	   ray/phong.c \
 	   ray/ray.c \
 	   ray/render.c \
 	   utils/utils.c \
-	   utils/rotate_utils.c \
 	   utils/m_utils1.c \
+	   utils/m_utils2.c \
 	   utils/v_utils1.c \
 	   utils/v_utils2.c \
 	   utils/v_utils3.c \
