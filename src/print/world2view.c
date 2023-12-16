@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 15:32:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 15:59:34 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,19 @@
 static t_4x4matrix	get_view_rotate_matrix(t_camera *camera)
 {
 	t_4x4matrix	m;
+	t_vec3		view_x;
+	t_vec3		view_y;
+	t_vec3		view_z;
 
-	camera->view_z = vt_mul(camera->direct_v, -1);
+	view_z = vt_mul(camera->direct_v, -1);
 	if (camera->direct_v.y >= 1.0 - 10e-4 || camera->direct_v.y <= -1.0 + 10e-4)
-		camera->view_x = vec3(1.0, 0.0, 0.0);
+		view_x = vec3(1.0, 0.0, 0.0);
 	else
-		camera->view_x = v_unit(v_cross(camera->view_z, vec3(0.0, 1.0, 0.0)));
-	camera->view_y = v_cross(camera->view_z, camera->view_x);
-	m = _4x4matrix(vec4(camera->view_x, 0.0), vec4(camera->view_y, 0.0),
-			vec4(camera->view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
+		view_x = v_unit(v_cross(view_z, vec3(0.0, 1.0, 0.0)));
+	view_y = v_cross(view_z, view_x);
+	m = _4x4matrix(vec4(view_x, 0.0), vec4(view_y, 0.0),
+			vec4(view_z, 0.0), vec4(vec3(0.0, 0.0, 0.0), 1));
 	return (m);
-}
-
-t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
-{
-	t_vec3 result;
-
-	result.x = rotate.r1.x * vector.x + rotate.r1.y * vector.y + rotate.r1.z * vector.z;
-	result.y = rotate.r2.x * vector.x + rotate.r2.y * vector.y + rotate.r2.z * vector.z;
-	result.z = rotate.r3.x * vector.x + rotate.r3.y * vector.y + rotate.r3.z * vector.z;
-
-	return result;
 }
 
 void	change_world2view_obj(t_list *cur,
@@ -55,7 +47,8 @@ void	change_world2view_obj(t_list *cur,
 			v_minus(((t_plane *)cur->content)->point, view_point);
 		((t_plane *)cur->content)->point = \
 			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
-		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, ((t_plane *)cur->content)->normal_v);
+		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, \
+		((t_plane *)cur->content)->normal_v);
 	}
 	else if (cur->type == CYLINDER)
 	{

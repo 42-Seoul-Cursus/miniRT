@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 23:17:52 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/16 13:48:40 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	gen_camera(t_camera *camera, char *line)
 	camera->viewport_v = vec3(0, camera->viewport_height, 0);
 	camera->pixel_delta_u = vt_divide(camera->viewport_u, WIDTH);
 	camera->pixel_delta_v = vt_divide(camera->viewport_v, HEIGHT);
+	camera->up_v = vec3(0, 1, 0);
 }
 
 void	gen_light(t_list **light, char *line)
