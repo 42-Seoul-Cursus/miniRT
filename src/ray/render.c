@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 22:05:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:27:11 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {
@@ -22,6 +23,8 @@ int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 	is_hit = 0;
 	if (object->type == SPHERE)
 		is_hit = hit_sphere((t_sphere *)object->content, ray, rec);
+	else if (object->type == PLANE)
+		is_hit = hit_plane((t_plane *)object->content, ray, rec);
 	return (is_hit);
 }
 

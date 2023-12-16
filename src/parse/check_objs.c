@@ -6,11 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 21:35:34 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:36:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "utils.h"
 
 void	check_sphere(t_sphere *sphere)
 {
@@ -20,6 +21,7 @@ void	check_sphere(t_sphere *sphere)
 void	check_plane(t_plane *plane)
 {
 	check_vec(plane->normal_v, -1, 1, FALSE);
+	plane->normal_v = v_unit(plane->normal_v);
 	check_vec(plane->i_rgb, 0, 255, TRUE);
 }
 

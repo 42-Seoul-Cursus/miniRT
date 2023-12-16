@@ -29,6 +29,7 @@ SRCS = main.c \
 	   print/print.c \
 	   print/rotate.c \
 	   print/world2view.c \
+	   ray/hit/hit_plane.c \
 	   ray/hit/hit_sphere.c \
 	   ray/phong.c \
 	   ray/ray.c \

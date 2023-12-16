@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 16:05:57 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 21:11:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,38 @@
 #include "utils.h"
 #include "mlx.h"
 
+void	rotate_object1(t_vars *vars, t_4x4matrix rotate_matrix)
+{
+	t_list		*cur;
+	t_4x4matrix	inverse_m;
+
+	inverse_m = get_inverse_rotate_m(rotate_matrix);
+	cur = vars->objects;
+	while (cur)
+	{
+		change_world2view_obj(cur, inverse_m, vars->camera.view_point);
+		cur = cur->next;
+	}
+	cur = vars->light;
+	while (cur)
+	{
+		((t_light *)cur->content)->light_point = v_minus(\
+			((t_light *)cur->content)->light_point, vars->camera.view_point);
+		((t_light *)cur->content)->light_point = mv_mul(\
+			inverse_m, vec4(((t_light *)cur->content)->light_point, 1));
+		cur = cur->next;
+	}
+	vars->camera.view_point = point3(0, 0, 0);
+	vars->camera.direct_v = mv_mul(\
+	inverse_m, vec4(vars->camera.direct_v, 1));
+}
+
 void	rotate_world2view(t_vars *vars, double angle_x, double angle_y)
 {
 	t_4x4matrix	rotate_matrix;
 
 	rotate_matrix = create_view_matrix(vars->camera, angle_x, angle_y);
-	rotate_object(vars, rotate_matrix);
+	rotate_object1(vars, rotate_matrix);
 	update_viewport(vars);
 }
 

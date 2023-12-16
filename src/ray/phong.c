@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 23:51:54 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/15 23:28:45 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_color3	get_diffuse(t_vars *vars, t_light *light)
 {
@@ -47,17 +48,17 @@ static t_color3	point_light_get(t_vars *vars, t_light *light)
 {
 	t_color3	diffuse;
 	t_color3	specular;
-	double		light_len;
 	t_ray		light_ray;
 	t_vec3		light_dir;
+	double		light_len;
 
-	light_dir = v_minus(light->light_point, vars->rec.p);
+	light_dir = (v_minus(light->light_point, vars->rec.p));
 	light_len = v_length(light_dir);
-	light_ray = ray(\
-	v_plus(vars->rec.p, vt_mul(vars->rec.normal, 1e-6)), light_dir);
+	light_ray = ray(v_plus(vars->rec.p, vt_mul(light_dir, 1e-6)), \
+	light_dir);
 	diffuse = get_diffuse(vars, light);
 	if (in_shadow(vars->objects, light_ray, light_len))
-		return (v_plus(diffuse, color3(0, 0, 0)));
+		return (color3(0, 0, 0));
 	specular = get_specular(vars, light);
 	return (v_plus(diffuse, specular));
 }
