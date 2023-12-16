@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 15:18:29 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/16 13:44:10 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ t_vec3	v_min(t_vec3 v1, t_vec3 v2)
 	else
 		res.z = v2.z;
 	return (res);
+}
+
+t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
+{
+	t_vec3	result;
+
+	result.x = rotate.r1.x * vector.x + \
+	rotate.r1.y * vector.y + rotate.r1.z * vector.z;
+	result.y = rotate.r2.x * vector.x + \
+	rotate.r2.y * vector.y + rotate.r2.z * vector.z;
+	result.z = rotate.r3.x * vector.x + \
+	rotate.r3.y * vector.y + rotate.r3.z * vector.z;
+	return (result);
 }

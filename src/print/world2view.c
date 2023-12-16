@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world2view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 00:57:27 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/16 13:43:47 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ static t_4x4matrix	get_view_rotate_matrix(t_camera *camera)
 	return (m);
 }
 
-static t_vec3	rotate_vec3(t_4x4matrix rotate, t_vec3 vector)
-{
-	t_vec3 result;
-
-	result.x = rotate.r1.x * vector.x + rotate.r1.y * vector.y + rotate.r1.z * vector.z;
-	result.y = rotate.r2.x * vector.x + rotate.r2.y * vector.y + rotate.r2.z * vector.z;
-	result.z = rotate.r3.x * vector.x + rotate.r3.y * vector.y + rotate.r3.z * vector.z;
-
-	return (result);
-}
-
 void	change_world2view_obj(t_list *cur,
 	t_4x4matrix rotate, t_point3 view_point)
 {
@@ -58,7 +47,8 @@ void	change_world2view_obj(t_list *cur,
 			v_minus(((t_plane *)cur->content)->point, view_point);
 		((t_plane *)cur->content)->point = \
 			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
-		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, ((t_plane *)cur->content)->normal_v);
+		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, \
+		((t_plane *)cur->content)->normal_v);
 	}
 	else if (cur->type == CYLINDER)
 	{
@@ -106,17 +96,14 @@ void	update_viewport(t_vars *vars)
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
 }
 
-#include "test.h"
 void	world2view(t_vars *vars)
 {
 	t_4x4matrix	rotate_matrix;
 
-	test_parse(vars);
 	rotate_matrix = get_view_rotate_matrix(&vars->camera);
 	rotate_object(vars, rotate_matrix);
 	update_viewport(vars);
 	vars->camera.euler_angles = vec3(\
 		asin(vars->camera.direct_v.y / v_length(vars->camera.direct_v)), \
 		atan2(vars->camera.direct_v.x, vars->camera.direct_v.z), 0);
-	test_parse(vars);
 }
