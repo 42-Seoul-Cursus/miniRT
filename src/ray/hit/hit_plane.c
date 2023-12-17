@@ -6,14 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 20:04:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 18:33:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
-#include <stdio.h>
 
 int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
 {

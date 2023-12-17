@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 14:30:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 14:49:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef INT_MIN
-#  define INT_MIN -2147483648
+#  define INT_MIN -INT_MAX - 1
 # endif
 
 # include <sys/types.h>

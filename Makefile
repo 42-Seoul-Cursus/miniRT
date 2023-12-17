@@ -19,6 +19,7 @@ SRCS = main.c \
  	   parse/get_next_line/get_next_line.c \
 	   parse/get_next_line/get_next_line_utils.c \
 	   parse/parse.c \
+	   parse/parse_utils.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \
@@ -39,7 +40,9 @@ SRCS = main.c \
 	   utils/v_utils1.c \
 	   utils/v_utils2.c \
 	   utils/v_utils3.c \
-	   utils/v_utils4.c
+	   utils/v_utils4.c \
+	   _test/test_leak.c \
+	   _test/test_parse.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
