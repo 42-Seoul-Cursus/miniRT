@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 14:49:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 00:24:02 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# ifndef INT_MAX
-#  define INT_MAX 2147483647
-# endif
-
-# ifndef INT_MIN
-#  define INT_MIN -INT_MAX - 1
-# endif
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # include <sys/types.h>
 # include "structures.h"
