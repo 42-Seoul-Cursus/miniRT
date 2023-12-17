@@ -19,6 +19,7 @@ SRCS = main.c \
  	   parse/get_next_line/get_next_line.c \
 	   parse/get_next_line/get_next_line_utils.c \
 	   parse/parse.c \
+	   parse/parse_utils.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
 	   parse/check_env.c \

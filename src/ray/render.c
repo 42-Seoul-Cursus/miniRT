@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 15:28:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 19:02:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {

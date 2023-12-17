@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 17:00:10 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 19:02:03 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	world2view_obj(t_list *cur,
 	}
 }
 
-static void wolrd2view_light(t_list *cur, t_4x4matrix rotate_matrix, t_point3 view_point)
+static void	wolrd2view_light(\
+	t_list *cur, t_4x4matrix rotate_matrix, t_point3 view_point)
 {
 	((t_light *)cur->content)->light_point = v_minus(\
 			((t_light *)cur->content)->light_point, view_point);

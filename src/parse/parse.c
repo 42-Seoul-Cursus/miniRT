@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/13 17:04:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 18:33:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,68 +37,26 @@ void	parse_rt(t_vars *vars, char *path)
 		ft_error("File Format Error");
 }
 
-double	parse_double(char **line)
-{
-	double	ans;
-	char	*tmp;
-	int		i;
-
-	while (**line == ' ')
-		++(*line);
-	i = 0;
-	if (ft_issign((*line)[i]))
-		++i;
-	while (ft_isdigit((*line)[i]) || (*line)[i] == '.')
-		++i;
-	tmp = ft_substr(*line, 0, i);
-	ans = ft_strtod(tmp);
-	free(tmp);
-	*line += i;
-	return (ans);
-}
-
-t_vec3	parse_vec(char **line, enum e_bool is_endl)
-{
-	t_vec3	ans;
-
-	ans.x = parse_double(line);
-	while (**line == ' ')
-		++line;
-	if (**line != ',')
-		ft_error("File Format Error");
-	++(*line);
-	ans.y = parse_double(line);
-	while (**line == ' ')
-		++(*line);
-	if (**line != ',')
-		ft_error("File Format Error");
-	++(*line);
-	ans.z = parse_double(line);
-	while (is_endl && **line == ' ')
-		++(*line);
-	if (**line != '\n' && **line != ' ')
-		ft_error("File Format Error");
-	return (ans);
-}
-
 static void	check_identifier(t_vars *vars, char *line)
 {
 	while (*line == ' ')
 		line++;
-	if (ft_strncmp(line, "A ", 2) == 0)
+	if (*line == '\n' && *(line + 1) == '\0')
+		return ;
+	else if (ft_strncmp(line, "A ", 2) == 0)
 		gen_ambient(&(vars->ambient), line + 1);
 	else if (ft_strncmp(line, "C ", 2) == 0)
 		gen_camera(&(vars->camera), line + 1);
 	else if (ft_strncmp(line, "L ", 2) == 0)
 		gen_light(&(vars->light), line + 1);
+	else if (ft_strncmp(line, "uv ", 3) == 0)
+		gen_uvmap(&(vars->uvmap), line + 2);
 	else if (ft_strncmp(line, "sp ", 3) == 0)
 		gen_sphere(&(vars->objects), line + 2);
 	else if (ft_strncmp(line, "pl ", 3) == 0)
 		gen_plane(&(vars->objects), line + 2);
 	else if (ft_strncmp(line, "cy ", 3) == 0)
 		gen_cylinder(&(vars->objects), line + 2);
-	else if (*line == '\n' && *(line + 1) == '\0')
-		return ;
 	else
 		ft_error("File Format Error");
 }
