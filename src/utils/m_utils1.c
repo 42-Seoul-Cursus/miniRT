@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_utils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 15:58:41 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/17 18:39:24 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate)
 	inverse_rotate.r4.w = 1;
 	return (inverse_rotate);
 }
-

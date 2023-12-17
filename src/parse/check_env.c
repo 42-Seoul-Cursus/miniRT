@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 20:31:13 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 18:19:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,14 @@ void	check_light(t_light *light)
 		ft_error("File Format Error");
 }
 
-int	check_range(double dst, double from, double to)
+void	check_uvmap(t_uvmap *uvmap)
 {
-	if (from <= dst && dst <= to)
-		return (TRUE);
-	return (FALSE);
-}
-
-int	check_vec(t_vec3 vec, double from, double to, enum e_bool is_int)
-{
-	int	integer;
-
-	if (is_int)
-	{
-		integer = (int) vec.x;
-		if (!check_range(vec.x, from, to) || integer * 10 != vec.x * 10)
-			return (FALSE);
-		integer = (int) vec.y;
-		if (!check_range(vec.y, from, to) || integer * 10 != vec.y * 10)
-			return (FALSE);
-		integer = (int) vec.z;
-		if (!check_range(vec.z, from, to) || integer * 10 != vec.z * 10)
-			return (FALSE);
-	}
-	else
-	{
-		if (!check_range(vec.x, from, to))
-			return (FALSE);
-		if (!check_range(vec.y, from, to))
-			return (FALSE);
-		if (!check_range(vec.z, from, to))
-			return (FALSE);
-	}
-	return (TRUE);
+	if (uvmap->cnt != 1)
+		ft_error("File Format Error");
+	if (!check_vec(uvmap->rgb1, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (!check_vec(uvmap->rgb2, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (uvmap->width <= 0 || uvmap->height <= 0)
+		ft_error("File Format Error");
 }

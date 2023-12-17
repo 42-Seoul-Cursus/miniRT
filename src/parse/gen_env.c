@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 16:11:30 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/17 18:31:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 void	gen_ambient(t_ambient *ambient, char *line)
 {
 	ambient->lighting_ratio = parse_double(&line);
-	ambient->i_rgb = parse_vec(&line, TRUE);
+	ambient->i_rgb = parse_vec(&line);
+	if (*line != '\n' && *line != '\0')
+		ft_error("File Format Error");
 	ambient->r_rgb = \
 		vt_mul(get_color_int_to_real(ambient->i_rgb), ambient->lighting_ratio);
 	++(ambient->cnt);
@@ -27,12 +29,10 @@ void	gen_ambient(t_ambient *ambient, char *line)
 
 void	gen_camera(t_camera *camera, char *line)
 {
-	camera->view_point = parse_vec(&line, FALSE);
-	camera->direct_v = parse_vec(&line, FALSE);
+	camera->view_point = parse_vec(&line);
+	camera->direct_v = parse_vec(&line);
 	camera->fov = parse_double(&line);
-	while (*line == ' ')
-		line++;
-	if (*line != '\n')
+	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
 	++(camera->cnt);
 	check_camera(camera);
@@ -50,11 +50,25 @@ void	gen_light(t_list **light, char *line)
 	t_light	*new;
 
 	new = (t_light *)ft_calloc(1, sizeof(t_light));
-	new->light_point = parse_vec(&line, FALSE);
+	new->light_point = parse_vec(&line);
 	new->brightness_ratio = parse_double(&line);
-	new->i_rgb = parse_vec(&line, TRUE);
+	new->i_rgb = parse_vec(&line);
+	if (*line != '\n' && *line != '\0')
+		ft_error("File Format Error");
+	check_light(new);
 	new->r_rgb = \
 		vt_mul(get_color_int_to_real(new->i_rgb), new->brightness_ratio);
-	check_light(new);
 	ft_lstadd_back(light, ft_lstnew(new, LIGHT));
+}
+
+void	gen_uvmap(t_uvmap *uvmap, char *line)
+{
+	uvmap->rgb1 = parse_vec(&line);
+	uvmap->rgb2 = parse_vec(&line);
+	uvmap->width = parse_int(&line);
+	uvmap->height = parse_int(&line);
+	if (*line != '\n' && *line != '\0')
+		ft_error("File Format Error");
+	++(uvmap->cnt);
+	check_uvmap(uvmap);
 }

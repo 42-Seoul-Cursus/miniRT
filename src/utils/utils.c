@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:34 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 20:22:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 18:20:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_vars(t_vars *vars)
 {
 	vars->ambient.cnt = 0;
 	vars->camera.cnt = 0;
+	vars->uvmap.cnt = 0;
 	vars->light = NULL;
 	vars->objects = NULL;
 }
