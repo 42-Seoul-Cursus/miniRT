@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/15 23:42:17 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 14:33:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
+typedef struct s_uvmap		t_uvmap;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_mlx_data	t_mlx_data;
 typedef struct s_mlx_args	t_mlx_args;
@@ -87,6 +88,16 @@ struct s_light
 	t_color3	r_rgb;
 };
 
+struct s_uvmap
+{
+	t_color3	rgb1;
+	t_color3	rgb2;
+	int			width;
+	int			height;
+	int			cnt;
+};
+
+
 struct s_sphere
 {
 	t_point3	center;
@@ -147,8 +158,9 @@ struct s_vars
 {
 	t_ambient		ambient;
 	t_camera		camera;
-	t_list			*objects;
 	t_list			*light;
+	t_uvmap			uvmap;
+	t_list			*objects;
 	t_ray			ray;
 	t_hit_record	rec;
 };

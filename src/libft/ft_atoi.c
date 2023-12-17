@@ -6,36 +6,42 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/11 18:28:01 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 14:32:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdlib.h"
 
-int	ft_atoi(const char *str)
+static void	make_int(char *s, long long *num, int *neg);
+
+int	ft_atoi(const char *s)
 {
 	long long	num;
-	int			min;
-	int			i;
+	int			neg;
 
 	num = 0;
-	min = 1;
-	i = 0;
-	while (str[i] == ' ')
-		++i;
-	if (str[i] == '-' || str[i] == '+')
+	neg = 1;
+	make_int(s, &num, &neg);
+	return (neg * num);
+}
+
+static void	make_int(char *s, long long *num, int *neg)
+{
+	if (*s == '-' || *s == '+')
 	{
-		if (str[i] == '-')
-			min *= -1;
+		if (*s == '-')
+			*neg *= -1;
 		++i;
 	}
-	while (ft_isdigit(str[i]))
+	if (!ft_isdigit(*s))
+		ft_error("File Format Error");
+	while (ft_isdigit(*s))
 	{
-		if (num > 214748364 || (num == 214748364 && str[i] > '7'))
+		if (num > INT_MAX / 10 || (num == INT_MAX / 10 && *s > '7'))
 			ft_error("File Format Error");
-		num = num * 10 + str[i] - '0';
-		++i;
+		num = num * 10 + *s - '0';
+		++s;
 	}
-	return (min * num);
+	if (*s != '\0')
+		ft_error("File Format Error");
 }
