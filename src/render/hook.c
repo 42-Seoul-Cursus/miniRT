@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 17:11:34 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/17 18:40:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 	}
 }
 
-static void	rotate_object_and_light(t_vars *vars, t_4x4matrix rotate_matrix, t_point3 view_point)
+static void	rotate_object_and_light(\
+	t_vars *vars, t_4x4matrix rotate_matrix, t_point3 view_point)
 {
 	t_list		*cur;
 
@@ -67,7 +68,7 @@ static void	rotate_object_and_light(t_vars *vars, t_4x4matrix rotate_matrix, t_p
 static void	normalize_vector_space(t_vars *vars)
 {
 	t_4x4matrix	rotate_matrix;
-	t_4x4matrix inverse_matrix;
+	t_4x4matrix	inverse_matrix;
 
 	rotate_matrix = get_rotate_matrix(&vars->camera);
 	vars->camera.direct_v = vec3(0, 0, -1);
@@ -112,14 +113,14 @@ void	move_hook(t_mlx_args *mlx_args, int keycode)
 		v_plus(prev_view_point, vt_mul(mlx_args->vars->camera.direct_v, 3));
 	else if (keycode == LEFT)
 		mlx_args->vars->camera.view_point = \
-		v_minus(prev_view_point,  vt_mul(v_cross(\
+		v_minus(prev_view_point, vt_mul(v_cross(\
 		mlx_args->vars->camera.direct_v, mlx_args->vars->camera.up_v), 3));
 	else if (keycode == BACK)
 		mlx_args->vars->camera.view_point = \
 		v_minus(prev_view_point, vt_mul(mlx_args->vars->camera.direct_v, 3));
 	else if (keycode == RIGHT)
 		mlx_args->vars->camera.view_point = \
-		v_plus(prev_view_point,  vt_mul(v_cross(\
+		v_plus(prev_view_point, vt_mul(v_cross(\
 		mlx_args->vars->camera.direct_v, mlx_args->vars->camera.up_v), 3));
 	reset_mlx(mlx_data);
 	update_viewport(mlx_args->vars);
