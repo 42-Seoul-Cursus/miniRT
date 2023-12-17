@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 22:53:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/17 23:56:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_hit_recor
 		t_vec3	p = v_plus(ray->orig, vt_mul(ray->dir, rec->t));
 		t_vec3	v = v_minus(p, cap->normal_v);
 		double	d2 = v_dot(v, v);
-		if (d2 > radius * radius)
+		if (sqrt(d2) > radius)
 			return (0);
 		rec->color = cap->r_rgb;
 		rec->p = p;

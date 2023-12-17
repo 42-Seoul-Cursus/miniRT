@@ -41,7 +41,8 @@ SRCS = main.c \
 	   utils/v_utils1.c \
 	   utils/v_utils2.c \
 	   utils/v_utils3.c \
-	   utils/v_utils4.c
+	   utils/v_utils4.c \
+	   test.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
