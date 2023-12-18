@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 15:11:49 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 23:29:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_color3	point_light_get(t_vars *vars, t_light *light)
 	light_ray = ray(v_plus(vars->rec.p, vt_mul(light_dir, 1e-6)), \
 	light_dir);
 	diffuse = get_diffuse(vars, light);
-	if (in_shadow(vars->objects, light_ray, light_len))
+	if (in_shadow(vars, light_ray, light_len))
 		return (color3(0, 0, 0));
 	specular = get_specular(vars, light);
 	return (v_plus(diffuse, specular));
@@ -78,7 +78,5 @@ t_color3	execute_phong(t_vars *vars)
 		}
 		light = light->next;
 	}
-	//printf("light_color %f %f %f\n", light_color.x, light_color.y, light_color.z);
-	//printf("%f, %f, %f\n", v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)).x, v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)).y, v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)).z);
 	return (v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)));
 }
