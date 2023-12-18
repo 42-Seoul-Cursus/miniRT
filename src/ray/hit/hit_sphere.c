@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 23:35:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 23:43:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ double b, double c, t_hit_record *rec)
 	return (1);
 }
 
-static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec, t_uvmap *uv)
+static t_color3	get_uvmap_color(t_sphere *sphere, \
+	t_hit_record *rec, t_uvmap *uv)
 {
 	t_vec3	d;
 	double	theta;

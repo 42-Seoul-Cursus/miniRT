@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 23:36:27 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 23:40:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_color3	point_light_get(t_vars *vars, t_light *light)
 	light_ray = ray(v_plus(vars->rec.p, vt_mul(light_dir, 1e-6)), \
 	light_dir);
 	diffuse = get_diffuse(vars, light);
-	if (in_shadow(vars->objects, light_ray, light_len, &vars->uvmap))
+	if (in_shadow(vars, light_ray, light_len))
 		return (color3(0, 0, 0));
 	specular = get_specular(vars, light);
 	return (v_plus(diffuse, specular));
