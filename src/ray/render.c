@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 22:32:13 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 15:11:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int	in_shadow(t_list *object, t_ray ray, double light_len)
 	rec.tmin = 1e-6;
 	rec.tmax = light_len;
 	if (hit(object, &ray, &rec))
+	{
 		return (1);
+	}
 	return (0);
 }
 
