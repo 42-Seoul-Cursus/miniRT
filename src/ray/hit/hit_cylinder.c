@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/18 15:11:27 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 18:18:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,31 @@ int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 	return (0);
 }
 
+/*
+p = ray->orig
+v = ray->dir
+p_a = cylinder->center
+v_a = cylinder->normal_v
+r = cylinder->radius
+*/
 static int	hit_cylinder_body(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 {
+	// implement infinite cylinder
+	t_point3 p = ray->orig;
+	t_vec3 v = ray->dir;
+	t_point3 p_a = cylinder->center;
+	t_vec3 v_a = cylinder->normal_v;
+	double r = cylinder->radius;
+
 	double	a;
 	double	b;
 	double	c;
 	double	oc;
 
-	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
-	b = 2 * (ray->orig.x * ray->dir.x + ray->orig.z * ray->dir.z - \
-		cylinder->center.x * ray->dir.x - cylinder->center.z * ray->dir.z);
-	c = ray->orig.x * ray->orig.x + cylinder->center.x * cylinder->center.x + \
-		ray->orig.z * ray->orig.z + cylinder->center.z * cylinder->center.z \
-		- 2 * (ray->orig.x * cylinder->center.x + ray->orig.z * cylinder->center.z) \
-		- cylinder->radius * cylinder->radius;
+	t_vec3 x = v_minus(v, vt_mul(v_a, v_dot(v, v_a)));
+	a = pow(v_length(x), 2);
+	b = 2 * v_dot(x, v_minus(v_minus(p, p_a), vt_mul(v_a, v_dot(v_minus(p, p_a), v_a))));
+	c = pow(v_length(v_minus(v_minus(p, p_a), vt_mul(v_a, v_dot(v_minus(p, p_a), v_a)))), 2) - pow(r, 2);
 	oc = b * b - 4 * a * c;
 	if (oc < 10e-4)
 		return (0);
@@ -67,9 +78,9 @@ static int	hit_cylinder_body(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec
 	}
 	r_sm = ray->orig.y + t_sm * ray->dir.y;
 	r_big = ray->orig.y + t_big * ray->dir.y;
-	if (!(cylinder->center.y - cylinder->height / 2 <= r_sm && r_sm <= cylinder->center.y + cylinder->height / 2))
+	if (!(cylinder->center.y <= r_sm && r_sm <= cylinder->center.y + cylinder->height))
 	{
-		if (!(cylinder->center.y - cylinder->height / 2 <= r_big && r_big <= cylinder->center.y + cylinder->height / 2))
+		if (!(cylinder->center.y <= r_big && r_big <= cylinder->center.y + cylinder->height))
 		{
 			return (0);
 		}

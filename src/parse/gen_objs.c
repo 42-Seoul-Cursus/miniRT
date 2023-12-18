@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 22:44:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 16:46:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ void	gen_cylinder_cap(t_cylinder *cylinder)
 	cylinder->top.i_rgb = cylinder->i_rgb;
 	cylinder->top.r_rgb = cylinder->r_rgb;
 	cylinder->top.point = v_plus(cylinder->center, \
-		vt_mul(cylinder->normal_v, cylinder->height / 2));
+		vt_mul(cylinder->normal_v, cylinder->height));
 	cylinder->bottom.normal_v = cylinder->normal_v;
 	cylinder->bottom.i_rgb = cylinder->i_rgb;
 	cylinder->bottom.r_rgb = cylinder->r_rgb;
-	cylinder->bottom.point = v_minus(cylinder->center, \
-		vt_mul(cylinder->normal_v, cylinder->height / 2));
+	cylinder->bottom.point = cylinder->center;
 }
