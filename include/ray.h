@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 00:18:07 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 22:41:28 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 22:59:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_color3	execute_phong(t_vars *vars);
 
 int			hit_obj(t_list *object, t_ray *ray, t_hit_record *rec);
 int			hit(t_list *objects, t_ray *ray, t_hit_record *rec);
-int			in_shadow(t_list *object, t_ray ray, double light_len);
+int			in_shadow(t_list *object, t_ray r, double light_len);
 t_color3	ray_color(t_vars *vars);
 
 #endif

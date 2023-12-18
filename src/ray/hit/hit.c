@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 15:11:51 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 23:04:57 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ int	hit(t_list *objects, t_ray *ray, t_hit_record *rec)
 	return (is_hit);
 }
 
-int	in_shadow(t_list *object, t_ray ray, double light_len)
+int	in_shadow(t_list *object, t_ray r, double light_len)
 {
 	t_hit_record	rec;
-
+	t_ray			correct_ray;
 	rec.tmin = 1e-6;
 	rec.tmax = light_len;
-	if (hit(object, &ray, &rec))
+
+	correct_ray = ray(v_plus(r.orig, vt_mul(r.dir, 7)), r.dir);
+	if (hit(object, &correct_ray, &rec))
 	{
 		return (1);
 	}
