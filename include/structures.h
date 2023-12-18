@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 14:33:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 00:21:33 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ struct s_uvmap
 	int			height;
 	int			cnt;
 };
-
 
 struct s_sphere
 {
