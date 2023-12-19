@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:48:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 16:04:31 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/19 11:14:20 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ enum e_event
 };
 
 void	reset_mlx(t_mlx_data *mlx_data);
-void	rotate_hook(t_mlx_args *mlx_args, int keycode);
-void	move_hook(t_mlx_args *mlx_args, int keycode);
+void	rotate_hook(t_vars *vars, int keycode);
+void	move_hook(t_vars *vars, int keycode);
 
 #endif

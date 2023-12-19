@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:25:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 16:12:18 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/19 11:07:48 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "render.h"
 #include "ray.h"
 
-void	render(t_vars *vars, t_mlx_data *mlx)
+void	render(t_vars *vars)
 {
 	int			i;
 	int			j;
@@ -36,7 +36,7 @@ void	render(t_vars *vars, t_mlx_data *mlx)
 			vars->ray.dir = v_minus(pixel_center, vars->camera.view_point);
 			color = ray_color(vars);
 			color = get_color_real_to_int(color);
-			my_mlx_pixel_put(mlx, i, j, create_trgb(0, &color));
+			my_mlx_pixel_put(&vars->mlx_data, i, j, create_trgb(0, &color));
 		}
 	}
 }

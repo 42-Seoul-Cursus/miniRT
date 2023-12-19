@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/18 22:53:47 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/19 11:33:35 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "ray.h"
 #include <math.h>
 
-static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_hit_record *rec);
+static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_vars *vars);
 static int	hit_cylinder_body(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
 
-int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
+int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars)
 {
 	if (hit_cylinder_body(cylinder, ray, rec))
 		return (1);
-	if (hit_cylinder_cap(&cylinder->top, cylinder->radius, ray, rec))
+	if (hit_cylinder_cap(&cylinder->top, cylinder->radius, ray, vars))
 		return (1);
-	if (hit_cylinder_cap(&cylinder->bottom, cylinder->radius, ray, rec))
+	if (hit_cylinder_cap(&cylinder->bottom, cylinder->radius, ray, vars))
 		return (1);
 	return (0);
 }
@@ -108,18 +108,18 @@ static int	hit_cylinder_body(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec
 	return (1);
 }
 
-static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_hit_record *rec)
+static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_vars *vars)
 {
-	if (hit_plane(cap, ray, rec))
+	if (hit_plane(cap, ray, &vars->rec, vars))
 	{
-		t_point3	p = v_minus(rec->p, cap->point);
+		t_point3	p = v_minus(vars->rec.p, cap->point);
 		if (v_dot(cap->normal_v, p) != 0)
 			return (0);
 		if (v_dot(p, p) >= pow(radius, 2))
 			return (0);
-		rec->color = cap->r_rgb;
-		rec->p = p;
-		rec->normal = cap->normal_v;
+		vars->rec.color = cap->r_rgb;
+		vars->rec.p = p;
+		vars->rec.normal = cap->normal_v;
 		return (1);
 	}
 	return (0);
