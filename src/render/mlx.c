@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 17:07:02 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/19 11:10:29 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,22 @@ static int	destroy_window(t_mlx_data *mlx_data)
 	return (0);
 }
 
-static int	handle_key_press(int keycode, t_mlx_args *mlx_args)
+static int	handle_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == ESC)
-		destroy_window(mlx_args->mlx_data);
+		destroy_window(&vars->mlx_data);
 	if (keycode == FRONT || (keycode >= LEFT && keycode <= RIGHT))
-		move_hook(mlx_args, keycode);
+		move_hook(vars, keycode);
 	if (keycode >= ROTATE_LEFT && keycode <= ROTATE_UP)
-		rotate_hook(mlx_args, keycode);
+		rotate_hook(vars, keycode);
 	return (0);
 }
 
-void	execute_mlx(t_mlx_data *mlx_data, t_vars *vars)
+void	execute_mlx(t_vars *vars)
 {
-	t_mlx_args	mlx_args;
-
-	mlx_args.mlx_data = mlx_data;
-	mlx_args.vars = vars;
-	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
-	mlx_hook(mlx_data->win, ON_DESTROY, 0, destroy_window, mlx_data);
-	mlx_hook(mlx_data->win, ON_KEYDOWN, 0, handle_key_press, &mlx_args);
-	mlx_loop(mlx_data->mlx);
+	mlx_put_image_to_window(vars->mlx_data.mlx,\
+	vars->mlx_data.win, vars->mlx_data.img, 0, 0);
+	mlx_hook(vars->mlx_data.win, ON_DESTROY, 0, destroy_window, &vars->mlx_data);
+	mlx_hook(vars->mlx_data.win, ON_KEYDOWN, 0, handle_key_press, vars);
+	mlx_loop(vars->mlx_data.mlx);
 }

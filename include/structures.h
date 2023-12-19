@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 23:34:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/19 11:12:01 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,12 +165,7 @@ struct s_vars
 	t_list			*objects;
 	t_ray			ray;
 	t_hit_record	rec;
-};
-
-struct s_mlx_args
-{
-	t_vars		*vars;
-	t_mlx_data	*mlx_data;
+	t_mlx_data		mlx_data;
 };
 
 struct s_4x4matrix
