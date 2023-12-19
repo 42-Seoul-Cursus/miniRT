@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 13:25:12 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/19 22:47:44 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	update_viewport(t_vars *vars)
 	, vt_mul(vars->camera.viewport_u, 0.5)) \
 	, vt_mul(vars->camera.viewport_v, 0.5));
 	vars->camera.pixel_00_loc = v_plus(\
-	vars->camera.viewport_upper_left \
-	, vt_mul(\
+	vars->camera.viewport_upper_left, vt_mul(\
 	v_plus(vars->camera.pixel_delta_u, vars->camera.pixel_delta_v), 0.5));
 }
 
+/* 전체 씬을 카메라 뷰로 업데이트 */
 void	world2view(t_vars *vars)
 {
 	t_4x4matrix	rotate_matrix;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:25:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:07:48 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/19 22:50:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "render.h"
 #include "ray.h"
 
+/* ray를 카메라에서 쏴서 픽셀의 값을 찍음 */
 void	render(t_vars *vars)
 {
 	int			i;
