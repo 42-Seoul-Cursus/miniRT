@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 11:10:29 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/19 14:42:29 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_mlx(t_mlx_data *mlx_data)
 	if (!mlx_data->win)
 		ft_error("mlx_new_window");
 	mlx_data->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
+	mlx_data->uv_img = mlx_xpm_file_to_image(mlx_data->mlx, "./maps/brick.xpm", &mlx_data->uv_width, &mlx_data->uv_height);
 	if (!mlx_data->img)
 		ft_error("mlx_new_image");
 	mlx_data->addr = mlx_get_data_addr(mlx_data->img, \
