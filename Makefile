@@ -29,11 +29,12 @@ SRCS = main.c \
 	   render/render.c \
 	   render/hook.c \
 	   render/world2view.c \
+	   ray/hit/hit_cylinder.c \
 	   ray/hit/hit_plane.c \
 	   ray/hit/hit_sphere.c \
+	   ray/hit/hit.c \
 	   ray/phong.c \
 	   ray/ray.c \
-	   ray/render.c \
 	   utils/utils.c \
 	   utils/m_utils1.c \
 	   utils/m_utils2.c \

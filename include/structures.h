@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 00:21:33 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/18 23:34:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,25 @@
 # define SHIN_VALUE	64
 # define SPEC_VALUE	0.5
 
-typedef struct s_vec3		t_vec3;
-typedef struct s_vec3		t_point3;
-typedef struct s_vec3		t_color3;
-typedef struct s_ambient	t_ambient;
-typedef struct s_camera		t_camera;
-typedef struct s_sphere		t_sphere;
-typedef struct s_plane		t_plane;
-typedef struct s_uvmap		t_uvmap;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_mlx_data	t_mlx_data;
-typedef struct s_mlx_args	t_mlx_args;
-typedef struct s_vars		t_vars;
-typedef struct s_vec4		t_vec4;
-typedef struct s_4x4matrix	t_4x4matrix;
-typedef struct s_ray		t_ray;
-typedef struct s_hit_record	t_hit_record;
-typedef struct s_light		t_light;
-typedef struct s_list		t_list;
+typedef struct s_vec3			t_vec3;
+typedef struct s_vec3			t_point3;
+typedef struct s_vec3			t_color3;
+typedef struct s_ambient		t_ambient;
+typedef struct s_camera			t_camera;
+typedef struct s_sphere			t_sphere;
+typedef struct s_plane			t_plane;
+typedef struct s_uvmap			t_uvmap;
+typedef struct s_cylinder_cap	t_cylinder_cap;
+typedef struct s_cylinder		t_cylinder;
+typedef struct s_mlx_data		t_mlx_data;
+typedef struct s_mlx_args		t_mlx_args;
+typedef struct s_vars			t_vars;
+typedef struct s_vec4			t_vec4;
+typedef struct s_4x4matrix		t_4x4matrix;
+typedef struct s_ray			t_ray;
+typedef struct s_hit_record		t_hit_record;
+typedef struct s_light			t_light;
+typedef struct s_list			t_list;
 
 struct s_vec3
 {
@@ -123,6 +124,8 @@ struct s_cylinder
 	double		height;
 	t_color3	i_rgb;
 	t_color3	r_rgb;
+	t_plane		top;
+	t_plane		bottom;
 };
 
 struct s_mlx_data

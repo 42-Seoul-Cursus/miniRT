@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 00:20:01 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/18 23:43:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ double b, double c, t_hit_record *rec)
 	return (1);
 }
 
-static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec, t_uvmap *uv)
+static t_color3	get_uvmap_color(t_sphere *sphere, \
+	t_hit_record *rec, t_uvmap *uv)
 {
 	t_vec3	d;
 	double	theta;
@@ -74,7 +75,7 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_uvmap *uv)
 	v_minus(ray->orig, sphere->center)) - sphere->radius * sphere->radius;
 	if (b * b - a * c < 0 \
 	|| update_nearest_hit_point(a, b, c, rec) == 0)
-		return (0.0);
+		return (0);
 	rec->p = ray_at(ray, rec->t);
 	rec->normal = get_sphere_normal_v(sphere, rec);
 	if (uv->cnt == 0)

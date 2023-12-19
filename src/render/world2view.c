@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/17 18:40:25 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 13:25:12 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	world2view_object_and_light(t_vars *vars, t_4x4matrix rotate_matrix)
 
 void	update_viewport(t_vars *vars)
 {
-	vars->camera.fov_len = atan((vars->camera.fov / 2) * (M_PI / 180));
+	vars->camera.fov_len = 1 / tan((vars->camera.fov / 2) * (M_PI / 180));
 	vars->camera.viewport_upper_left = v_minus(v_minus(v_minus(\
 	vars->camera.view_point, vec3(0, 0, vars->camera.fov_len)) \
 	, vt_mul(vars->camera.viewport_u, 0.5)) \

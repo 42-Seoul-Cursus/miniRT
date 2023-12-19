@@ -6,13 +6,16 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 18:34:05 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/18 16:46:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "render.h"
 #include "libft.h"
+#include "utils.h"
+
+static void	gen_cylinder_cap(t_cylinder *cylinder);
 
 void	gen_sphere(t_list **objects, char *line)
 {
@@ -47,7 +50,7 @@ void	gen_plane(t_list **objects, char *line)
 
 void	gen_cylinder(t_list **objects, char *line)
 {
-	t_cylinder	*cylinder;
+	t_cylinder		*cylinder;
 
 	cylinder = (t_cylinder *)ft_calloc(1, sizeof(t_cylinder));
 	cylinder->center = parse_vec(&line);
@@ -60,5 +63,19 @@ void	gen_cylinder(t_list **objects, char *line)
 	check_cylinder(cylinder);
 	cylinder->radius = cylinder->diameter / 2;
 	cylinder->r_rgb = get_color_int_to_real(cylinder->i_rgb);
+	gen_cylinder_cap(cylinder);
 	ft_lstadd_back(objects, ft_lstnew(cylinder, CYLINDER));
+}
+
+void	gen_cylinder_cap(t_cylinder *cylinder)
+{
+	cylinder->top.normal_v = cylinder->normal_v;
+	cylinder->top.i_rgb = cylinder->i_rgb;
+	cylinder->top.r_rgb = cylinder->r_rgb;
+	cylinder->top.point = v_plus(cylinder->center, \
+		vt_mul(cylinder->normal_v, cylinder->height));
+	cylinder->bottom.normal_v = cylinder->normal_v;
+	cylinder->bottom.i_rgb = cylinder->i_rgb;
+	cylinder->bottom.r_rgb = cylinder->r_rgb;
+	cylinder->bottom.point = cylinder->center;
 }
