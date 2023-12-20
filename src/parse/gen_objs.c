@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_objs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/18 16:46:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/20 15:00:00 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	gen_plane(t_list **objects, char *line)
 		ft_error("File Format Error");
 	check_plane(plane);
 	plane->r_rgb = get_color_int_to_real(plane->i_rgb);
+	plane->normal_v_basis = get_orthogonal_basis(plane->normal_v);
 	ft_lstadd_back(objects, ft_lstnew(plane, PLANE));
 }
 

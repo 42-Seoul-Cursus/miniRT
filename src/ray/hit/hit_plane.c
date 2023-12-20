@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 17:37:21 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/20 15:23:28 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,62 +17,54 @@
 #include "libft.h"
 #include "render.h"
 
-// static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec, t_vars *var)
+// static t_color3	get_check_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 // {
 // 	t_vec3	e1;
 // 	t_vec3	e2;
 
-// 	e1 = v_unit(v_cross(plane->normal_v, vec3(1, 0, 0)));
-// 	if (v_length(e1) == 0)
-// 		e1 = v_unit(v_cross(plane->normal_v, vec3(0, 0, 1)));
-// 	e2 = v_unit(v_cross(plane->normal_v, e1));
+// 	e1 = vec4_to_vec3(plane->normal_v_basis.r1);
+// 	e2 = vec4_to_vec3(plane->normal_v_basis.r2);
 // 	if ((int)(floor(v_dot(e1, rec->p)) + floor(v_dot(e2, rec->p))) % 2 == 0)
 // 		return (var->uvmap.rgb1);
 // 	else
 // 		return (var->uvmap.rgb2);
 // }
 
-#include <stdio.h>
-static unsigned int	my_mlx_extract_texel(void *img, int x, int y)
+static unsigned int	extract_uv_color(t_mlx_data *data, int x, int y)
 {
-	char		*dst;
-	t_mlx_data	data;
+	char	*dst;
 
-	data.addr = mlx_get_data_addr(img, &data.bits_per_pixel,\
-	&data.line_length, &data.endian);
-	if (!data.addr)
-		ft_error("mlx_get_data_addr");
-	dst = data.addr + (y * data.line_length + x * (data.bits_per_pixel / 8));
+	dst = data->addr + y * data->line_length + x * data->bits_per_pixel / 8;
 	return (*(unsigned int *)dst);
 }
 
-static t_color3	set_map_rgb(t_vars *vars, t_plane *plane, t_hit_record *rec)
+static t_color3	get_uv_map_color
+	(t_vars *vars, t_plane *plane, t_hit_record *rec, t_mlx_data *data)
 {
-	t_vec3		u;
-	t_vec3		v;
-	t_vec3		uv_p;
-	t_4x4matrix	rotate;
+	t_point3	uv_p;
+	t_vec3		v_color;
+	unsigned	color;
 
-	u = v_unit(v_cross(plane->normal_v, vec3(1, 0, 0)));
-	if (v_length(u) == 0)
-		u = v_unit(v_cross(plane->normal_v, vec3(0, 0, 1)));
-	v = v_unit(v_cross(plane->normal_v, u));
-	rotate = _4x4matrix(vec4(u, 0), vec4(v, 0), vec4(plane->normal_v, 0), vec4(vec3(0, 0, 0), 1));
-	uv_p = mv_mul(rotate, vec4(rec->p, 1));
+
+	uv_p = mv_mul(plane->normal_v_basis, vec4(rec->p, 1));
 	uv_p.x = fmod(uv_p.x, 8) / 8;
 	uv_p.y = fmod(uv_p.y, 8) / 8;
 	if (uv_p.x < 0)
 		uv_p.x += 1;
 	if (uv_p.y < 0)
 		uv_p.y += 1;
-	unsigned int color = my_mlx_extract_texel(vars->mlx_data.uv_img, floor(uv_p.x * vars->uvmap.width), floor(uv_p.y * vars->uvmap.height));
-	return (color3((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF));
+	color = extract_uv_color(data,\
+	floor(uv_p.x * vars->uvmap.width), floor(uv_p.y * vars->uvmap.height));
+	v_color = color3((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF);
+	return (get_color_int_to_real(v_color));
 }
 
+#include <stdio.h>
 int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 {
-	double	denom;
-	double	t;
+	double		denom;
+	double		t;
+	t_vec3		bump_color;
 
 	ray->dir = v_unit(ray->dir);
 	denom = v_dot(plane->normal_v, ray->dir);
@@ -86,8 +78,15 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 	if (vars->uvmap.cnt == 0)
 		rec->color = plane->r_rgb;
 	else
-		rec->color = get_color_int_to_real(set_map_rgb(vars, plane, rec));
-		// rec->color = set_uvmap_color(plane, rec, vars);
-	rec->normal = plane->normal_v;
+	{
+		rec->color = get_uv_map_color(vars, plane, rec, &vars->uvmap.texture);
+		bump_color = get_uv_map_color(vars, plane, rec, &vars->uvmap.normal);
+		rec->normal = v_unit(v_minus(vt_mul(bump_color, 2.0), vec3(1, 1, 1)));
+	}
+	/*
+	checker borad logic
+		rec->color = get_check_color(plane, rec, vars);
+		rec->normal = plane->normal_v;
+	*/
 	return (1);
 }

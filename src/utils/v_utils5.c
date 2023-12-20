@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   v_utils5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 23:23:22 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 21:47:02 by sunko            ###   ########.fr       */
+/*   Created: 2023/12/20 15:17:45 by sunko             #+#    #+#             */
+/*   Updated: 2023/12/20 15:19:21 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "render.h"
 #include "utils.h"
+#include "structures.h"
 
-int	main(int argc, char *argv[])
+t_vec3	vec4_to_vec3(t_vec4 v4)
 {
-	t_vars		vars;
-
-	is_valid_arg(argc, argv);
-	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
-	init_mlx(&vars);
-	world2view(&vars);
-	render(&vars);
-	execute_mlx(&vars);
-	return (0);
+	return (vec3(v4.x, v4.y, v4.z));
 }

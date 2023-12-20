@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 14:35:46 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/20 15:03:53 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct s_ambient		t_ambient;
 typedef struct s_camera			t_camera;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
+typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_uvmap			t_uvmap;
 typedef struct s_cylinder_cap	t_cylinder_cap;
 typedef struct s_cylinder		t_cylinder;
-typedef struct s_mlx_data		t_mlx_data;
 typedef struct s_mlx_args		t_mlx_args;
 typedef struct s_vars			t_vars;
 typedef struct s_vec4			t_vec4;
@@ -52,6 +52,14 @@ struct s_vec4
 	double	y;
 	double	z;
 	double	w;
+};
+
+struct s_4x4matrix
+{
+	t_vec4	r1;
+	t_vec4	r2;
+	t_vec4	r3;
+	t_vec4	r4;
 };
 
 struct s_ambient
@@ -89,15 +97,6 @@ struct s_light
 	t_color3	r_rgb;
 };
 
-struct s_uvmap
-{
-	t_color3	rgb1;
-	t_color3	rgb2;
-	int			width;
-	int			height;
-	int			cnt;
-};
-
 struct s_sphere
 {
 	t_point3	center;
@@ -113,6 +112,7 @@ struct s_plane
 	t_vec3		normal_v;
 	t_color3	i_rgb;
 	t_color3	r_rgb;
+	t_4x4matrix	normal_v_basis;
 };
 
 struct s_cylinder
@@ -137,9 +137,6 @@ struct s_mlx_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	void	*uv_img;
-	int		uv_width;
-	int		uv_height;
 };
 
 struct s_ray
@@ -159,24 +156,30 @@ struct s_hit_record
 	t_color3	color;
 };
 
+struct s_uvmap
+{
+	t_mlx_data	texture;
+	t_mlx_data	normal;
+	t_color3	rgb1;
+	t_color3	rgb2;
+	int			width;
+	int			height;
+	int			cnt;
+};
+
 struct s_vars
 {
 	t_ambient		ambient;
 	t_camera		camera;
 	t_list			*light;
 	t_uvmap			uvmap;
+	t_uvmap			checker;
+	t_uvmap			normal_map;
+	t_uvmap			texture_map;
 	t_list			*objects;
 	t_ray			ray;
 	t_hit_record	rec;
 	t_mlx_data		mlx_data;
-};
-
-struct s_4x4matrix
-{
-	t_vec4	r1;
-	t_vec4	r2;
-	t_vec4	r3;
-	t_vec4	r4;
 };
 
 enum	e_type

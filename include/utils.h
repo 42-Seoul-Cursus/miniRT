@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:10:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 16:04:58 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/20 15:19:37 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ t_vec3		v_unit(t_vec3 vec);
 t_vec4		vec4(t_vec3 v, const double w);
 t_vec3		v_min(t_vec3 v1, t_vec3 v2);
 t_vec3		rotate_vec3(t_4x4matrix rotate, t_vec3 vector);
+t_vec3		vec4_to_vec3(t_vec4 v4);
 
 // m_utils.c
 t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
 t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
 t_4x4matrix	get_rotate_matrix(t_camera *camera);
 t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);
+t_4x4matrix	get_orthogonal_basis(t_vec3	v1);
 
 // utils.c
 void		is_valid_arg(int ac, char *av[]);

@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:11:30 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/19 21:59:42 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
 // mlx.c
 void		reset_mlx(t_mlx_data *mlx_data);
 void		execute_mlx(t_vars *vars);
-void		init_mlx(t_mlx_data *mlx_data);
+void		init_mlx(t_vars *vars);
 
 // world2view.c
 void		world2view(t_vars *vars);
