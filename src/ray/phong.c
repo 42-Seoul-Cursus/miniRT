@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 23:40:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/20 18:19:52 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,10 @@ t_color3	execute_phong(t_vars *vars)
 	while (light)
 	{
 		if (light->type == LIGHT)
-		{
 			light_color = v_plus(light_color, \
 			point_light_get(vars, (t_light *)light->content));
-		}
 		light = light->next;
 	}
+	light_color = v_plus(light_color, vt_mul(vars->ambient.r_rgb, vars->ambient.lighting_ratio));
 	return (v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)));
 }

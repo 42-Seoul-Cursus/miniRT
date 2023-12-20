@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:33:35 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/20 17:17:12 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,12 @@ static int	hit_cylinder_body(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec
 
 static int	hit_cylinder_cap(t_plane *cap, double radius, t_ray *ray, t_vars *vars)
 {
+	t_point3	p;
+
 	if (hit_plane(cap, ray, &vars->rec, vars))
 	{
-		t_point3	p = v_minus(vars->rec.p, cap->point);
-		if (v_dot(cap->normal_v, p) != 0)
-			return (0);
-		if (v_dot(p, p) >= pow(radius, 2))
-			return (0);
-		vars->rec.color = cap->r_rgb;
-		vars->rec.p = p;
-		vars->rec.normal = cap->normal_v;
-		return (1);
+		p = v_minus(vars->rec.p, cap->point);
+		return (v_dot(p, p) < radius * radius);
 	}
 	return (0);
 }
