@@ -6,34 +6,42 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 01:02:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 01:05:43 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 01:18:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "utils.h"
 #include "ray.h"
+
+/*
+두 개의 레이가 hit 함수로 들어옴
+1. 카메라 레이
+2. 쉐도우 판정 레이
+
+hit_cylinder에서 body부터 확인하고 return하기 때문에 바닥이 보이지 않음
+temp_rec에 미리 저장하고 판정 다시 해야함
+*/
 
 int	hit_cylinder_cap(t_cylinder *cylinder, t_ray *ray, \
 	t_hit_record *rec, t_vars *vars)
 {
 	t_plane		cap;
 	t_point3	p;
-	double		radius;
+	double		radius2;
 
-	radius = cylinder->radius;
+	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->top;
 	if (hit_plane(&cap, ray, rec, vars))
 	{
 		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius * radius)
+		if (v_dot(p, p) < radius2)
 			return (1);
 	}
 	cap = cylinder->bottom;
 	if (hit_plane(&cap, ray, rec, vars))
 	{
 		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius * radius)
+		if (v_dot(p, p) < radius2)
 			return (1);
 	}
 	return (0);
