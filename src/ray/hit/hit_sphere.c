@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 23:33:59 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 01:06:35 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,13 @@ static t_color3	get_uvmap_color(t_sphere *sphere, \
 	phi = acos(d.y / sphere->radius);
 	u = 1 - (theta / (2 * M_PI) + 0.5);
 	v = 1 - phi / M_PI;
-	if (((int)(floor(u * vars->uvmap.width)) + (int)(floor(v * vars->uvmap.height))) % 2 == 0)
+	if (((int)(floor(u * vars->uvmap.width)) \
+		+ (int)(floor(v * vars->uvmap.height))) % 2 == 0)
 		return (vars->uvmap.rgb1);
 	else
 		return (vars->uvmap.rgb2);
 }
 
-/*
-a = ray->dir \cdot ray->dir
-b = 2 * ray->dir \cdot (ray->orig - sphere->center)
-c = (ray->orig - sphere->center) \cdot (ray->orig - sphere->center) - (sphere->radius)^2
- */
 int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_vars *vars)
 {
 	double	a;

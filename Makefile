@@ -30,6 +30,7 @@ SRCS = main.c \
 	   render/hook.c \
 	   render/world2view.c \
 	   ray/hit/hit_cylinder.c \
+	   ray/hit/hit_cylinder_cap.c \
 	   ray/hit/hit_plane.c \
 	   ray/hit/hit_sphere.c \
 	   ray/hit/hit.c \
@@ -41,8 +42,7 @@ SRCS = main.c \
 	   utils/v_utils1.c \
 	   utils/v_utils2.c \
 	   utils/v_utils3.c \
-	   utils/v_utils4.c \
-	   test.c
+	   utils/v_utils4.c
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)

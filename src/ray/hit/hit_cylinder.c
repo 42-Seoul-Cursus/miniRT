@@ -6,20 +6,24 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 00:06:10 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 01:05:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "utils.h"
 #include "ray.h"
-#include <math.h>
 
-static int	hit_cylinder_cap(\
-	t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars);
-static int	hit_cylinder_body(\
-	t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
+static int		hit_cylinder_body(\
+				t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
+static int		has_real_roots(t_cylinder *cy, t_ray *r, \
+				double *t_sm, double *t_lg);
+static int		is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
+				t_point3 p, double t);
+static t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_hit_record *rec);
 
-int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars)
+int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, \
+	t_hit_record *rec, t_vars *vars)
 {
 	if (hit_cylinder_body(cylinder, ray, rec))
 		return (1);
@@ -30,79 +34,76 @@ int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *va
 
 static int	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
 {
-	// implement infinite cylinder
-
-	double	a;
-	double	b;
-	double	c;
-	double	oc;
-
-	t_vec3	x = v_minus(r->dir, vt_mul(cy->normal_v, v_dot(r->dir, cy->normal_v)));
-	a = v_length2(x);
-	b = 2 * v_dot(x, v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v))));
-	c = v_length2(v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v)))) - pow(cy->radius, 2);
-	oc = b * b - 4 * a * c;
-	if (oc <= 0)
-		return (0);
-
-	// implement finite cylinder
-
 	t_point3	p;
 	double		t_sm;
 	double		t_lg;
-	double		tmp;
 
-	t_sm = (-b - sqrt(oc)) / (2 * a);
-	t_lg = (-b + sqrt(oc)) / (2 * a);
-	if (t_sm > t_lg)
-	{
-		tmp = t_lg;
-		t_lg = t_sm;
-		t_sm = tmp;
-	}
+	if (!has_real_roots(cy, r, &t_sm, &t_lg))
+		return (0);
 	p = ray_at(r, t_sm);
-	if (!(v_dot(cy->normal_v, v_minus(p, cy->bottom.point)) > 0 && v_dot(cy->normal_v, v_minus(p, cy->top.point)) < 0) || !(rec->tmin < t_sm && t_sm < rec->tmax))
+	if (!is_point_on_cylinder(cy, rec, p, t_sm))
 	{
 		p = ray_at(r, t_lg);
-		if (!(v_dot(cy->normal_v, v_minus(p, cy->bottom.point)) > 0 && v_dot(cy->normal_v, v_minus(p, cy->top.point)) < 0) || !(rec->tmin < t_lg && t_lg < rec->tmax))
+		if (!is_point_on_cylinder(cy, rec, p, t_lg))
 			return (0);
 		rec->t = t_lg;
 		rec->color = cy->r_rgb;
 		rec->p = p;
-		rec->normal = v_unit(v_minus(v_minus(p, cy->center), vt_mul(cy->normal_v, v_dot(cy->normal_v, v_minus(p, cy->center)))));
-		if (v_dot(rec->normal, r->dir) > 0)
-			rec->normal = v_minus(rec->normal, vec3(-1, -1, -1));
+		rec->normal = get_cylinder_normal_v(cy, rec);
 		return (1);
 	}
 	rec->t = t_sm;
 	rec->color = cy->r_rgb;
 	rec->p = p;
-	rec->normal = v_unit(v_minus(v_minus(p, cy->center), vt_mul(cy->normal_v, v_dot(cy->normal_v, v_minus(p, cy->center)))));
-	if (v_dot(rec->normal, r->dir) > 0)
-		rec->normal = v_minus(rec->normal, vec3(-1, -1, -1));
+	rec->normal = get_cylinder_normal_v(cy, rec);
 	return (1);
 }
 
-static int	hit_cylinder_cap(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars)
+static int	has_real_roots(t_cylinder *cy, t_ray *r, \
+	double *t_sm, double *t_lg)
 {
-	t_plane		cap;
-	t_point3	p;
-	double		radius;
+	double	a;
+	double	b;
+	double	c;
+	double	oc;
 
-	radius = cylinder->radius;
-	cap = cylinder->top;
-	if (hit_plane(&cap, ray, rec, vars))
+	a = v_length2(\
+		v_minus(r->dir, vt_mul(cy->normal_v, v_dot(r->dir, cy->normal_v))));
+	b = 2 * v_dot(v_minus(r->dir, vt_mul(cy->normal_v, v_dot(\
+		r->dir, cy->normal_v))), v_minus(v_minus(r->orig, cy->center), vt_mul(\
+		cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v))));
+	c = v_length2(v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, \
+		v_dot(v_minus(r->orig, cy->center), cy->normal_v)))) \
+		- pow(cy->radius, 2);
+	oc = b * b - 4 * a * c;
+	if (oc <= 0 || a == 0)
+		return (0);
+	*t_sm = (-b - sqrt(oc)) / (2 * a);
+	*t_lg = (-b + sqrt(oc)) / (2 * a);
+	if (*t_sm > *t_lg)
 	{
-		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius * radius)
-			return (1);
+		c = *t_lg;
+		*t_lg = *t_sm;
+		*t_sm = c;
 	}
-	cap = cylinder->bottom;
-	if (hit_plane(&cap, ray, rec, vars))
-	{
-		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius * radius)
-			return (1);
-	}
+	return (1);
+}
+
+static int	is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
+	t_point3 p, double t)
+{
+	if ((v_dot(cy->normal_v, v_minus(p, cy->bottom.point)) > 0 && \
+		v_dot(cy->normal_v, v_minus(p, cy->top.point)) < 0) && \
+		(rec->tmin < t && t < rec->tmax))
+		return (1);
 	return (0);
+}
+
+static	t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_hit_record *rec)
+{
+	t_vec3	normal_v;
+
+	normal_v = v_unit(v_minus(v_minus(rec->p, cy->center), vt_mul(\
+		cy->normal_v, v_dot(cy->normal_v, v_minus(rec->p, cy->center)))));
+	return (normal_v);
 }
