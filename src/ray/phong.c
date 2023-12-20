@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/20 18:19:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 00:05:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,28 @@ static t_color3	get_specular(t_vars *vars, t_light *light)
 	light_dir = v_unit(v_minus(light->light_point, vars->rec.p));
 	view_dir = v_unit(vt_mul(vars->ray.dir, -1));
 	reflect_dir = get_reflect_vec(vt_mul(light_dir, -1), vars->rec.normal);
-	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), SHIN_VALUE);
+	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), 5);
 	return (vt_mul(vt_mul(light->r_rgb, 0.5), spec));
 }
 
 static t_color3	point_light_get(t_vars *vars, t_light *light)
 {
 	t_color3	diffuse;
+	t_vec3		light_dir;
 	t_color3	specular;
 	t_ray		light_ray;
-	t_vec3		light_dir;
 	double		light_len;
 
 	light_dir = v_minus(light->light_point, vars->rec.p);
 	light_len = v_length(light_dir);
+	light_dir = v_unit(light_dir);
 	light_ray = ray(v_plus(vars->rec.p, vt_mul(light_dir, 1e-6)), \
 	light_dir);
-	diffuse = get_diffuse(vars, light);
 	if (in_shadow(vars, light_ray, light_len))
 		return (color3(0, 0, 0));
+	diffuse = get_diffuse(vars, light);
 	specular = get_specular(vars, light);
-	return (v_plus(diffuse, specular));
+	return (v_plus(v_plus(diffuse, specular), vars->ambient.r_rgb));
 }
 
 t_color3	execute_phong(t_vars *vars)
@@ -76,6 +77,5 @@ t_color3	execute_phong(t_vars *vars)
 			point_light_get(vars, (t_light *)light->content));
 		light = light->next;
 	}
-	light_color = v_plus(light_color, vt_mul(vars->ambient.r_rgb, vars->ambient.lighting_ratio));
 	return (v_min(v_mul(light_color, vars->rec.color), color3(1, 1, 1)));
 }

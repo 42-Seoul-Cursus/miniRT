@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 23:37:16 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 00:14:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ int	hit(t_vars *vars, t_ray *ray, t_hit_record *rec)
 int	in_shadow(t_vars *vars, t_ray r, double light_len)
 {
 	t_hit_record	rec;
-	t_ray			correct_ray;
 
 	rec.tmin = 1e-6;
 	rec.tmax = light_len;
-	correct_ray = ray(v_plus(r.orig, vt_mul(r.dir, 10)), r.dir);
-	if (hit(vars, &correct_ray, &rec))
+	if (hit(vars, &r, &rec))
 		return (1);
 	return (0);
 }
