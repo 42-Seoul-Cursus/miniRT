@@ -3,43 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:14:51 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 16:34:57 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "render.h"
 #include "hook.h"
 #include "utils.h"
 #include "mlx.h"
-#include <math.h>
+#include "parse.h"
 
 static void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 {
 	if (cur->type == SPHERE)
-	{
-		((t_sphere *)cur->content)->center = \
-			v_minus(((t_sphere *)cur->content)->center, view_point);
-		((t_sphere *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_sphere *)cur->content)->center, 1));
-	}
+		((t_sphere *)cur->content)->center = get_rotate_point(\
+			((t_sphere *)cur->content)->center, view_point, rotate);
 	else if (cur->type == PLANE)
 	{
-		((t_plane *)cur->content)->point = \
-			v_minus(((t_plane *)cur->content)->point, view_point);
+		((t_plane *)cur->content)->point = get_rotate_point(\
+			((t_plane *)cur->content)->point, view_point, rotate);
 		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, \
 			((t_plane *)cur->content)->normal_v);
-		((t_plane *)cur->content)->point = \
-			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
 	}
 	else if (cur->type == CYLINDER)
 	{
-		((t_cylinder *)cur->content)->center = \
-			v_minus(((t_cylinder *)cur->content)->center, view_point);
-		((t_cylinder *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_cylinder *)cur->content)->center, 1));
+		((t_cylinder *)cur->content)->center = get_rotate_point(\
+			((t_cylinder *)cur->content)->center, view_point, rotate);
+		((t_cylinder *)cur->content)->normal_v = rotate_vec3(rotate, \
+			((t_plane *)cur->content)->normal_v);
+		gen_cylinder_cap((t_cylinder *)cur->content);
 	}
 }
 

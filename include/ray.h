@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 00:18:07 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 01:06:59 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:15:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int			hit_plane(\
 			t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars);
 int			hit_cylinder(\
 			t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars);
-int			hit_cylinder_cap(\
-			t_cylinder *cylinder, t_ray *ray, t_hit_record *rec, t_vars *vars);
+int			hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
+			t_hit_record *rec, t_vars *vars);
+int			hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
+			t_hit_record *rec, t_vars *vars);
 
 t_color3	execute_phong(t_vars *vars);
 

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 01:02:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 01:18:54 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:14:40 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,37 @@
 hit_cylinder에서 body부터 확인하고 return하기 때문에 바닥이 보이지 않음
 temp_rec에 미리 저장하고 판정 다시 해야함
 */
-
-int	hit_cylinder_cap(t_cylinder *cylinder, t_ray *ray, \
+int	hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
 	t_hit_record *rec, t_vars *vars)
 {
-	t_plane		cap;
-	t_point3	p;
-	double		radius2;
+	t_plane			cap;
+	t_point3		p;
+	double			radius2;
+
+	radius2 = cylinder->radius * cylinder->radius;
+	cap = cylinder->bottom;
+	if (hit_plane(&cap, ray, rec, vars))
+	{
+		p = v_minus(rec->p, cap.point);
+		if (v_dot(p, p) <= radius2)
+			return (1);
+	}
+	return (0);
+}
+
+int	hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
+	t_hit_record *rec, t_vars *vars)
+{
+	t_plane			cap;
+	t_point3		p;
+	double			radius2;
 
 	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->top;
 	if (hit_plane(&cap, ray, rec, vars))
 	{
 		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius2)
-			return (1);
-	}
-	cap = cylinder->bottom;
-	if (hit_plane(&cap, ray, rec, vars))
-	{
-		p = v_minus(rec->p, cap.point);
-		if (v_dot(p, p) < radius2)
+		if (v_dot(p, p) <= radius2)
 			return (1);
 	}
 	return (0);

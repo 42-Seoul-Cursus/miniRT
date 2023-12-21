@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 00:14:23 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:28:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* sphere, plane, cylinder 판별식에 ray를 쏴서 맞으면 is_hit = 1 */
 int	hit_obj(t_vars *vars, t_list *object, t_ray *ray, t_hit_record *rec)
 {
-	int		is_hit;
+	int	is_hit;
 
 	is_hit = 0;
 	if (object->type == SPHERE)

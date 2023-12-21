@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 01:06:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:19:19 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,8 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_vars *vars)
 		rec->color = sphere->r_rgb;
 	else
 		rec->color = get_uvmap_color(sphere, rec, vars);
-	if (v_dot(ray->dir, rec->normal) < 0)
-		rec->front_face = 1;
-	else
-	{
-		rec->front_face = 0;
-		rec->normal = vt_mul(rec->normal, -1.0);
-	}
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
+	if (!rec->front_face)
+		rec->normal = vt_mul(rec->normal, -1);
 	return (1);
 }
