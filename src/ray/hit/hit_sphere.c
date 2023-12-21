@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 16:19:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 23:26:13 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "render.h"
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
@@ -61,9 +62,9 @@ static t_color3	get_uvmap_color(t_sphere *sphere, \
 	v = 1 - phi / M_PI;
 	if (((int)(floor(u * vars->uvmap.width)) \
 		+ (int)(floor(v * vars->uvmap.height))) % 2 == 0)
-		return (vars->uvmap.rgb1);
+		return (get_color_int_to_real(vars->uvmap.rgb1));
 	else
-		return (vars->uvmap.rgb2);
+		return (get_color_int_to_real(vars->uvmap.rgb2));
 }
 
 int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_vars *vars)

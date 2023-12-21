@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 21:06:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 23:27:20 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
+#include "render.h"
 
 static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 {
@@ -24,9 +25,9 @@ static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 		e1 = v_unit(v_cross(plane->normal_v, vec3(0, 0, 1)));
 	e2 = v_unit(v_cross(plane->normal_v, e1));
 	if ((int)(floor(v_dot(e1, rec->p)) + floor(v_dot(e2, rec->p))) % 2 == 0)
-		return (var->uvmap.rgb1);
+		return (get_color_int_to_real(var->uvmap.rgb1));
 	else
-		return (var->uvmap.rgb2);
+		return (get_color_int_to_real(var->uvmap.rgb2));
 }
 
 int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
