@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 22:44:43 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:09:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	gen_uvmap(t_uvmap *uvmap, char *line);
 void	gen_sphere(t_list **objects, char *line);
 void	gen_plane(t_list **objects, char *line);
 void	gen_cylinder(t_list **objects, char *line);
+void	gen_cylinder_cap(t_cylinder *cylinder);
 
 // check_env.c
 void	check_ambient(t_ambient *ambient);

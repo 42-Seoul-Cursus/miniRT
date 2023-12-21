@@ -30,6 +30,7 @@ SRCS = main.c \
 	   render/hook.c \
 	   render/world2view.c \
 	   ray/hit/hit_cylinder.c \
+	   ray/hit/hit_cylinder_cap.c \
 	   ray/hit/hit_plane.c \
 	   ray/hit/hit_sphere.c \
 	   ray/hit/hit.c \
@@ -46,14 +47,14 @@ OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
+
 $(MLX):
 	$(MAKE) -C $(SRC_DIR)/mlx
 
 $(LIBFT):
 	$(MAKE) -C $(SRC_DIR)/libft
-
-$(NAME): $(MLX) $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)

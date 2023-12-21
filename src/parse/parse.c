@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 18:33:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/19 22:34:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 static void	check_identifier(t_vars *vars, char *line);
 static int	protected_open(char *path);
 
+/* gnl로 한줄씩 받아서 알맞는 구조체에 넣는 함수 */
 void	parse_rt(t_vars *vars, char *path)
 {
 	char	*line;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:10:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/16 16:04:58 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 16:34:40 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ t_vec3		rotate_left_matrix(t_vec3 v);
 t_vec3		rotate_right_matrix(t_vec3 v);
 t_vec3		rotate_up_matrix(t_vec3 v);
 t_vec3		rotate_down_matrix(t_vec3 v);
+t_point3	get_rotate_point(t_point3 point, t_point3 view_point, \
+	t_4x4matrix rotate);
 
 #endif

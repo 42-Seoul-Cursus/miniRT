@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 11:28:50 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 21:06:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 		return (0);
 	rec->t = t;
 	rec->p = ray_at(ray, t);
+	rec->normal = plane->normal_v;
 	if (vars->uvmap.cnt == 0)
 		rec->color = plane->r_rgb;
 	else
 		rec->color = set_uvmap_color(plane, rec, vars);
-	rec->normal = plane->normal_v;
+	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
+	if (!rec->front_face)
+		rec->normal = vt_mul(rec->normal, -1);
 	return (1);
 }

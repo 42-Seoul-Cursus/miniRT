@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/18 16:46:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 16:16:30 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "render.h"
 #include "libft.h"
 #include "utils.h"
-
-static void	gen_cylinder_cap(t_cylinder *cylinder);
 
 void	gen_sphere(t_list **objects, char *line)
 {
@@ -61,6 +59,7 @@ void	gen_cylinder(t_list **objects, char *line)
 	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
 	check_cylinder(cylinder);
+	cylinder->normal_v = v_unit(cylinder->normal_v);
 	cylinder->radius = cylinder->diameter / 2;
 	cylinder->r_rgb = get_color_int_to_real(cylinder->i_rgb);
 	gen_cylinder_cap(cylinder);
@@ -74,7 +73,7 @@ void	gen_cylinder_cap(t_cylinder *cylinder)
 	cylinder->top.r_rgb = cylinder->r_rgb;
 	cylinder->top.point = v_plus(cylinder->center, \
 		vt_mul(cylinder->normal_v, cylinder->height));
-	cylinder->bottom.normal_v = cylinder->normal_v;
+	cylinder->bottom.normal_v = vt_mul(cylinder->normal_v, -1);
 	cylinder->bottom.i_rgb = cylinder->i_rgb;
 	cylinder->bottom.r_rgb = cylinder->r_rgb;
 	cylinder->bottom.point = cylinder->center;

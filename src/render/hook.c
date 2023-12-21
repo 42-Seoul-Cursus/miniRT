@@ -3,67 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:14:51 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 21:07:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "render.h"
 #include "hook.h"
 #include "utils.h"
 #include "mlx.h"
-#include <math.h>
-
-static void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
-{
-	if (cur->type == SPHERE)
-	{
-		((t_sphere *)cur->content)->center = \
-			v_minus(((t_sphere *)cur->content)->center, view_point);
-		((t_sphere *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_sphere *)cur->content)->center, 1));
-	}
-	else if (cur->type == PLANE)
-	{
-		((t_plane *)cur->content)->point = \
-			v_minus(((t_plane *)cur->content)->point, view_point);
-		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, \
-			((t_plane *)cur->content)->normal_v);
-		((t_plane *)cur->content)->point = \
-			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
-	}
-	else if (cur->type == CYLINDER)
-	{
-		((t_cylinder *)cur->content)->center = \
-			v_minus(((t_cylinder *)cur->content)->center, view_point);
-		((t_cylinder *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_cylinder *)cur->content)->center, 1));
-	}
-}
-
-static void	rotate_object_and_light(\
-	t_vars *vars, t_4x4matrix rotate_matrix, t_point3 view_point)
-{
-	t_list		*cur;
-
-	cur = vars->objects;
-	while (cur)
-	{
-		rotate_obj(cur, rotate_matrix, view_point);
-		cur = cur->next;
-	}
-	cur = vars->light;
-	while (cur)
-	{
-		((t_light *)cur->content)->light_point = \
-			v_minus(((t_light *)cur->content)->light_point, view_point);
-		((t_light *)cur->content)->light_point = mv_mul(\
-			rotate_matrix, vec4(((t_light *)cur->content)->light_point, 1));
-		cur = cur->next;
-	}
-}
+#include "parse.h"
 
 static void	normalize_vector_space(t_vars *vars)
 {
@@ -73,7 +25,7 @@ static void	normalize_vector_space(t_vars *vars)
 	rotate_matrix = get_rotate_matrix(&vars->camera);
 	vars->camera.direct_v = vec3(0, 0, -1);
 	inverse_matrix = get_inverse_matrix(rotate_matrix);
-	rotate_object_and_light(vars, inverse_matrix, vars->camera.view_point);
+	rotate_object_and_light(vars, inverse_matrix);
 	vars->camera.view_point = vec3(0, 0, 0);
 	update_viewport(vars);
 }
@@ -103,27 +55,23 @@ void	rotate_hook(t_vars *vars, int keycode)
 
 void	move_hook(t_vars *vars, int keycode)
 {
-	t_mlx_data	*mlx_data;
-	t_point3	prev_view_point;
-
-	mlx_data = &vars->mlx_data;
-	prev_view_point = vars->camera.view_point;
 	if (keycode == FRONT)
 		vars->camera.view_point = \
-		v_plus(prev_view_point, vt_mul(vars->camera.direct_v, 3));
+		v_plus(vars->camera.view_point, vt_mul(vars->camera.direct_v, 3));
 	else if (keycode == LEFT)
 		vars->camera.view_point = \
-		v_minus(prev_view_point, vt_mul(v_cross(\
+		v_minus(vars->camera.view_point, vt_mul(v_cross(\
 		vars->camera.direct_v, vars->camera.up_v), 3));
 	else if (keycode == BACK)
 		vars->camera.view_point = \
-		v_minus(prev_view_point, vt_mul(vars->camera.direct_v, 3));
+		v_minus(vars->camera.view_point, vt_mul(vars->camera.direct_v, 3));
 	else if (keycode == RIGHT)
 		vars->camera.view_point = \
-		v_plus(prev_view_point, vt_mul(v_cross(\
+		v_plus(vars->camera.view_point, vt_mul(v_cross(\
 		vars->camera.direct_v, vars->camera.up_v), 3));
-	reset_mlx(mlx_data);
+	reset_mlx(&(vars->mlx_data));
 	update_viewport(vars);
 	render(vars);
-	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
+	mlx_put_image_to_window(vars->mlx_data.mlx, vars->mlx_data.win, \
+		vars->mlx_data.img, 0, 0);
 }
