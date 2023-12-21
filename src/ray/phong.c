@@ -6,22 +6,19 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 23:47:29 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 21:37:57 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 22:48:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "ray.h"
 #include <math.h>
-#include <stdio.h>
 
 static t_color3	get_diffuse(t_vars *vars, t_light *light, t_vec3 light_dir)
 {
 	double	kd;
 
 	kd = fmax(v_dot(vars->rec.normal, light_dir), 0.0);
-	if (kd == 0.0)
-		printf("kd = %f\n", kd);
 	return (vt_mul(light->r_rgb, kd));
 }
 
@@ -38,7 +35,7 @@ static t_color3	get_specular(t_vars *vars, t_light *light, t_vec3 light_dir)
 
 	view_dir = v_unit(vt_mul(vars->ray.dir, -1));
 	reflect_dir = get_reflect_vec(vt_mul(light_dir, -1), vars->rec.normal);
-	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), 5);
+	spec = pow(fmax(v_dot(view_dir, reflect_dir), 0.0), SHIN_VALUE);
 	return (vt_mul(vt_mul(light->r_rgb, SPEC_VALUE), spec));
 }
 
@@ -58,7 +55,7 @@ static t_color3	point_light_get(t_vars *vars, t_light *light)
 	diffuse = get_diffuse(vars, light, light_dir);
 	specular = get_specular(vars, light, light_dir);
 	if (in_shadow(vars, light_ray, light_len))
-		return (color3(0, 0, 0));
+		return (v_mul(vars->rec.color, vars->ambient.r_rgb));
 	return (vt_mul(v_plus(v_plus(vars->ambient.r_rgb, diffuse), specular), \
 		light->brightness_ratio));
 }
