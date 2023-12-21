@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/20 21:17:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 21:26:56 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	gen_camera(t_camera *camera, char *line)
 		ft_error("File Format Error");
 	++(camera->cnt);
 	check_camera(camera);
+	camera->direct_v = v_unit(camera->direct_v);
 	camera->viewport_width = 2;
 	camera->viewport_height = 2 / IMG_RATIO;
 	camera->viewport_u = vec3(camera->viewport_width, 0, 0);

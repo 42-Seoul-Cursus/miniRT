@@ -47,14 +47,14 @@ OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
+
 $(MLX):
 	$(MAKE) -C $(SRC_DIR)/mlx
 
 $(LIBFT):
 	$(MAKE) -C $(SRC_DIR)/libft
-
-$(NAME): $(MLX) $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)
