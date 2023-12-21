@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 11:11:30 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 19:56:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void		init_mlx(t_mlx_data *mlx_data);
 // world2view.c
 void		world2view(t_vars *vars);
 void		update_viewport(t_vars *vars);
+void		rotate_object_and_light(t_vars *vars, t_4x4matrix rotate);
+void		rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point);
+void		rotate_right(t_list *cur, t_4x4matrix rotate, t_point3 view_point);
 
 // print.c
 void		render(t_vars *vars);

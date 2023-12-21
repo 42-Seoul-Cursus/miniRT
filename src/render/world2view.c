@@ -6,69 +6,61 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 22:47:44 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/21 19:58:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "utils.h"
 #include "render.h"
+#include "parse.h"
 
-static void	world2view_obj(t_list *cur,
-	t_4x4matrix rotate, t_point3 view_point)
+void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 {
 	if (cur->type == SPHERE)
-	{
-		((t_sphere *)cur->content)->center = \
-			v_minus(((t_sphere *)cur->content)->center, view_point);
-		((t_sphere *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_sphere *)cur->content)->center, 1));
-	}
+		((t_sphere *)cur->content)->center = get_rotate_point(\
+			((t_sphere *)cur->content)->center, view_point, rotate);
 	else if (cur->type == PLANE)
 	{
-		((t_plane *)cur->content)->point = \
-			v_minus(((t_plane *)cur->content)->point, view_point);
-		((t_plane *)cur->content)->point = \
-			mv_mul(rotate, vec4(((t_plane *)cur->content)->point, 1));
+		((t_plane *)cur->content)->point = get_rotate_point(\
+			((t_plane *)cur->content)->point, view_point, rotate);
 		((t_plane *)cur->content)->normal_v = rotate_vec3(rotate, \
-		((t_plane *)cur->content)->normal_v);
+			((t_plane *)cur->content)->normal_v);
 	}
 	else if (cur->type == CYLINDER)
 	{
-		((t_cylinder *)cur->content)->center = \
-			v_minus(((t_cylinder *)cur->content)->center, view_point);
-		((t_cylinder *)cur->content)->center = \
-			mv_mul(rotate, vec4(((t_cylinder *)cur->content)->center, 1));
+		((t_cylinder *)cur->content)->center = get_rotate_point(\
+			((t_cylinder *)cur->content)->center, view_point, rotate);
+		((t_cylinder *)cur->content)->normal_v = rotate_vec3(rotate, \
+			((t_plane *)cur->content)->normal_v);
+		gen_cylinder_cap((t_cylinder *)cur->content);
 	}
 }
 
-static void	wolrd2view_light(\
-	t_list *cur, t_4x4matrix rotate_matrix, t_point3 view_point)
+void	rotate_right(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 {
 	((t_light *)cur->content)->light_point = v_minus(\
 			((t_light *)cur->content)->light_point, view_point);
 	((t_light *)cur->content)->light_point = mv_mul(\
-	rotate_matrix, vec4(((t_light *)cur->content)->light_point, 1));
+	rotate, vec4(((t_light *)cur->content)->light_point, 1));
 }
 
-static void	world2view_object_and_light(t_vars *vars, t_4x4matrix rotate_matrix)
+void	rotate_object_and_light(t_vars *vars, t_4x4matrix rotate)
 {
 	t_list		*cur;
 
 	cur = vars->objects;
 	while (cur)
 	{
-		world2view_obj(cur, rotate_matrix, vars->camera.view_point);
+		rotate_obj(cur, rotate, vars->camera.view_point);
 		cur = cur->next;
 	}
 	cur = vars->light;
 	while (cur)
 	{
-		wolrd2view_light(cur, rotate_matrix, vars->camera.view_point);
+		rotate_right(cur, rotate, vars->camera.view_point);
 		cur = cur->next;
 	}
-	vars->camera.view_point = point3(0, 0, 0);
-	vars->camera.direct_v = vec3(0, 0, -1);
 }
 
 void	update_viewport(t_vars *vars)
@@ -89,6 +81,8 @@ void	world2view(t_vars *vars)
 	t_4x4matrix	rotate_matrix;
 
 	rotate_matrix = get_rotate_matrix(&vars->camera);
-	world2view_object_and_light(vars, rotate_matrix);
+	rotate_object_and_light(vars, rotate_matrix);
+	vars->camera.view_point = point3(0, 0, 0);
+	vars->camera.direct_v = vec3(0, 0, -1);
 	update_viewport(vars);
 }
