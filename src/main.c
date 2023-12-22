@@ -16,12 +16,12 @@
 
 int	main(int argc, char *argv[])
 {
-	t_vars		vars;
+	t_vars	vars;
 
 	is_valid_arg(argc, argv);
 	init_vars(&vars);
-	parse_rt(&vars, argv[1]);
 	init_mlx(&vars.mlx_data);
+	parse_rt(&vars, argv[1]);
 	world2view(&vars);
 	render(&vars);
 	execute_mlx(&vars);

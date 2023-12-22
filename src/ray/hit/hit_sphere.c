@@ -46,8 +46,7 @@ static int	update_nearest_hit_point(double a, \
 	return (1);
 }
 
-static t_color3	get_uvmap_color(t_sphere *sphere, \
-	t_hit_record *rec, t_vars *vars)
+static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec)
 {
 	t_vec3	d;
 	double	theta;
@@ -60,14 +59,14 @@ static t_color3	get_uvmap_color(t_sphere *sphere, \
 	phi = acos(d.y / sphere->radius);
 	u = 1 - (theta / (2 * M_PI) + 0.5);
 	v = 1 - phi / M_PI;
-	if (((int)(floor(u * vars->uvmap.width)) \
-		+ (int)(floor(v * vars->uvmap.height))) % 2 == 0)
-		return (get_color_int_to_real(vars->uvmap.rgb1));
+	if (((int)(floor(u * sphere->checker->width)) \
+		+ (int)(floor(v * sphere->checker->height))) % 2 == 0)
+		return (get_color_int_to_real(sphere->checker->rgb1));
 	else
-		return (get_color_int_to_real(vars->uvmap.rgb2));
+		return (get_color_int_to_real(sphere->checker->rgb2));
 }
 
-int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_vars *vars)
+int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	double	a;
 	double	b;
@@ -81,10 +80,10 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec, t_vars *vars)
 		return (0);
 	rec->p = ray_at(ray, rec->t);
 	rec->normal = get_sphere_normal_v(sphere, rec);
-	if (vars->uvmap.cnt == 0)
+	if (sphere->checker == NULL)
 		rec->color = sphere->r_rgb;
 	else
-		rec->color = get_uvmap_color(sphere, rec, vars);
+		rec->color = get_uvmap_color(sphere, rec);
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
 	if (!rec->front_face)
 		rec->normal = vt_mul(rec->normal, -1);

@@ -39,7 +39,6 @@ void	init_vars(t_vars *vars)
 {
 	vars->ambient.cnt = 0;
 	vars->camera.cnt = 0;
-	vars->uvmap.cnt = 0;
 	vars->light = NULL;
 	vars->objects = NULL;
 }
