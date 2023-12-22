@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 00:27:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/22 16:00:07 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,27 @@ struct s_light
 	t_color3	i_rgb;
 	t_color3	r_rgb;
 };
+
+/*
+struct s_textmap
+{
+	t_text_data	texture;
+	t_text_data	normal;
+}
+
+struct s_text_data
+{
+	char	*path;
+	void	*addr;
+	void	*img;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}
+*/
+// s_uvmap => s_check_map
 
 struct s_uvmap
 {
@@ -175,6 +196,12 @@ struct s_vars
 	t_ray			ray;
 	t_hit_record	rec;
 	t_mlx_data		mlx_data;
+	t_mlx_data		texture;
+	t_mlx_data		normal;
+	int				t_width;
+	int				t_height;
+	int				n_width;
+	int				n_height;
 };
 
 struct s_4x4matrix

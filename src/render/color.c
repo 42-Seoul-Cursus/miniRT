@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:48:22 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/14 22:05:28 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/22 14:03:03 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+unsigned int	extract_uv_color(t_mlx_data *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr + y * data->line_length + x * data->bits_per_pixel / 8;
+	return (*(unsigned int *)dst);
 }

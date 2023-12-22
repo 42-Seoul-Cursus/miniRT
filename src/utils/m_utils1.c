@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_utils1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:50 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 22:49:23 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/22 16:15:37 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,19 @@ t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate)
 	inverse_rotate.r4.z = 0;
 	inverse_rotate.r4.w = 1;
 	return (inverse_rotate);
+}
+
+t_4x4matrix	get_orthogonal_basis(t_vec3	v1)
+{
+	t_vec3		u;
+	t_vec3		v;
+	t_4x4matrix	orthogonal_basis;
+
+	u = v_unit(v_cross(v1, vec3(1, 0, 0)));
+	if (v_length(u) == 0)
+		u = v_unit(v_cross(v1, vec3(0, 0, 1)));
+	v = v_unit(v_cross(v1, u));
+	orthogonal_basis = _4x4matrix(vec4(u, 0), vec4(v, 0), \
+	vec4(v1, 0), vec4(vec3(0, 0, 0), 1));
+	return (orthogonal_basis);
 }

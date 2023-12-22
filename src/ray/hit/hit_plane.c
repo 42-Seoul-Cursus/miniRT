@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 23:27:20 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/22 14:26:07 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math.h>
 #include "render.h"
 
-static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec, t_vars *var)
+static t_color3	get_check_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 {
 	t_vec3	e1;
 	t_vec3	e2;
@@ -29,6 +29,11 @@ static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 	else
 		return (get_color_int_to_real(var->uvmap.rgb2));
 }
+
+// static t_color3	get_uv_color(t_sphere *sphere, t_hit_record *rec)
+// {
+
+// }
 
 int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 {
@@ -48,7 +53,7 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 	if (vars->uvmap.cnt == 0)
 		rec->color = plane->r_rgb;
 	else
-		rec->color = set_uvmap_color(plane, rec, vars);
+		rec->color = get_check_color(plane, rec, vars);
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
 	if (!rec->front_face)
 		rec->normal = vt_mul(rec->normal, -1);
