@@ -23,21 +23,20 @@ static int		is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
 static t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
 				t_hit_record *rec);
 
-int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, \
-	t_hit_record *rec, t_vars *vars)
+int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 {
 	int				is_hit;
 	t_hit_record	temp_rec;
 
 	is_hit = 0;
 	temp_rec = *rec;
-	if (hit_cylinder_bottom(cylinder, ray, &temp_rec, vars))
+	if (hit_cylinder_bottom(cylinder, ray, &temp_rec))
 	{
 		is_hit = 1;
 		temp_rec.tmax = temp_rec.t;
 		*rec = temp_rec;
 	}
-	if (hit_cylinder_top(cylinder, ray, &temp_rec, vars))
+	if (hit_cylinder_top(cylinder, ray, &temp_rec))
 	{
 		is_hit = 1;
 		temp_rec.tmax = temp_rec.t;

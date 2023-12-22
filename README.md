@@ -29,6 +29,7 @@ After the build is complete, you can run the program with the following command.
 ## Usage
 - Press the `ESC` key to exit the program during rendering.
 - Press the `W`, `A`, `S`, `D` keys to move the camera.
+- Press the `↑`, `←`, `↓`, `→` keys to rotate the camera.
 
 ## Examples
 Test various rendering examples included in the `scenes` folder with different `.rt` files.

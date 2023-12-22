@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "utils.h"
 #include "ray.h"
-#include <math.h>
 #include "render.h"
 
+<<<<<<< HEAD
 static t_color3	get_check_color(t_plane *plane, t_hit_record *rec, t_vars *var)
+=======
+static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec)
+>>>>>>> main
 {
 	t_vec3	e1;
 	t_vec3	e2;
@@ -25,17 +29,21 @@ static t_color3	get_check_color(t_plane *plane, t_hit_record *rec, t_vars *var)
 		e1 = v_unit(v_cross(plane->normal_v, vec3(0, 0, 1)));
 	e2 = v_unit(v_cross(plane->normal_v, e1));
 	if ((int)(floor(v_dot(e1, rec->p)) + floor(v_dot(e2, rec->p))) % 2 == 0)
-		return (get_color_int_to_real(var->uvmap.rgb1));
+		return (get_color_int_to_real(plane->checker->rgb1));
 	else
-		return (get_color_int_to_real(var->uvmap.rgb2));
+		return (get_color_int_to_real(plane->checker->rgb2));
 }
 
+<<<<<<< HEAD
 // static t_color3	get_uv_color(t_sphere *sphere, t_hit_record *rec)
 // {
 
 // }
 
 int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
+=======
+int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
+>>>>>>> main
 {
 	double	denom;
 	double	t;
@@ -50,10 +58,14 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec, t_vars *vars)
 	rec->t = t;
 	rec->p = ray_at(ray, t);
 	rec->normal = plane->normal_v;
-	if (vars->uvmap.cnt == 0)
+	if (plane->checker == NULL)
 		rec->color = plane->r_rgb;
 	else
+<<<<<<< HEAD
 		rec->color = get_check_color(plane, rec, vars);
+=======
+		rec->color = set_uvmap_color(plane, rec);
+>>>>>>> main
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
 	if (!rec->front_face)
 		rec->normal = vt_mul(rec->normal, -1);

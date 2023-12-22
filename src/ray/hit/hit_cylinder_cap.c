@@ -22,7 +22,7 @@ hit_cylinder에서 body부터 확인하고 return하기 때문에 바닥이 보�
 temp_rec에 미리 저장하고 판정 다시 해야함
 */
 int	hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
-	t_hit_record *rec, t_vars *vars)
+	t_hit_record *rec)
 {
 	t_plane			cap;
 	t_point3		p;
@@ -30,7 +30,7 @@ int	hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
 
 	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->bottom;
-	if (hit_plane(&cap, ray, rec, vars))
+	if (hit_plane(&cap, ray, rec))
 	{
 		p = v_minus(rec->p, cap.point);
 		if (v_dot(p, p) <= radius2)
@@ -40,7 +40,7 @@ int	hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
 }
 
 int	hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
-	t_hit_record *rec, t_vars *vars)
+	t_hit_record *rec)
 {
 	t_plane			cap;
 	t_point3		p;
@@ -48,7 +48,7 @@ int	hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
 
 	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->top;
-	if (hit_plane(&cap, ray, rec, vars))
+	if (hit_plane(&cap, ray, rec))
 	{
 		p = v_minus(rec->p, cap.point);
 		if (v_dot(p, p) <= radius2)

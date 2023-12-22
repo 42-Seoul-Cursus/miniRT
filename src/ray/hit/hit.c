@@ -16,17 +16,17 @@
 #include <stdlib.h>
 
 /* sphere, plane, cylinder 판별식에 ray를 쏴서 맞으면 is_hit = 1 */
-int	hit_obj(t_vars *vars, t_list *object, t_ray *ray, t_hit_record *rec)
+int	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)
 {
 	int	is_hit;
 
 	is_hit = 0;
 	if (object->type == SPHERE)
-		is_hit = hit_sphere((t_sphere *)object->content, ray, rec, vars);
+		is_hit = hit_sphere((t_sphere *)object->content, ray, rec);
 	else if (object->type == PLANE)
-		is_hit = hit_plane((t_plane *)object->content, ray, rec, vars);
+		is_hit = hit_plane((t_plane *)object->content, ray, rec);
 	else if (object->type == CYLINDER)
-		is_hit = hit_cylinder((t_cylinder *)object->content, ray, rec, vars);
+		is_hit = hit_cylinder((t_cylinder *)object->content, ray, rec);
 	return (is_hit);
 }
 
@@ -46,7 +46,7 @@ int	hit(t_vars *vars, t_ray *ray, t_hit_record *rec)
 	obj = vars->objects;
 	while (obj)
 	{
-		if (hit_obj(vars, obj, ray, &temp_rec))
+		if (hit_obj(obj, ray, &temp_rec))
 		{
 			is_hit = 1;
 			temp_rec.tmax = temp_rec.t;
