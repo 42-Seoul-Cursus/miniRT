@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 11:10:29 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 01:00:10 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ static int	handle_key_press(int keycode, t_vars *vars)
 
 void	execute_mlx(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx_data.mlx,\
+	mlx_put_image_to_window(vars->mlx_data.mlx, \
 	vars->mlx_data.win, vars->mlx_data.img, 0, 0);
-	mlx_hook(vars->mlx_data.win, ON_DESTROY, 0, destroy_window, &vars->mlx_data);
+	mlx_hook(vars->mlx_data.win, ON_DESTROY, 0, destroy_window, \
+		&vars->mlx_data);
 	mlx_hook(vars->mlx_data.win, ON_KEYDOWN, 0, handle_key_press, vars);
 	mlx_loop(vars->mlx_data.mlx);
 }

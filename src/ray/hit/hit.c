@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/19 11:29:37 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/21 14:28:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <math.h>
 #include <stdlib.h>
 
+/* sphere, plane, cylinder 판별식에 ray를 쏴서 맞으면 is_hit = 1 */
 int	hit_obj(t_vars *vars, t_list *object, t_ray *ray, t_hit_record *rec)
 {
-	int		is_hit;
+	int	is_hit;
 
 	is_hit = 0;
 	if (object->type == SPHERE)
@@ -29,6 +30,11 @@ int	hit_obj(t_vars *vars, t_list *object, t_ray *ray, t_hit_record *rec)
 	return (is_hit);
 }
 
+/*
+1. camera에서 ray를 쏠 때(물체를 그리기 위함)
+2. in_shadow에서 object가 맞은 점에서 광원으로 ray를 쏠 때(그림자를 판단하기 위함)
+temp_rec: 오브젝트에 hit 했을 때 rec에 갱신하기 위함
+*/
 int	hit(t_vars *vars, t_ray *ray, t_hit_record *rec)
 {
 	int				is_hit;
@@ -54,12 +60,10 @@ int	hit(t_vars *vars, t_ray *ray, t_hit_record *rec)
 int	in_shadow(t_vars *vars, t_ray r, double light_len)
 {
 	t_hit_record	rec;
-	t_ray			correct_ray;
 
 	rec.tmin = 1e-6;
 	rec.tmax = light_len;
-	correct_ray = ray(v_plus(r.orig, vt_mul(r.dir, 10)), r.dir);
-	if (hit(vars, &correct_ray, &rec))
+	if (hit(vars, &r, &rec))
 		return (1);
 	return (0);
 }

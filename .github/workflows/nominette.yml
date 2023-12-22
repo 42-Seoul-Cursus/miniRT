@@ -28,4 +28,4 @@ jobs:
         find src -type d -name 'mlx' -prune -o -name '*.c' -exec norminette {} \; > norm_output.txt
 
     - name: Run merge check script
-      run: bash merge_check.sh
+      run: bash .github/merge_check.sh
