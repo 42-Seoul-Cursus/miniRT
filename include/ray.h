@@ -18,19 +18,18 @@
 t_ray		ray(t_point3 orig, t_vec3 dir);
 t_point3	ray_at(t_ray *ray, const double t);
 
-int			hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec);
-int			hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec);
-int			hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
-int			hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
-				t_hit_record *rec);
-int			hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
-				t_hit_record *rec);
+t_bool		hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec);
+t_bool		hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec);
+t_bool		hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
+t_bool		hit_cone(t_cone *cone, t_ray *ray, t_hit_record *rec);
+t_bool		hit_disk(t_plane *disk, double radius, \
+				t_ray *ray, t_hit_record *rec);
 
 t_color3	execute_phong(t_vars *vars);
 
-int			hit_obj(t_list *object, t_ray *ray, t_hit_record *rec);
-int			hit(t_vars *vars, t_ray *ray, t_hit_record *rec);
-int			in_shadow(t_vars *vars, t_ray r, double light_len);
+t_bool		hit_obj(t_list *object, t_ray *ray, t_hit_record *rec);
+t_bool		hit(t_vars *vars, t_ray *ray, t_hit_record *rec);
+t_bool		in_shadow(t_vars *vars, t_ray r, double light_len);
 t_color3	ray_color(t_vars *vars);
 
 #endif

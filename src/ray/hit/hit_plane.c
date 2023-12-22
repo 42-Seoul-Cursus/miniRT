@@ -30,7 +30,7 @@ static t_color3	set_uvmap_color(t_plane *plane, t_hit_record *rec)
 		return (get_color_int_to_real(plane->checker->rgb2));
 }
 
-int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
+t_bool	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
 {
 	double	denom;
 	double	t;
@@ -38,10 +38,10 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
 	ray->dir = v_unit(ray->dir);
 	denom = v_dot(plane->normal_v, ray->dir);
 	if (fabs(denom) < 1e-6)
-		return (0);
+		return (FALSE);
 	t = v_dot(v_minus(plane->point, ray->orig), plane->normal_v) / denom;
 	if (t < rec->tmin || t > rec->tmax)
-		return (0);
+		return (FALSE);
 	rec->t = t;
 	rec->p = ray_at(ray, t);
 	rec->normal = plane->normal_v;
@@ -52,5 +52,5 @@ int	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
 	if (!rec->front_face)
 		rec->normal = vt_mul(rec->normal, -1);
-	return (1);
+	return (TRUE);
 }

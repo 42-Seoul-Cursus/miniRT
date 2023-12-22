@@ -15,12 +15,6 @@
 
 # include "structures.h"
 
-enum	e_bool
-{
-	FALSE = 0,
-	TRUE = 1
-};
-
 // parse.c
 void			parse_rt(t_vars *vars, char *path);
 
@@ -32,22 +26,24 @@ t_vec3			parse_vec(char **line);
 
 // check_utils.c
 int				check_range(double dst, double from, double to);
-int				check_vec(t_vec3 vec, double from, double to, enum e_bool is_int);
+int				check_vec(t_vec3 vec, double from, double to, t_bool is_int);
 
 // check_map.c
-void			check_map(t_vars *vars, void *content, char *line, t_type type);
+void			check_map(t_vars *vars, void *content, \
+					char *line, t_type type);
 
 // check_env.c
 void			check_ambient(t_ambient *ambient);
 void			check_camera(t_camera *camera);
 void			check_light(t_light *light);
+void			check_uv_map(t_uv_map *uvmap);
+void			check_checker_board(t_checker_map *checker);
 
 // check_objs.c
 void			check_sphere(t_sphere *sphere);
 void			check_plane(t_plane *plane);
 void			check_cylinder(t_cylinder *cylinder);
-void			check_uv_map(t_uv_map *uvmap);
-void			check_checker_board(t_checker_map *checker);
+void			check_cone(t_cone *cone);
 
 // gen_env.c
 void			gen_ambient(t_ambient *ambient, char *line);
@@ -58,6 +54,9 @@ void			gen_light(t_list **light, char *line);
 void			gen_sphere(t_vars *vars, char *line);
 void			gen_plane(t_vars *vars, char *line);
 void			gen_cylinder(t_vars *vars, char *line);
-void			gen_cylinder_cap(t_cylinder *cylinder);
+
+// gen_objs_utils.c
+void			gen_cylinder_cap(t_cylinder *cylinder, t_bool is_first);
+void			gen_cone_cap(t_cone *cone, t_bool is_first);
 
 #endif

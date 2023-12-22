@@ -26,7 +26,7 @@ static t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec)
 	return (normal_v);
 }
 
-static int	update_nearest_hit_point(double a, \
+static t_bool	update_nearest_hit_point(double a, \
 	double b, double c, t_hit_record *rec)
 {
 	double	root;
@@ -40,10 +40,10 @@ static int	update_nearest_hit_point(double a, \
 	{
 		root = (-b + sqrtd) / a;
 		if (root < rec->tmin || rec->tmax < root)
-			return (0);
+			return (FALSE);
 	}
 	rec->t = root;
-	return (1);
+	return (TRUE);
 }
 
 static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec)
@@ -66,7 +66,7 @@ static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec)
 		return (get_color_int_to_real(sphere->checker->rgb2));
 }
 
-int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
+t_bool	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	double	a;
 	double	b;
@@ -77,7 +77,7 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 	c = v_length2(\
 	v_minus(ray->orig, sphere->center)) - sphere->radius * sphere->radius;
 	if (b * b - a * c < 0 || update_nearest_hit_point(a, b, c, rec) == 0)
-		return (0);
+		return (FALSE);
 	rec->p = ray_at(ray, rec->t);
 	rec->normal = get_sphere_normal_v(sphere, rec);
 	if (sphere->checker == NULL)
@@ -87,5 +87,5 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
 	if (!rec->front_face)
 		rec->normal = vt_mul(rec->normal, -1);
-	return (1);
+	return (TRUE);
 }

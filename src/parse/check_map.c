@@ -47,6 +47,7 @@ static t_checker_map	*gen_checker_board(char *line)
 	out->height = parse_int(&line);
 	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
+	check_checker_board(out);
 	return (out);
 }
 
@@ -63,6 +64,7 @@ static t_uv_map	*gen_bump_map(char *line, t_vars *vars)
 	out->normal->mlx = vars->mlx_data.mlx;
 	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
+	check_uv_map(out);
 	return (out);
 }
 
@@ -83,5 +85,10 @@ static void	assign_value_by_type(void *content, t_type type, \
 	{
 		((t_cylinder *)content)->uvmap = uvmap;
 		((t_cylinder *)content)->checker = checker;
+	}
+	else if (type == CONE)
+	{
+		((t_cone *)content)->uvmap = uvmap;
+		((t_cone *)content)->checker = checker;
 	}
 }

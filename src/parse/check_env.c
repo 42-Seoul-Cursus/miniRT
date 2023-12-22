@@ -40,3 +40,18 @@ void	check_light(t_light *light)
 	if (!check_vec(light->i_rgb, 0, 255, TRUE))
 		ft_error("File Format Error");
 }
+
+void	check_uv_map(t_uv_map *uvmap)
+{
+	(void) uvmap;
+}
+
+void	check_checker_board(t_checker_map *checker)
+{
+	if (!check_vec(checker->rgb1, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (!check_vec(checker->rgb2, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (checker->width <= 0 || checker->height <= 0)
+		ft_error("File Format Error");
+}

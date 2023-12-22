@@ -20,7 +20,7 @@ int	check_range(double dst, double from, double to)
 	return (FALSE);
 }
 
-int	check_vec(t_vec3 vec, double from, double to, enum e_bool is_int)
+int	check_vec(t_vec3 vec, double from, double to, t_bool is_int)
 {
 	int	integer;
 
