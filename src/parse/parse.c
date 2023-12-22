@@ -51,11 +51,11 @@ static void	check_identifier(t_vars *vars, char *line)
 	else if (ft_strncmp(line, "L ", 2) == 0)
 		gen_light(&(vars->light), line + 1);
 	else if (ft_strncmp(line, "sp ", 3) == 0)
-		gen_sphere(&(vars->objects), line + 2);
+		gen_sphere(vars, line + 2);
 	else if (ft_strncmp(line, "pl ", 3) == 0)
-		gen_plane(&(vars->objects), line + 2);
+		gen_plane(vars, line + 2);
 	else if (ft_strncmp(line, "cy ", 3) == 0)
-		gen_cylinder(&(vars->objects), line + 2);
+		gen_cylinder(vars, line + 2);
 	else
 		ft_error("File Format Error");
 }

@@ -35,9 +35,7 @@ int				check_range(double dst, double from, double to);
 int				check_vec(t_vec3 vec, double from, double to, enum e_bool is_int);
 
 // check_map.c
-t_checker_map	*gen_checker_board(char *line);
-t_uv_map		*gen_bump_map(char *line);
-void			check_map(void *content, char *line, t_type type);
+void			check_map(t_vars *vars, void *content, char *line, t_type type);
 
 // check_env.c
 void			check_ambient(t_ambient *ambient);
@@ -57,9 +55,9 @@ void			gen_camera(t_camera *camera, char *line);
 void			gen_light(t_list **light, char *line);
 
 // gen_objs.c
-void			gen_sphere(t_list **objects, char *line);
-void			gen_plane(t_list **objects, char *line);
-void			gen_cylinder(t_list **objects, char *line);
+void			gen_sphere(t_vars *vars, char *line);
+void			gen_plane(t_vars *vars, char *line);
+void			gen_cylinder(t_vars *vars, char *line);
 void			gen_cylinder_cap(t_cylinder *cylinder);
 
 #endif

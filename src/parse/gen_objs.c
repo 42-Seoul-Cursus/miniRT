@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "utils.h"
 
-void	gen_sphere(t_list **objects, char *line)
+void	gen_sphere(t_vars *vars, char *line)
 {
 	t_sphere	*sphere;
 
@@ -25,13 +25,13 @@ void	gen_sphere(t_list **objects, char *line)
 	sphere->center = parse_vec(&line);
 	sphere->radius = parse_double(&line) / 2;
 	sphere->i_rgb = parse_vec(&line);
-	check_map(sphere, line, SPHERE);
+	check_map(vars, sphere, line, SPHERE);
 	check_sphere(sphere);
 	sphere->r_rgb = get_color_int_to_real(sphere->i_rgb);
-	ft_lstadd_back(objects, ft_lstnew(sphere, SPHERE));
+	ft_lstadd_back(&(vars->objects), ft_lstnew(sphere, SPHERE));
 }
 
-void	gen_plane(t_list **objects, char *line)
+void	gen_plane(t_vars *vars, char *line)
 {
 	t_plane	*plane;
 
@@ -41,14 +41,13 @@ void	gen_plane(t_list **objects, char *line)
 	plane->point = parse_vec(&line);
 	plane->normal_v = parse_vec(&line);
 	plane->i_rgb = parse_vec(&line);
-	if (*line != '\n' && *line != '\0')
-		ft_error("File Format Error");
+	check_map(vars, plane, line, PLANE);
 	check_plane(plane);
 	plane->r_rgb = get_color_int_to_real(plane->i_rgb);
-	ft_lstadd_back(objects, ft_lstnew(plane, PLANE));
+	ft_lstadd_back(&(vars->objects), ft_lstnew(plane, PLANE));
 }
 
-void	gen_cylinder(t_list **objects, char *line)
+void	gen_cylinder(t_vars *vars, char *line)
 {
 	t_cylinder		*cylinder;
 
@@ -59,13 +58,12 @@ void	gen_cylinder(t_list **objects, char *line)
 	cylinder->radius = parse_double(&line) / 2;
 	cylinder->height = parse_double(&line);
 	cylinder->i_rgb = parse_vec(&line);
-	if (*line != '\n' && *line != '\0')
-		ft_error("File Format Error");
+	check_map(vars, cylinder, line, CYLINDER);
 	check_cylinder(cylinder);
 	cylinder->normal_v = v_unit(cylinder->normal_v);
 	cylinder->r_rgb = get_color_int_to_real(cylinder->i_rgb);
 	gen_cylinder_cap(cylinder);
-	ft_lstadd_back(objects, ft_lstnew(cylinder, CYLINDER));
+	ft_lstadd_back(&(vars->objects), ft_lstnew(cylinder, CYLINDER));
 }
 
 void	gen_cylinder_cap(t_cylinder *cylinder)
