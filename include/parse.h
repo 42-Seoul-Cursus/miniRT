@@ -22,36 +22,44 @@ enum	e_bool
 };
 
 // parse.c
-void	parse_rt(t_vars *vars, char *path);
+void			parse_rt(t_vars *vars, char *path);
 
 // parse_utils.c
-int		parse_int(char **line);
-double	parse_double(char **line);
-t_vec3	parse_vec(char **line);
-int		check_range(double dst, double from, double to);
-int		check_vec(t_vec3 vec, double from, double to, enum e_bool is_int);
+int				parse_int(char **line);
+char			*parse_path(char **line);
+double			parse_double(char **line);
+t_vec3			parse_vec(char **line);
 
-// gen_env.c
-void	gen_ambient(t_ambient *ambient, char *line);
-void	gen_camera(t_camera *camera, char *line);
-void	gen_light(t_list **light, char *line);
-void	gen_uvmap(t_uvmap *uvmap, char *line);
+// check_utils.c
+int				check_range(double dst, double from, double to);
+int				check_vec(t_vec3 vec, double from, double to, enum e_bool is_int);
 
-// gen_objs.c
-void	gen_sphere(t_list **objects, char *line);
-void	gen_plane(t_list **objects, char *line);
-void	gen_cylinder(t_list **objects, char *line);
-void	gen_cylinder_cap(t_cylinder *cylinder);
+// check_map.c
+t_checker_map	*gen_checker_board(char *line);
+t_uv_map		*gen_bump_map(char *line);
+void			check_map(void *content, char *line, t_type type);
 
 // check_env.c
-void	check_ambient(t_ambient *ambient);
-void	check_camera(t_camera *camera);
-void	check_light(t_light *light);
-void	check_uvmap(t_uvmap *uvmap);
+void			check_ambient(t_ambient *ambient);
+void			check_camera(t_camera *camera);
+void			check_light(t_light *light);
 
 // check_objs.c
-void	check_sphere(t_sphere *sphere);
-void	check_plane(t_plane *plane);
-void	check_cylinder(t_cylinder *cylinder);
+void			check_sphere(t_sphere *sphere);
+void			check_plane(t_plane *plane);
+void			check_cylinder(t_cylinder *cylinder);
+void			check_uv_map(t_uv_map *uvmap);
+void			check_checker_board(t_checker_map *checker);
+
+// gen_env.c
+void			gen_ambient(t_ambient *ambient, char *line);
+void			gen_camera(t_camera *camera, char *line);
+void			gen_light(t_list **light, char *line);
+
+// gen_objs.c
+void			gen_sphere(t_list **objects, char *line);
+void			gen_plane(t_list **objects, char *line);
+void			gen_cylinder(t_list **objects, char *line);
+void			gen_cylinder_cap(t_cylinder *cylinder);
 
 #endif

@@ -19,25 +19,27 @@
 # define SHIN_VALUE	64
 # define SPEC_VALUE	0.5
 
-typedef struct s_vec3			t_vec3;
-typedef struct s_vec3			t_point3;
-typedef struct s_vec3			t_color3;
-typedef struct s_ambient		t_ambient;
-typedef struct s_camera			t_camera;
-typedef struct s_sphere			t_sphere;
-typedef struct s_plane			t_plane;
-typedef struct s_uvmap			t_uvmap;
-typedef struct s_cylinder_cap	t_cylinder_cap;
-typedef struct s_cylinder		t_cylinder;
-typedef struct s_mlx_data		t_mlx_data;
-typedef struct s_mlx_args		t_mlx_args;
-typedef struct s_vars			t_vars;
-typedef struct s_vec4			t_vec4;
-typedef struct s_4x4matrix		t_4x4matrix;
-typedef struct s_ray			t_ray;
-typedef struct s_hit_record		t_hit_record;
-typedef struct s_light			t_light;
-typedef struct s_list			t_list;
+typedef struct s_vec3				t_vec3;
+typedef struct s_vec3				t_point3;
+typedef struct s_vec3				t_color3;
+typedef struct s_ambient			t_ambient;
+typedef struct s_camera				t_camera;
+typedef struct s_sphere				t_sphere;
+typedef struct s_plane				t_plane;
+typedef struct s_uv_map				t_uv_map;
+typedef struct s_uv_data			t_uv_data;
+typedef struct s_checker_map		t_checker_map;
+typedef struct s_cylinder_cap		t_cylinder_cap;
+typedef struct s_cylinder			t_cylinder;
+typedef struct s_mlx_data			t_mlx_data;
+typedef struct s_vars				t_vars;
+typedef struct s_vec4				t_vec4;
+typedef struct s_4x4matrix			t_4x4matrix;
+typedef struct s_ray				t_ray;
+typedef struct s_hit_record			t_hit_record;
+typedef struct s_light				t_light;
+typedef enum e_type					t_type;
+typedef struct s_list				t_list;
 
 struct s_vec3
 {
@@ -89,43 +91,65 @@ struct s_light
 	t_color3	r_rgb;
 };
 
-struct s_uvmap
+struct s_uv_map
+{
+	t_uv_data		*texture;
+	t_uv_data		*normal;
+};
+
+struct s_uv_data
+{
+	char	*path;
+	void	*mlx;
+	void	*addr;
+	void	*img;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+};
+
+struct s_checker_map
 {
 	t_color3	rgb1;
 	t_color3	rgb2;
 	int			width;
 	int			height;
-	int			cnt;
 };
 
 struct s_sphere
 {
-	t_point3	center;
-	double		diameter;
-	double		radius;
-	t_color3	i_rgb;
-	t_color3	r_rgb;
+	t_point3		center;
+	double			radius;
+	t_color3		i_rgb;
+	t_color3		r_rgb;
+	t_uv_map		*uvmap;
+	t_checker_map	*checker;
 };
 
 struct s_plane
 {
-	t_point3	point;
-	t_vec3		normal_v;
-	t_color3	i_rgb;
-	t_color3	r_rgb;
+	t_point3		point;
+	t_vec3			normal_v;
+	t_color3		i_rgb;
+	t_color3		r_rgb;
+	t_uv_map		*uvmap;
+	t_checker_map	*checker;
 };
 
 struct s_cylinder
 {
-	t_point3	center;
-	t_vec3		normal_v;
-	double		diameter;
-	double		radius;
-	double		height;
-	t_color3	i_rgb;
-	t_color3	r_rgb;
-	t_plane		top;
-	t_plane		bottom;
+	t_point3		center;
+	t_vec3			normal_v;
+	double			radius;
+	double			height;
+	t_color3		i_rgb;
+	t_color3		r_rgb;
+	t_plane			top;
+	t_plane			bottom;
+	t_uv_map		*uvmap;
+	t_checker_map	*checker;
 };
 
 struct s_mlx_data
@@ -170,7 +194,6 @@ struct s_vars
 	t_ambient		ambient;
 	t_camera		camera;
 	t_list			*light;
-	t_uvmap			uvmap;
 	t_list			*objects;
 	t_ray			ray;
 	t_hit_record	rec;

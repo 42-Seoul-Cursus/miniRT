@@ -13,8 +13,17 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+# ifndef INT_MAX
+#  define INT_MAX 2147483647
+# endif
+
+# ifndef INT_MIN
+#  define INT_MIN -INT_MAX-1
+# endif
+
+# ifndef NULL
+#  define NULL (void *)0
+# endif
 
 # include <sys/types.h>
 # include "structures.h"

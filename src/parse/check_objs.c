@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parse.h"
 #include "utils.h"
 
@@ -29,4 +30,19 @@ void	check_cylinder(t_cylinder *cylinder)
 {
 	check_vec(cylinder->normal_v, -1, 1, FALSE);
 	check_vec(cylinder->i_rgb, 0, 255, TRUE);
+}
+
+void	check_uv_map(t_uv_map *uvmap)
+{
+	(void) uvmap;
+}
+
+void	check_checker_board(t_checker_map *checker)
+{
+	if (!check_vec(checker->rgb1, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (!check_vec(checker->rgb2, 0, 255, TRUE))
+		ft_error("File Format Error");
+	if (checker->width <= 0 || checker->height <= 0)
+		ft_error("File Format Error");
 }

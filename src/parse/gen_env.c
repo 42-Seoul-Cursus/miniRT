@@ -61,15 +61,3 @@ void	gen_light(t_list **light, char *line)
 		vt_mul(get_color_int_to_real(new->i_rgb), new->brightness_ratio);
 	ft_lstadd_back(light, ft_lstnew(new, LIGHT));
 }
-
-void	gen_uvmap(t_uvmap *uvmap, char *line)
-{
-	uvmap->rgb1 = parse_vec(&line);
-	uvmap->rgb2 = parse_vec(&line);
-	uvmap->width = parse_int(&line);
-	uvmap->height = parse_int(&line);
-	if (*line != '\n' && *line != '\0')
-		ft_error("File Format Error");
-	++(uvmap->cnt);
-	check_uvmap(uvmap);
-}

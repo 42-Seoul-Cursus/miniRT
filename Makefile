@@ -18,12 +18,14 @@ SRC_DIR = src
 SRCS = main.c \
  	   parse/get_next_line/get_next_line.c \
 	   parse/get_next_line/get_next_line_utils.c \
-	   parse/parse.c \
-	   parse/parse_utils.c \
+	   parse/check_env.c \
+	   parse/check_map.c \
+	   parse/check_objs.c \
+	   parse/check_utils.c \
 	   parse/gen_env.c \
 	   parse/gen_objs.c \
-	   parse/check_env.c \
-	   parse/check_objs.c \
+	   parse/parse_utils.c \
+	   parse/parse.c \
 	   render/color.c \
 	   render/mlx.c \
 	   render/render.c \
