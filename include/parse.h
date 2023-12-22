@@ -54,6 +54,7 @@ void			gen_light(t_list **light, char *line);
 void			gen_sphere(t_vars *vars, char *line);
 void			gen_plane(t_vars *vars, char *line);
 void			gen_cylinder(t_vars *vars, char *line);
+void			gen_cone(t_vars *vars, char *line);
 
 // gen_objs_utils.c
 void			gen_cylinder_cap(t_cylinder *cylinder, t_bool is_first);

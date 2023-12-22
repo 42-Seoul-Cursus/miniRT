@@ -41,6 +41,5 @@ static t_bool	hit_cone_body(t_cone *cone, t_ray *r, t_hit_record *rec)
 	(void) cone;
 	(void) r;
 	(void) rec;
-	
 	return (FALSE);
 }
