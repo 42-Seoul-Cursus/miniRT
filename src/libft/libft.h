@@ -21,10 +21,6 @@
 #  define INT_MIN -INT_MAX-1
 # endif
 
-# ifndef NULL
-#  define NULL (void *)0
-# endif
-
 # include <sys/types.h>
 # include "structures.h"
 

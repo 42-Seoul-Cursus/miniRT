@@ -66,7 +66,8 @@ static t_uv_map	*gen_bump_map(char *line, t_vars *vars)
 	return (out);
 }
 
-static void	assign_value_by_type(void *content, t_type type, t_uv_map *uvmap, t_checker_map *checker)
+static void	assign_value_by_type(void *content, t_type type, \
+				t_uv_map *uvmap, t_checker_map *checker)
 {
 	if (type == SPHERE)
 	{

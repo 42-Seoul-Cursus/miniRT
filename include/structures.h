@@ -13,6 +13,10 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# ifndef NULL
+#  define NULL (void *)0
+# endif
+
 # define WIDTH	1440
 # define HEIGHT	920
 # define IMG_RATIO	1.7778

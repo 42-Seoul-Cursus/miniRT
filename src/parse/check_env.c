@@ -40,4 +40,3 @@ void	check_light(t_light *light)
 	if (!check_vec(light->i_rgb, 0, 255, TRUE))
 		ft_error("File Format Error");
 }
-
