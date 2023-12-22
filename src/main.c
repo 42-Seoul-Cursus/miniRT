@@ -16,7 +16,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_vars		vars;
+	t_vars	vars;
 
 	is_valid_arg(argc, argv);
 	init_vars(&vars);
