@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 14:20:27 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:24:17 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static t_color3	get_checkmap_color(t_sphere *sphere, t_hit_record *rec)
 
 static t_color3	get_uv_color(t_sphere *sphere, t_hit_record *rec, t_uv_data *uv)
 {
-	double		u;
-	double		v;
-	unsigned	color;
-	t_color3	v_color;
+	double			u;
+	double			v;
+	unsigned int	color;
+	t_color3		v_color;
 
 	u = 1 - (atan2(rec->normal.x, rec->normal.z) / (2 * M_PI) + 0.5);
 	v = 1 - acos(rec->normal.y / sphere->radius) / M_PI;
@@ -82,7 +82,6 @@ static t_vec3	get_bump_vector(t_color3 bump_color)
 	return (bump_vec);
 }
 
-
 int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	double	a;
@@ -96,7 +95,7 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 	if (b * b - a * c < 0 || update_nearest_hit_point(a, b, c, rec) == 0)
 		return (0);
 	rec->p = ray_at(ray, rec->t);
-	rec->normal =  v_unit(v_minus(rec->p, sphere->center));
+	rec->normal = v_unit(v_minus(rec->p, sphere->center));
 	if (v_dot(ray->dir, rec->normal) > 0)
 		rec->normal = vt_mul(rec->normal, -1);
 	if (!sphere->checker && !sphere->uvmap)

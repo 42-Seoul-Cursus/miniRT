@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 14:33:16 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:23:53 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static t_color3	get_checkmap_color(t_plane *plane, t_hit_record *rec)
 
 static t_color3	get_uv_color(t_plane *plane, t_hit_record *rec, t_uv_data *uv)
 {
-	t_point3	uv_p;
-	t_color3	v_color;
-	unsigned	color;
+	t_point3		uv_p;
+	t_color3		v_color;
+	unsigned int	color;
 
 	uv_p = mv_mul(plane->normal_v_basis, vec4(rec->p, 1));
 	uv_p.x = fmod(uv_p.x, 8) / 8;
@@ -43,7 +43,7 @@ static t_color3	get_uv_color(t_plane *plane, t_hit_record *rec, t_uv_data *uv)
 		uv_p.x += 1;
 	if (uv_p.y < 0)
 		uv_p.y += 1;
-	color = extract_uv_color(uv,\
+	color = extract_uv_color(uv, \
 	floor(uv_p.x * uv->width), floor(uv_p.y * uv->height));
 	v_color = color3((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF);
 	return (get_color_int_to_real(v_color));

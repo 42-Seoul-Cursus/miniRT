@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder_cap.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 01:02:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:14:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 15:30:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	hit_cylinder_bottom(t_cylinder *cylinder, t_ray *ray, \
 
 	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->bottom;
+	cap.uvmap = cylinder->uvmap;
 	if (hit_plane(&cap, ray, rec))
 	{
 		p = v_minus(rec->p, cap.point);
@@ -48,6 +49,7 @@ int	hit_cylinder_top(t_cylinder *cylinder, t_ray *ray, \
 
 	radius2 = cylinder->radius * cylinder->radius;
 	cap = cylinder->top;
+	cap.uvmap = cylinder->uvmap;
 	if (hit_plane(&cap, ray, rec))
 	{
 		p = v_minus(rec->p, cap.point);

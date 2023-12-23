@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 00:34:08 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:17:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "render.h"
 #include "libft.h"
 #include "utils.h"
+#include <stdlib.h>
 
 void	gen_sphere(t_vars *vars, char *line)
 {

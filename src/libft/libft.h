@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:25:23 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/18 00:24:02 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:19:24 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef INT_MIN
-#  define INT_MIN -INT_MAX-1
+#  define INT_MIN -2147483648
 # endif
 
 # include <sys/types.h>

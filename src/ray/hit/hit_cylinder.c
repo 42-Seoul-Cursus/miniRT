@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 15:06:13 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:22:46 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,67 @@
 #include "utils.h"
 #include "ray.h"
 
-static int		hit_cylinder_body(\
-				t_cylinder *cylinder, t_ray *ray, t_hit_record *rec);
-static int		has_real_roots(t_cylinder *cy, t_ray *r, \
-				double *t_sm, double *t_lg);
-static int		is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
-				t_point3 p, double t);
+static int	is_point_on_cylinder(t_cylinder *cy, t_point3 p)
+{
+	if ((v_dot(cy->normal_v, v_minus(p, cy->bottom.point)) > 0 && \
+		v_dot(cy->normal_v, v_minus(p, cy->top.point)) < 0))
+		return (1);
+	return (0);
+}
+
+static int	has_real_roots(t_cylinder *cy, t_ray *r, t_hit_record *rec)
+{
+	double	a;
+	double	b;
+	double	c;
+	double	root;
+
+	a = v_length2(\
+		v_minus(r->dir, vt_mul(cy->normal_v, v_dot(r->dir, cy->normal_v))));
+	b = v_dot(v_minus(r->dir, vt_mul(cy->normal_v, v_dot(\
+		r->dir, cy->normal_v))), v_minus(v_minus(r->orig, cy->center), vt_mul(\
+		cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v))));
+	c = v_length2(v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, \
+		v_dot(v_minus(r->orig, cy->center), cy->normal_v)))) \
+		- pow(cy->radius, 2);
+	if (b * b - a * c < 0 || a == 0)
+		return (0);
+	root = (-b - sqrt(b * b - a * c)) / a;
+	if (root < rec->tmin || rec->tmax < root)
+	{
+		root = (-b + sqrt(b * b - a * c)) / a;
+		if (root < rec->tmin || rec->tmax < root)
+			return (0);
+	}
+	rec->t = root;
+	rec->p = ray_at(r, rec->t);
+	return (1);
+}
+
 static t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
-				t_hit_record *rec);
+	t_hit_record *rec)
+{
+	t_vec3	normal_v;
+	t_vec3	cp;
+
+	cp = v_minus(rec->p, cy->center);
+	normal_v = v_minus(cp, vt_mul(cy->normal_v, v_dot(cy->normal_v, cp)));
+	normal_v = v_unit(normal_v);
+	if (v_dot(r->dir, normal_v) > 0)
+		vt_mul(normal_v, -1);
+	return (normal_v);
+}
+
+static int	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
+{
+	if (!has_real_roots(cy, r, rec))
+		return (0);
+	rec->color = cy->r_rgb;
+	rec->normal = get_cylinder_normal_v(cy, r, rec);
+	if (!is_point_on_cylinder(cy, rec->p))
+		return (0);
+	return (1);
+}
 
 int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 {
@@ -49,80 +102,4 @@ int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 		*rec = temp_rec;
 	}
 	return (is_hit);
-}
-
-static int	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
-{
-	double		t_sm;
-	double		t_lg;
-
-	if (!has_real_roots(cy, r, &t_sm, &t_lg))
-		return (0);
-	rec->p = ray_at(r, t_sm);
-	rec->color = cy->r_rgb;
-	if (!is_point_on_cylinder(cy, rec, rec->p, t_sm))
-	{
-		rec->p = ray_at(r, t_lg);
-		if (!is_point_on_cylinder(cy, rec, rec->p, t_lg))
-			return (0);
-		rec->normal = get_cylinder_normal_v(cy, r, rec);
-		rec->t = t_lg;
-		return (1);
-	}
-	rec->t = t_sm;
-	rec->normal = get_cylinder_normal_v(cy, r, rec);
-	return (1);
-}
-
-static int	has_real_roots(t_cylinder *cy, t_ray *r, \
-	double *t_sm, double *t_lg)
-{
-	double	a;
-	double	b;
-	double	c;
-	double	oc;
-
-
-	a = v_length2(\
-		v_minus(r->dir, vt_mul(cy->normal_v, v_dot(r->dir, cy->normal_v))));
-	b = v_dot(v_minus(r->dir, vt_mul(cy->normal_v, v_dot(\
-		r->dir, cy->normal_v))), v_minus(v_minus(r->orig, cy->center), vt_mul(\
-		cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v))));
-	c = v_length2(v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, \
-		v_dot(v_minus(r->orig, cy->center), cy->normal_v)))) \
-		- pow(cy->radius, 2);
-	oc = b * b - a * c;
-	if (oc < 0 || a == 0)
-		return (0);
-	*t_sm = (-b - sqrt(oc)) / a;
-	*t_lg = (-b + sqrt(oc)) / a;
-	if (*t_sm > *t_lg)
-	{
-		c = *t_lg;
-		*t_lg = *t_sm;
-		*t_sm = c;
-	}
-	return (1);
-}
-
-static int	is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
-	t_point3 p, double t)
-{
-	if ((v_dot(cy->normal_v, v_minus(p, cy->bottom.point)) > 0 && \
-		v_dot(cy->normal_v, v_minus(p, cy->top.point)) < 0) && \
-		(rec->tmin < t && t < rec->tmax))
-		return (1);
-	return (0);
-}
-
-static	t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
-		t_hit_record *rec)
-{
-	t_vec3	normal_v;
-
-	normal_v = v_unit(v_minus(v_minus(rec->p, cy->center), vt_mul(\
-		cy->normal_v, v_dot(cy->normal_v, v_minus(rec->p, cy->center)))));
-	if (v_dot(r->dir, rec->normal) > 0)
-		vt_mul(rec->normal, -1);
-	return (normal_v);
 }

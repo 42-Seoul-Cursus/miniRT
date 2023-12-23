@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:09:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:14:26 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_vec3			parse_vec(char **line);
 
 // check_utils.c
 int				check_range(double dst, double from, double to);
-int				check_vec(t_vec3 vec, double from, double to, enum e_bool is_int);
+int				check_vec(\
+	t_vec3 vec, double from, double to, enum e_bool is_int);
 
 // check_map.c
 void			check_map(t_vars *vars, void *content, char *line, t_type type);
@@ -46,7 +47,6 @@ void			check_light(t_light *light);
 void			check_sphere(t_sphere *sphere);
 void			check_plane(t_plane *plane);
 void			check_cylinder(t_cylinder *cylinder);
-void			check_uv_map(t_uv_map *uvmap);
 void			check_checker_board(t_checker_map *checker);
 
 // gen_env.c

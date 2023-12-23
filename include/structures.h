@@ -6,16 +6,12 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 14:29:44 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:17:14 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
-# ifndef NULL
-#  define NULL (void *)0
-# endif
 
 # define WIDTH	1440
 # define HEIGHT	920
