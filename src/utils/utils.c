@@ -6,14 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:34 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/19 22:33:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:14:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-/* 인자가 하나고 확장자명이 '.rt'인 파일인지 확인*/
 void	is_valid_arg(int ac, char *av[])
 {
 	int	i;
@@ -34,11 +33,19 @@ void	is_valid_arg(int ac, char *av[])
 		ft_error("The file must end with a \'.rt\'");
 }
 
-// 파싱할 때 하나만 들어와야하는 것들 cnt 초기화
 void	init_vars(t_vars *vars)
 {
 	vars->ambient.cnt = 0;
 	vars->camera.cnt = 0;
 	vars->light = NULL;
 	vars->objects = NULL;
+}
+
+void	swap_double(double *a, double *b)
+{
+	double	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

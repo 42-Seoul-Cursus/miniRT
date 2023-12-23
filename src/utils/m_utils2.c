@@ -6,12 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:09:26 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 19:58:29 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:14:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "structures.h"
 #include "utils.h"
 
 t_vec3	rotate_left_matrix(t_vec3 v)

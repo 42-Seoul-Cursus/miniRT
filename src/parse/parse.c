@@ -56,6 +56,8 @@ static void	check_identifier(t_vars *vars, char *line)
 		gen_plane(vars, line + 2);
 	else if (ft_strncmp(line, "cy ", 3) == 0)
 		gen_cylinder(vars, line + 2);
+	else if (ft_strncmp(line, "cn ", 3) == 0)
+		gen_cone(vars, line + 2);
 	else
 		ft_error("File Format Error");
 }

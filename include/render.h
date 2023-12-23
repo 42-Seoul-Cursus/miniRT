@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 16:14:04 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 20:01:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			rotate_obj(\
 void			rotate_right(\
 	t_list *cur, t_4x4matrix rotate, t_point3 view_point);
 
-// print.c
+// render.c
 void			render(t_vars *vars);
 
 #endif

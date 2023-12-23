@@ -12,7 +12,7 @@ miniRT is a simple 3D graphic renderer using ray tracing. This project is create
 ### Installation and Build
 1. Clone the repository.
 ```bash
-git clone https://github.com/your-username/miniRT.git
+git clone https://github.com/seungwonme/miniRT.git
 cd miniRT
 ```
 2. Run the build script.

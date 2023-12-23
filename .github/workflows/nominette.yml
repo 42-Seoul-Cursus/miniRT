@@ -25,7 +25,7 @@ jobs:
 
     - name: Run 42 Norminette in src folder (excluding mlx directory)
       run: |
-        find src -type d -name 'mlx' -prune -o -name '*.c' -exec norminette {} \; > norm_output.txt
+        find . -type d -name 'mlx' -prune -o -name '*.c' -exec norminette {} \; > norm_output.txt
 
     - name: Run merge check script
       run: bash .github/merge_check.sh

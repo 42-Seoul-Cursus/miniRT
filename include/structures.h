@@ -31,6 +31,7 @@ typedef struct s_uv_data			t_uv_data;
 typedef struct s_checker_map		t_checker_map;
 typedef struct s_cylinder_cap		t_cylinder_cap;
 typedef struct s_cylinder			t_cylinder;
+typedef struct s_cone				t_cone;
 typedef struct s_mlx_data			t_mlx_data;
 typedef struct s_vars				t_vars;
 typedef struct s_vec4				t_vec4;
@@ -38,6 +39,7 @@ typedef struct s_4x4matrix			t_4x4matrix;
 typedef struct s_ray				t_ray;
 typedef struct s_hit_record			t_hit_record;
 typedef struct s_light				t_light;
+typedef enum e_bool					t_bool;
 typedef enum e_type					t_type;
 typedef struct s_list				t_list;
 
@@ -161,6 +163,21 @@ struct s_cylinder
 	t_checker_map	*checker;
 };
 
+struct s_cone
+{
+	t_point3		center;
+	t_vec3			normal_v;
+	double			radius;
+	double			height;
+	t_color3		i_rgb;
+	t_color3		r_rgb;
+	t_point3		apex;
+	double			half_angle;
+	t_plane			bottom;
+	t_uv_map		*uvmap;
+	t_checker_map	*checker;
+};
+
 struct s_mlx_data
 {
 	void	*mlx;
@@ -214,13 +231,19 @@ struct s_vars
 	int				n_height;
 };
 
+enum	e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+};
+
 enum	e_type
 {
 	LIGHT,
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	LIGHT_POINT
+	CONE
 };
 
 struct s_list

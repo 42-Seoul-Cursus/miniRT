@@ -6,36 +6,22 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 21:07:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 22:21:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "render.h"
 #include "hook.h"
 #include "utils.h"
 #include "mlx.h"
-#include "parse.h"
 
-static void	normalize_vector_space(t_vars *vars)
-{
-	t_4x4matrix	rotate_matrix;
-	t_4x4matrix	inverse_matrix;
-
-	rotate_matrix = get_rotate_matrix(&vars->camera);
-	vars->camera.direct_v = vec3(0, 0, -1);
-	inverse_matrix = get_inverse_matrix(rotate_matrix);
-	rotate_object_and_light(vars, inverse_matrix);
-	vars->camera.view_point = vec3(0, 0, 0);
-	update_viewport(vars);
-}
+static void	normalize_vector_space(t_vars *vars);
 
 void	rotate_hook(t_vars *vars, int keycode)
 {
 	t_mlx_data	*mlx_data;
 
 	mlx_data = &vars->mlx_data;
-	reset_mlx(mlx_data);
 	if (keycode == ROTATE_LEFT)
 		vars->camera.direct_v = \
 		v_unit(rotate_left_matrix(vars->camera.direct_v));
@@ -48,6 +34,7 @@ void	rotate_hook(t_vars *vars, int keycode)
 	else if (keycode == ROTATE_DOWN)
 		vars->camera.direct_v = \
 		v_unit(rotate_down_matrix(vars->camera.direct_v));
+	reset_mlx(mlx_data);
 	normalize_vector_space(vars);
 	render(vars);
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
@@ -74,4 +61,17 @@ void	move_hook(t_vars *vars, int keycode)
 	render(vars);
 	mlx_put_image_to_window(vars->mlx_data.mlx, vars->mlx_data.win, \
 		vars->mlx_data.img, 0, 0);
+}
+
+static void	normalize_vector_space(t_vars *vars)
+{
+	t_4x4matrix	rotate_matrix;
+	t_4x4matrix	inverse_matrix;
+
+	rotate_matrix = get_rotate_matrix(&vars->camera);
+	vars->camera.direct_v = vec3(0, 0, -1);
+	inverse_matrix = get_inverse_matrix(rotate_matrix);
+	rotate_object_and_light(vars, inverse_matrix);
+	vars->camera.view_point = vec3(0, 0, 0);
+	update_viewport(vars);
 }

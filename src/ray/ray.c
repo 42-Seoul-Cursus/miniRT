@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 00:15:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 23:11:39 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 20:20:34 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
 #include "utils.h"
 
 t_ray	ray(t_point3 orig, t_vec3 dir)
