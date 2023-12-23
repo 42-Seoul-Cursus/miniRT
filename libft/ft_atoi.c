@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 14:50:29 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 23:33:29 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	make_int(const char *s, int *num, int *neg)
 	while (ft_isdigit(*s))
 	{
 		if (*num > INT_MAX / 10 || (*num == INT_MAX / 10 && *s > '7'))
-			ft_error("File Format Error");
+			ft_error("File Format Error (Integer Overflow)");
 		*num = *num * 10 + *s - '0';
 		++s;
 	}
