@@ -15,6 +15,7 @@ all: $(NOM)
 	@echo "\033[32m$(NOM) created successfully\033[0m"
 
 $(NOM):	$(OBJ)
+	@echo "\033[37mCreating $@\033[0m"
 	@ar -cr $(NOM) $(OBJ)
 	@ranlib $(NOM)
 
