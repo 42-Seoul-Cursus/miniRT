@@ -1,5 +1,6 @@
 name: "코드 수정"
 description: 코드 수정 Issue 작성 양식입니다.
+labels: ["modify"]
 body:
   - type: markdown
     attributes:
