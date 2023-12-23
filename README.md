@@ -3,6 +3,15 @@
 ## Project Overview
 miniRT is a simple 3D graphic renderer using ray tracing. This project is created to enhance understanding of computer graphics and ray tracing principles.
 
+![rainbow_sphere.rt](img/rainbow.png)
+
+<details>
+<summary><b style="font-size:25px">More images!</b></summary>
+<img src="img/sphere.png" width=900 alt="parallel_light.rt"/>
+scene: scenes/parallel_light.rt
+
+</details>
+
 ## Getting Started
 
 ### System Requirements
