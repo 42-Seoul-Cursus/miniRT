@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 14:30:26 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 15:06:13 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,23 @@ int	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
 
 static int	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
 {
-	t_point3	p;
 	double		t_sm;
 	double		t_lg;
 
 	if (!has_real_roots(cy, r, &t_sm, &t_lg))
 		return (0);
-	p = ray_at(r, t_sm);
-	if (!is_point_on_cylinder(cy, rec, p, t_sm))
+	rec->p = ray_at(r, t_sm);
+	rec->color = cy->r_rgb;
+	if (!is_point_on_cylinder(cy, rec, rec->p, t_sm))
 	{
-		p = ray_at(r, t_lg);
-		if (!is_point_on_cylinder(cy, rec, p, t_lg))
+		rec->p = ray_at(r, t_lg);
+		if (!is_point_on_cylinder(cy, rec, rec->p, t_lg))
 			return (0);
-		rec->t = t_lg;
-		rec->color = cy->r_rgb;
-		rec->p = p;
 		rec->normal = get_cylinder_normal_v(cy, r, rec);
+		rec->t = t_lg;
 		return (1);
 	}
 	rec->t = t_sm;
-	rec->color = cy->r_rgb;
-	rec->p = p;
 	rec->normal = get_cylinder_normal_v(cy, r, rec);
 	return (1);
 }
@@ -86,19 +82,20 @@ static int	has_real_roots(t_cylinder *cy, t_ray *r, \
 	double	c;
 	double	oc;
 
+
 	a = v_length2(\
 		v_minus(r->dir, vt_mul(cy->normal_v, v_dot(r->dir, cy->normal_v))));
-	b = 2 * v_dot(v_minus(r->dir, vt_mul(cy->normal_v, v_dot(\
+	b = v_dot(v_minus(r->dir, vt_mul(cy->normal_v, v_dot(\
 		r->dir, cy->normal_v))), v_minus(v_minus(r->orig, cy->center), vt_mul(\
 		cy->normal_v, v_dot(v_minus(r->orig, cy->center), cy->normal_v))));
 	c = v_length2(v_minus(v_minus(r->orig, cy->center), vt_mul(cy->normal_v, \
 		v_dot(v_minus(r->orig, cy->center), cy->normal_v)))) \
 		- pow(cy->radius, 2);
-	oc = b * b - 4 * a * c;
-	if (oc <= 0 || a == 0)
+	oc = b * b - a * c;
+	if (oc < 0 || a == 0)
 		return (0);
-	*t_sm = (-b - sqrt(oc)) / (2 * a);
-	*t_lg = (-b + sqrt(oc)) / (2 * a);
+	*t_sm = (-b - sqrt(oc)) / a;
+	*t_lg = (-b + sqrt(oc)) / a;
 	if (*t_sm > *t_lg)
 	{
 		c = *t_lg;
