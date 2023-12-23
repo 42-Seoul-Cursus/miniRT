@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:16:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:21:47 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parse.h"
+#include "mlx.h"
+#include <stdio.h>
 
 static t_checker_map	*gen_checker_board(char *line);
 static t_uv_map			*gen_bump_map(char *line, t_vars *vars);
@@ -57,11 +59,23 @@ static t_uv_map	*gen_bump_map(char *line, t_vars *vars)
 
 	out = ft_calloc(1, sizeof(t_uv_map));
 	out->texture = ft_calloc(1, sizeof(t_uv_data));
-	out->texture->path = parse_path(&line);
-	out->texture->mlx = vars->mlx_data.mlx;
 	out->normal = ft_calloc(1, sizeof(t_uv_data));
-	out->normal->path = parse_path(&line);
+	out->texture->mlx = vars->mlx_data.mlx;
 	out->normal->mlx = vars->mlx_data.mlx;
+	out->texture->img = mlx_xpm_file_to_image(out->texture->mlx, \
+	parse_path(&line), &out->texture->width, &out->texture->height);
+	out->normal->img = mlx_xpm_file_to_image(out->normal->mlx, \
+	parse_path(&line), &out->normal->width, &out->normal->height);
+	if (!out->texture->img || !out->normal->img)
+		ft_error("mlx_xpm_file_to_image error");
+	out->texture->addr = mlx_get_data_addr(\
+	out->texture->img, &out->texture->bits_per_pixel, \
+	&out->texture->line_length, &out->texture->endian);
+	out->normal->addr = mlx_get_data_addr(\
+	out->normal->img, &out->normal->bits_per_pixel, \
+	&out->normal->line_length, &out->normal->endian);
+	if (!out->texture->addr || !out->normal->addr)
+		ft_error("mlx_get_data_addr error");
 	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
 	check_uv_map(out);

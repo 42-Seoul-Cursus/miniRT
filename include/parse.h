@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:09:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:01:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void			check_sphere(t_sphere *sphere);
 void			check_plane(t_plane *plane);
 void			check_cylinder(t_cylinder *cylinder);
 void			check_cone(t_cone *cone);
+void			check_checker_board(t_checker_map *checker);
 
 // gen_env.c
 void			gen_ambient(t_ambient *ambient, char *line);

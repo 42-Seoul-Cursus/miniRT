@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_objs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:16:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:17:34 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "render.h"
 #include "libft.h"
 #include "utils.h"
+#include <stdlib.h>
 
 void	gen_sphere(t_vars *vars, char *line)
 {
@@ -41,6 +42,7 @@ void	gen_plane(t_vars *vars, char *line)
 	plane->checker = NULL;
 	plane->point = parse_vec(&line);
 	plane->normal_v = parse_vec(&line);
+	plane->normal_v_basis = get_orthogonal_basis(plane->normal_v);
 	plane->i_rgb = parse_vec(&line);
 	check_map(vars, plane, line, PLANE);
 	check_plane(plane);
