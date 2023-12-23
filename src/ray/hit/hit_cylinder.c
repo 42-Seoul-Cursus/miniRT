@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 22:16:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 14:30:26 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ static	t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
 
 	normal_v = v_unit(v_minus(v_minus(rec->p, cy->center), vt_mul(\
 		cy->normal_v, v_dot(cy->normal_v, v_minus(rec->p, cy->center)))));
-	rec->front_face = v_dot(r->dir, rec->normal) < 0;
-	if (!rec->front_face)
+	if (v_dot(r->dir, rec->normal) > 0)
 		vt_mul(rec->normal, -1);
 	return (normal_v);
 }
