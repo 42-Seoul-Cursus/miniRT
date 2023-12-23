@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:03:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 22:16:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:27:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,13 @@ static t_bool	is_point_on_cone(t_cone *cone, t_hit_record *rec, \
 
 void	set_cone_normal(t_cone *cone, t_ray *r, t_hit_record *rec)
 {
-	t_vec3		v;
-	t_vec3		cp;
+	t_vec3	v;
+	t_vec3	cp;
 
 	cp = v_minus(rec->p, cone->apex);
 	v = v_unit(v_minus(cone->center, cone->apex));
 	rec->normal = v_unit(v_minus(cp, vt_mul(v, \
 		(v_length2(cp) / v_dot(cp, v)))));
-	rec->front_face = v_dot(r->dir, rec->normal) < 0;
-	if (!rec->front_face)
+	if (v_dot(r->dir, rec->normal) >= 0)
 		rec->normal = vt_mul(rec->normal, -1);
 }

@@ -6,13 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/16 13:44:10 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:15:47 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "utils.h"
 #include "libft.h"
-#include <stdlib.h>
 
 t_vec3	v_cross(t_vec3 vec, t_vec3 vec2)
 {
@@ -30,10 +30,7 @@ t_vec3	v_unit(t_vec3 vec)
 
 	len = v_length(vec);
 	if (len == 0)
-	{
-		ft_putstr_fd("Error\n0 is not divisible", 2);
-		exit(EXIT_FAILURE);
-	}
+		ft_error("0 is not divisible");
 	vec.x /= len;
 	vec.y /= len;
 	vec.z /= len;

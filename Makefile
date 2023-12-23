@@ -8,9 +8,9 @@ MEMORY = -g3 -fsanitize=address
 LLDB = -g
 
 RM = rm -f
-INCLUDE = -I./include -I./src/mlx -I./src/libft
-LIBFT = src/libft/libft.a
-MLX = src/mlx/libmlx.a
+INCLUDE = -I./include -I./mlx -I./libft
+LIBFT = libft/libft.a
+MLX = mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
 
 SRC_DIR = src
@@ -56,21 +56,21 @@ $(NAME): $(MLX) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 
 $(MLX):
-	$(MAKE) -C $(SRC_DIR)/mlx
+	$(MAKE) -C ./mlx
 
 $(LIBFT):
-	$(MAKE) -C $(SRC_DIR)/libft
+	$(MAKE) -C ./libft
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDE)
 
 clean:
-	$(MAKE) clean -C $(SRC_DIR)/mlx
-	$(MAKE) clean -C $(SRC_DIR)/libft
+	$(MAKE) clean -C ./mlx
+	$(MAKE) clean -C ./libft
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(SRC_DIR)/libft
+	$(MAKE) fclean -C ./libft
 	$(RM) $(NAME)
 
 re:
@@ -79,12 +79,12 @@ re:
 
 mem:
 	$(MAKE) fclean
-	$(MAKE) mem -C $(SRC_DIR)/libft
+	$(MAKE) mem -C ./libft
 	$(MAKE) all CFLAGS="$(MEMORY)"
 
 lldb:
 	$(MAKE) fclean
-	$(MAKE) lldb -C $(SRC_DIR)/libft
+	$(MAKE) lldb -C ./libft
 	$(MAKE) all CFLAGS="$(LLDB)"
 
 .PHONY: all clean fclean re mem lldb

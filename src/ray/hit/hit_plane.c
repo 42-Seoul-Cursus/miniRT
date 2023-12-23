@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:52:46 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 20:04:25 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:26:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,39 @@
 #include "utils.h"
 #include "ray.h"
 #include "render.h"
+
+static t_color3	get_checkmap_color(t_plane *plane, t_hit_record *rec);
+static t_color3	get_uv_color(t_plane *plane, t_hit_record *rec, t_uv_data *uv);
+static t_vec3	get_bump_vector(t_color3 bump_color);
+
+t_bool	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
+{
+	double	denom;
+	double	t;
+
+	denom = v_dot(plane->normal_v, ray->dir);
+	if (fabs(denom) < 1e-6)
+		return (FALSE);
+	t = v_dot(v_minus(plane->point, ray->orig), plane->normal_v) / denom;
+	if (t < rec->tmin || t > rec->tmax)
+		return (FALSE);
+	rec->t = t;
+	rec->p = ray_at(ray, t);
+	rec->normal = plane->normal_v;
+	if (v_dot(ray->dir, rec->normal) >= 0)
+		rec->normal = vt_mul(rec->normal, -1);
+	if (!plane->checker && !plane->uvmap)
+		rec->color = plane->r_rgb;
+	else if (plane->uvmap)
+	{
+		rec->color = get_uv_color(plane, rec, plane->uvmap->texture);
+		rec->normal = mv_mul(get_orthogonal_basis(rec->normal), vec4(\
+		get_bump_vector(get_uv_color(plane, rec, plane->uvmap->normal)), 1));
+	}
+	else if (plane->checker)
+		rec->color = get_checkmap_color(plane, rec);
+	return (TRUE);
+}
 
 static t_color3	get_checkmap_color(t_plane *plane, t_hit_record *rec)
 {
@@ -55,33 +88,4 @@ static t_vec3	get_bump_vector(t_color3 bump_color)
 
 	bump_vector = v_minus(vt_mul(bump_color, 2.0), vec3(1, 1, 1));
 	return (v_unit(bump_vector));
-}
-
-t_bool	hit_plane(t_plane *plane, t_ray *ray, t_hit_record *rec)
-{
-	double	denom;
-	double	t;
-
-	denom = v_dot(plane->normal_v, ray->dir);
-	if (fabs(denom) < 1e-6)
-		return (FALSE);
-	t = v_dot(v_minus(plane->point, ray->orig), plane->normal_v) / denom;
-	if (t < rec->tmin || t > rec->tmax)
-		return (FALSE);
-	rec->t = t;
-	rec->p = ray_at(ray, t);
-	rec->normal = plane->normal_v;
-	if (v_dot(ray->dir, rec->normal) > 0)
-		rec->normal = vt_mul(rec->normal, -1);
-	if (!plane->checker && !plane->uvmap)
-		rec->color = plane->r_rgb;
-	else if (plane->uvmap)
-	{
-		rec->color = get_uv_color(plane, rec, plane->uvmap->texture);
-		rec->normal = mv_mul(get_orthogonal_basis(rec->normal), vec4(\
-		get_bump_vector(get_uv_color(plane, rec, plane->uvmap->normal)), 1));
-	}
-	else if (plane->checker)
-		rec->color = get_checkmap_color(plane, rec);
-	return (TRUE);
 }

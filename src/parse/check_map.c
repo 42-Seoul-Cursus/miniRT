@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 16:21:47 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 20:30:21 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 #include "parse.h"
 #include "mlx.h"
-#include <stdio.h>
 
 static t_checker_map	*gen_checker_board(char *line);
 static t_uv_map			*gen_bump_map(char *line, t_vars *vars);
@@ -78,7 +78,6 @@ static t_uv_map	*gen_bump_map(char *line, t_vars *vars)
 		ft_error("mlx_get_data_addr error");
 	if (*line != '\n' && *line != '\0')
 		ft_error("File Format Error");
-	check_uv_map(out);
 	return (out);
 }
 

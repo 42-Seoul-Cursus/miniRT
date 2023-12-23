@@ -6,13 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 22:39:01 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 19:58:54 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:19:10 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "utils.h"
-#include "render.h"
 #include "parse.h"
 
 void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)

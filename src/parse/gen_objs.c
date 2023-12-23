@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   gen_objs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 16:17:34 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 20:49:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdlib.h>
 #include "parse.h"
 #include "render.h"
 #include "libft.h"
 #include "utils.h"
-#include <stdlib.h>
 
 void	gen_sphere(t_vars *vars, char *line)
 {
@@ -46,6 +46,7 @@ void	gen_plane(t_vars *vars, char *line)
 	plane->i_rgb = parse_vec(&line);
 	check_map(vars, plane, line, PLANE);
 	check_plane(plane);
+	plane->normal_v = v_unit(plane->normal_v);
 	plane->r_rgb = get_color_int_to_real(plane->i_rgb);
 	ft_lstadd_back(&(vars->objects), ft_lstnew(plane, PLANE));
 }

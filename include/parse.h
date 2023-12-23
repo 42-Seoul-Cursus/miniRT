@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:38:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 20:01:16 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:41:31 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ double			parse_double(char **line);
 t_vec3			parse_vec(char **line);
 
 // check_utils.c
-int				check_range(double dst, double from, double to);
-int				check_vec(t_vec3 vec, double from, double to, t_bool is_int);
+t_bool			check_range(double dst, double from, double to);
+t_bool			check_vec(t_vec3 vec, double from, double to, t_bool is_int);
 
 // check_map.c
 void			check_map(t_vars *vars, void *content, \
@@ -36,7 +36,6 @@ void			check_map(t_vars *vars, void *content, \
 void			check_ambient(t_ambient *ambient);
 void			check_camera(t_camera *camera);
 void			check_light(t_light *light);
-void			check_uv_map(t_uv_map *uvmap);
 void			check_checker_board(t_checker_map *checker);
 
 // check_objs.c
@@ -44,7 +43,6 @@ void			check_sphere(t_sphere *sphere);
 void			check_plane(t_plane *plane);
 void			check_cylinder(t_cylinder *cylinder);
 void			check_cone(t_cone *cone);
-void			check_checker_board(t_checker_map *checker);
 
 // gen_env.c
 void			gen_ambient(t_ambient *ambient, char *line);

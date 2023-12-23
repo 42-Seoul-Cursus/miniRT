@@ -6,21 +6,20 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:11:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 18:21:23 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:31:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "parse.h"
 
-int	check_range(double dst, double from, double to)
+t_bool	check_range(double dst, double from, double to)
 {
 	if (from <= dst && dst <= to)
 		return (TRUE);
 	return (FALSE);
 }
 
-int	check_vec(t_vec3 vec, double from, double to, t_bool is_int)
+t_bool	check_vec(t_vec3 vec, double from, double to, t_bool is_int)
 {
 	int	integer;
 

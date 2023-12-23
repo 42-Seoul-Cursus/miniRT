@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:57:16 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/22 16:24:38 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 20:21:05 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "ray.h"
 #include <math.h>
 #include <stdlib.h>
+#include "utils.h"
+#include "ray.h"
 
 /* sphere, plane, cylinder 판별식에 ray를 쏴서 맞으면 is_hit = 1 */
 t_bool	hit_obj(t_list *object, t_ray *ray, t_hit_record *rec)

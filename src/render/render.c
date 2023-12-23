@@ -6,11 +6,10 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:25:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 22:48:56 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:18:49 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
 #include "utils.h"
 #include "render.h"
 #include "ray.h"

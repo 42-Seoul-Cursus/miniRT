@@ -6,12 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:39:43 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/14 20:11:59 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:15:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include <math.h>
+#include "utils.h"
 
 double	v_length2(const t_vec3 vec)
 {

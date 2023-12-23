@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:10 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/17 18:19:54 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 20:47:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ void	check_light(t_light *light)
 		ft_error("File Format Error");
 	if (!check_vec(light->i_rgb, 0, 255, TRUE))
 		ft_error("File Format Error");
-}
-
-void	check_uv_map(t_uv_map *uvmap)
-{
-	(void) uvmap;
 }
 
 void	check_checker_board(t_checker_map *checker)
