@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:12:43 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/22 14:03:47 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/22 21:52:57 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_color3		get_color_int_to_real(t_color3 i_rgb);
 t_color3		get_color_real_to_int(t_color3 r_rgb);
 int				create_trgb(int t, t_color3 *color);
 void			my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color);
-unsigned int	extract_uv_color(t_mlx_data *data, int x, int y);
+unsigned int	extract_uv_color(t_uv_data *data, int x, int y);
 
 // mlx.c
 void		reset_mlx(t_mlx_data *mlx_data);

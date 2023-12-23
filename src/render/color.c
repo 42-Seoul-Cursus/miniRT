@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:48:22 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/22 14:03:03 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 02:10:15 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	my_mlx_pixel_put(t_mlx_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-unsigned int	extract_uv_color(t_mlx_data *data, int x, int y)
+unsigned int	extract_uv_color(t_uv_data *data, int x, int y)
 {
 	char	*dst;
 

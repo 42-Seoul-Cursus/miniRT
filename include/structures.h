@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/22 16:00:07 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 14:29:44 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ struct s_vec4
 	double	w;
 };
 
+struct s_4x4matrix
+{
+	t_vec4	r1;
+	t_vec4	r2;
+	t_vec4	r3;
+	t_vec4	r4;
+};
+
 struct s_ambient
 {
 	double		lighting_ratio;
@@ -95,18 +103,6 @@ struct s_light
 	t_color3	r_rgb;
 };
 
-<<<<<<< HEAD
-/*
-struct s_textmap
-{
-	t_text_data	texture;
-	t_text_data	normal;
-}
-
-struct s_text_data
-{
-	char	*path;
-=======
 struct s_uv_map
 {
 	t_uv_data		*texture;
@@ -117,7 +113,6 @@ struct s_uv_data
 {
 	char	*path;
 	void	*mlx;
->>>>>>> main
 	void	*addr;
 	void	*img;
 	int		bits_per_pixel;
@@ -125,17 +120,9 @@ struct s_uv_data
 	int		endian;
 	int		width;
 	int		height;
-<<<<<<< HEAD
-}
-*/
-// s_uvmap => s_check_map
-
-struct s_uvmap
-=======
 };
 
 struct s_checker_map
->>>>>>> main
 {
 	t_color3	rgb1;
 	t_color3	rgb2;
@@ -161,6 +148,7 @@ struct s_plane
 	t_color3		r_rgb;
 	t_uv_map		*uvmap;
 	t_checker_map	*checker;
+	t_4x4matrix		normal_v_basis;
 };
 
 struct s_cylinder
@@ -210,7 +198,6 @@ struct s_hit_record
 	double		tmin;
 	double		tmax;
 	double		t;
-	int			front_face;
 	t_color3	color;
 };
 
@@ -229,14 +216,6 @@ struct s_vars
 	int				t_height;
 	int				n_width;
 	int				n_height;
-};
-
-struct s_4x4matrix
-{
-	t_vec4	r1;
-	t_vec4	r2;
-	t_vec4	r3;
-	t_vec4	r4;
 };
 
 enum	e_type
