@@ -49,6 +49,7 @@ t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);
 // utils.c
 void		is_valid_arg(int ac, char *av[]);
 void		init_vars(t_vars *vars);
+void		swap_double(double *a, double *b);
 
 // rotate_utils.c
 t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);

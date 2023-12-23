@@ -20,7 +20,7 @@ static t_bool	has_real_roots(t_cylinder *cy, t_ray *r, \
 				double *t_sm, double *t_lg);
 static t_bool	is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
 				t_point3 p, double t);
-static t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
+static void		set_cylinder_normal(t_cylinder *cy, t_ray *r, \
 				t_hit_record *rec);
 
 t_bool	hit_cylinder(t_cylinder *cylinder, t_ray *ray, t_hit_record *rec)
@@ -58,7 +58,9 @@ static t_bool	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
 	double		t_lg;
 
 	if (!has_real_roots(cy, r, &t_sm, &t_lg))
-		return (0);
+		return (FALSE);
+	if (t_sm > t_lg)
+		swap_double(&t_sm, &t_lg);
 	p = ray_at(r, t_sm);
 	if (!is_point_on_cylinder(cy, rec, p, t_sm))
 	{
@@ -68,13 +70,13 @@ static t_bool	hit_cylinder_body(t_cylinder *cy, t_ray *r, t_hit_record *rec)
 		rec->t = t_lg;
 		rec->color = cy->r_rgb;
 		rec->p = p;
-		rec->normal = get_cylinder_normal_v(cy, r, rec);
+		set_cylinder_normal(cy, r, rec);
 		return (TRUE);
 	}
 	rec->t = t_sm;
 	rec->color = cy->r_rgb;
 	rec->p = p;
-	rec->normal = get_cylinder_normal_v(cy, r, rec);
+	set_cylinder_normal(cy, r, rec);
 	return (TRUE);
 }
 
@@ -99,12 +101,6 @@ static t_bool	has_real_roots(t_cylinder *cy, t_ray *r, \
 		return (FALSE);
 	*t_sm = (-b - sqrt(oc)) / (2 * a);
 	*t_lg = (-b + sqrt(oc)) / (2 * a);
-	if (*t_sm > *t_lg)
-	{
-		c = *t_lg;
-		*t_lg = *t_sm;
-		*t_sm = c;
-	}
 	return (TRUE);
 }
 
@@ -118,15 +114,12 @@ static t_bool	is_point_on_cylinder(t_cylinder *cy, t_hit_record *rec, \
 	return (FALSE);
 }
 
-static	t_vec3	get_cylinder_normal_v(t_cylinder *cy, t_ray *r, \
+static void	set_cylinder_normal(t_cylinder *cy, t_ray *r, \
 		t_hit_record *rec)
 {
-	t_vec3	normal_v;
-
-	normal_v = v_unit(v_minus(v_minus(rec->p, cy->center), vt_mul(\
+	rec->normal = v_unit(v_minus(v_minus(rec->p, cy->center), vt_mul(\
 		cy->normal_v, v_dot(cy->normal_v, v_minus(rec->p, cy->center)))));
 	rec->front_face = v_dot(r->dir, rec->normal) < 0;
 	if (!rec->front_face)
-		vt_mul(rec->normal, -1);
-	return (normal_v);
+		rec->normal = vt_mul(rec->normal, -1);
 }

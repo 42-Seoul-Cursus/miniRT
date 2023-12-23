@@ -32,20 +32,12 @@ void	rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 		((t_cylinder *)cur->content)->center = get_rotate_point(\
 			((t_cylinder *)cur->content)->center, view_point, rotate);
 		((t_cylinder *)cur->content)->normal_v = rotate_vec3(rotate, \
-			((t_plane *)cur->content)->normal_v);
+			((t_cylinder *)cur->content)->normal_v);
 		gen_cylinder_cap((t_cylinder *)cur->content, FALSE);
-	}
-	else if (cur->type == CONE)
-	{
-		((t_cone *)cur->content)->center = get_rotate_point(\
-			((t_cone *)cur->content)->center, view_point, rotate);
-		((t_cone *)cur->content)->normal_v = rotate_vec3(rotate, \
-			((t_plane *)cur->content)->normal_v);
-		gen_cone_cap((t_cone *)cur->content, FALSE);
 	}
 }
 
-void	rotate_right(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
+void	rotate_light(t_list *cur, t_4x4matrix rotate, t_point3 view_point)
 {
 	((t_light *)cur->content)->light_point = v_minus(\
 			((t_light *)cur->content)->light_point, view_point);
@@ -61,12 +53,20 @@ void	rotate_object_and_light(t_vars *vars, t_4x4matrix rotate)
 	while (cur)
 	{
 		rotate_obj(cur, rotate, vars->camera.view_point);
+		if (cur->type == CONE)
+		{
+			((t_cone *)cur->content)->center = get_rotate_point(((t_cone *) \
+				cur->content)->center, vars->camera.view_point, rotate);
+			((t_cone *)cur->content)->normal_v = rotate_vec3(rotate, \
+				((t_cone *)cur->content)->normal_v);
+			gen_cone_cap((t_cone *)cur->content, FALSE);
+		}
 		cur = cur->next;
 	}
 	cur = vars->light;
 	while (cur)
 	{
-		rotate_right(cur, rotate, vars->camera.view_point);
+		rotate_light(cur, rotate, vars->camera.view_point);
 		cur = cur->next;
 	}
 }

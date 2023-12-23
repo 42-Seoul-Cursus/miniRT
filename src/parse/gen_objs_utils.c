@@ -42,6 +42,7 @@ void	gen_cone_cap(t_cone *cone, t_bool is_first)
 		cone->bottom.uvmap = cone->uvmap;
 		cone->bottom.checker = cone->checker;
 	}
+	cone->apex = v_plus(cone->center, vt_mul(cone->normal_v, cone->height));
 	cone->bottom.normal_v = vt_mul(cone->normal_v, -1);
 	cone->bottom.point = cone->center;
 }

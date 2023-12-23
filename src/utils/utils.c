@@ -42,3 +42,12 @@ void	init_vars(t_vars *vars)
 	vars->light = NULL;
 	vars->objects = NULL;
 }
+
+void	swap_double(double *a, double *b)
+{
+	double	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}

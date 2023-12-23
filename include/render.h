@@ -31,9 +31,9 @@ void		world2view(t_vars *vars);
 void		update_viewport(t_vars *vars);
 void		rotate_object_and_light(t_vars *vars, t_4x4matrix rotate);
 void		rotate_obj(t_list *cur, t_4x4matrix rotate, t_point3 view_point);
-void		rotate_right(t_list *cur, t_4x4matrix rotate, t_point3 view_point);
+void		rotate_light(t_list *cur, t_4x4matrix rotate, t_point3 view_point);
 
-// print.c
+// render.c
 void		render(t_vars *vars);
 
 #endif

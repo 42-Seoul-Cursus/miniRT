@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "parse.h"
 #include "render.h"
 #include "libft.h"
@@ -83,6 +84,7 @@ void	gen_cone(t_vars *vars, char *line)
 	check_cone(cone);
 	cone->normal_v = v_unit(cone->normal_v);
 	cone->r_rgb = get_color_int_to_real(cone->i_rgb);
+	cone->half_angle = tan(cone->radius / cone->height);
 	gen_cone_cap(cone, TRUE);
 	ft_lstadd_back(&(vars->objects), ft_lstnew(cone, CONE));
 }

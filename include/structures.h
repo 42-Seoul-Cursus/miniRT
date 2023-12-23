@@ -166,6 +166,8 @@ struct s_cone
 	double			height;
 	t_color3		i_rgb;
 	t_color3		r_rgb;
+	t_point3		apex;
+	double			half_angle;
 	t_plane			bottom;
 	t_uv_map		*uvmap;
 	t_checker_map	*checker;
