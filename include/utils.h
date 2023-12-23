@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 20:10:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/21 16:34:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:10:46 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_4x4matrix	_4x4matrix(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
 t_vec3		mv_mul(t_4x4matrix m, t_vec4 v);
 t_4x4matrix	get_rotate_matrix(t_camera *camera);
 t_4x4matrix	get_inverse_matrix(t_4x4matrix rotate);
+t_4x4matrix	get_orthogonal_basis(t_vec3	v1);
 
 // utils.c
 void		is_valid_arg(int ac, char *av[]);

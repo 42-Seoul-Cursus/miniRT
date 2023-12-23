@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:37:44 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 00:27:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 16:17:14 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
-# ifndef NULL
-#  define NULL (void *)0
-# endif
 
 # define WIDTH	1440
 # define HEIGHT	920
@@ -58,6 +54,14 @@ struct s_vec4
 	double	y;
 	double	z;
 	double	w;
+};
+
+struct s_4x4matrix
+{
+	t_vec4	r1;
+	t_vec4	r2;
+	t_vec4	r3;
+	t_vec4	r4;
 };
 
 struct s_ambient
@@ -140,6 +144,7 @@ struct s_plane
 	t_color3		r_rgb;
 	t_uv_map		*uvmap;
 	t_checker_map	*checker;
+	t_4x4matrix		normal_v_basis;
 };
 
 struct s_cylinder
@@ -189,7 +194,6 @@ struct s_hit_record
 	double		tmin;
 	double		tmax;
 	double		t;
-	int			front_face;
 	t_color3	color;
 };
 
@@ -202,14 +206,12 @@ struct s_vars
 	t_ray			ray;
 	t_hit_record	rec;
 	t_mlx_data		mlx_data;
-};
-
-struct s_4x4matrix
-{
-	t_vec4	r1;
-	t_vec4	r2;
-	t_vec4	r3;
-	t_vec4	r4;
+	t_mlx_data		texture;
+	t_mlx_data		normal;
+	int				t_width;
+	int				t_height;
+	int				n_width;
+	int				n_height;
 };
 
 enum	e_type

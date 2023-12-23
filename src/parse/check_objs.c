@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_objs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:15:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/15 16:36:51 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 00:29:51 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	check_cylinder(t_cylinder *cylinder)
 {
 	check_vec(cylinder->normal_v, -1, 1, FALSE);
 	check_vec(cylinder->i_rgb, 0, 255, TRUE);
-}
-
-void	check_uv_map(t_uv_map *uvmap)
-{
-	(void) uvmap;
 }
 
 void	check_checker_board(t_checker_map *checker)

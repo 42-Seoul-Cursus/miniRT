@@ -6,7 +6,7 @@
 /*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:30:55 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/21 23:26:13 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 16:24:17 by sunko            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 #include "ray.h"
 #include <math.h>
 #include <stdlib.h>
+#include "mlx.h"
 
 /* P - C: 법선 벡터
 정규화된 법선 벡터: (P - C) / r */
-static t_vec3	get_sphere_normal_v(t_sphere *sphere, t_hit_record *rec)
-{
-	t_vec3	normal_v;
-
-	normal_v = v_unit(v_minus(rec->p, sphere->center));
-	return (normal_v);
-}
 
 static int	update_nearest_hit_point(double a, \
 	double b, double c, t_hit_record *rec)
@@ -46,7 +40,7 @@ static int	update_nearest_hit_point(double a, \
 	return (1);
 }
 
-static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec)
+static t_color3	get_checkmap_color(t_sphere *sphere, t_hit_record *rec)
 {
 	t_vec3	d;
 	double	theta;
@@ -66,6 +60,28 @@ static t_color3	get_uvmap_color(t_sphere *sphere, t_hit_record *rec)
 		return (get_color_int_to_real(sphere->checker->rgb2));
 }
 
+static t_color3	get_uv_color(t_sphere *sphere, t_hit_record *rec, t_uv_data *uv)
+{
+	double			u;
+	double			v;
+	unsigned int	color;
+	t_color3		v_color;
+
+	u = 1 - (atan2(rec->normal.x, rec->normal.z) / (2 * M_PI) + 0.5);
+	v = 1 - acos(rec->normal.y / sphere->radius) / M_PI;
+	color = extract_uv_color(uv, floor(u * uv->width), floor(v * uv->height));
+	v_color = color3((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF);
+	return (get_color_int_to_real(v_color));
+}
+
+static t_vec3	get_bump_vector(t_color3 bump_color)
+{
+	t_vec3	bump_vec;
+
+	bump_vec = v_unit(v_minus(vt_mul(bump_color, 2.0), vec3(1, 1, 1)));
+	return (bump_vec);
+}
+
 int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
 	double	a;
@@ -79,13 +95,18 @@ int	hit_sphere(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 	if (b * b - a * c < 0 || update_nearest_hit_point(a, b, c, rec) == 0)
 		return (0);
 	rec->p = ray_at(ray, rec->t);
-	rec->normal = get_sphere_normal_v(sphere, rec);
-	if (sphere->checker == NULL)
-		rec->color = sphere->r_rgb;
-	else
-		rec->color = get_uvmap_color(sphere, rec);
-	rec->front_face = v_dot(ray->dir, rec->normal) < 0;
-	if (!rec->front_face)
+	rec->normal = v_unit(v_minus(rec->p, sphere->center));
+	if (v_dot(ray->dir, rec->normal) > 0)
 		rec->normal = vt_mul(rec->normal, -1);
+	if (!sphere->checker && !sphere->uvmap)
+		rec->color = sphere->r_rgb;
+	else if (sphere->uvmap)
+	{
+		rec->color = get_uv_color(sphere, rec, sphere->uvmap->texture);
+		rec->normal = mv_mul(get_orthogonal_basis(rec->normal), vec4(\
+		get_bump_vector(get_uv_color(sphere, rec, sphere->uvmap->normal)), 1));
+	}
+	else if (sphere->checker)
+		rec->color = get_checkmap_color(sphere, rec);
 	return (1);
 }
