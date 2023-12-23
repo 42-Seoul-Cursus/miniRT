@@ -12,13 +12,14 @@ CFLAGS+=-O2
 CFLAGS+= -DSTRINGPUTX11
 
 all: $(NOM)
+	@echo "\033[32m$(NOM) created successfully\033[0m"
 
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@ar -cr $(NOM) $(OBJ)
+	@ranlib $(NOM)
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
 
 re: clean all
