@@ -73,6 +73,7 @@ all: $(NAME)
 	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 $(NAME): $(MLX) $(LIBFT) $(OBJS)
+	@$(CC) $(CFLAGS) $^ -o $(NAME) $(MLXFLAGS)
 	@echo "$(WHITE)Creating $@$(RESET)"
 
 $(MLX):
