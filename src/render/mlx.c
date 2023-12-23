@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 23:21:30 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 20:18:01 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 22:20:34 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	reset_mlx(t_mlx_data *mlx_data)
 {
+	mlx_destroy_image(mlx_data->mlx, mlx_data->img);
 	mlx_data->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
 	if (!mlx_data->img)
 		ft_error("mlx_new_image");

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 22:45:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 20:17:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 22:21:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	rotate_hook(t_vars *vars, int keycode)
 	t_mlx_data	*mlx_data;
 
 	mlx_data = &vars->mlx_data;
-	reset_mlx(mlx_data);
 	if (keycode == ROTATE_LEFT)
 		vars->camera.direct_v = \
 		v_unit(rotate_left_matrix(vars->camera.direct_v));
@@ -35,6 +34,7 @@ void	rotate_hook(t_vars *vars, int keycode)
 	else if (keycode == ROTATE_DOWN)
 		vars->camera.direct_v = \
 		v_unit(rotate_down_matrix(vars->camera.direct_v));
+	reset_mlx(mlx_data);
 	normalize_vector_space(vars);
 	render(vars);
 	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
