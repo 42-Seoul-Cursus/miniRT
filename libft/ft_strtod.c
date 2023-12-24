@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunko <sunko@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 00:14:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/12 11:56:41 by sunko            ###   ########.fr       */
+/*   Updated: 2023/12/23 23:29:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void	make_double(char *s, double *integer, double *fractional, int *neg)
 		ft_error("File Format Error");
 	while (ft_isdigit(*s))
 	{
-		if (*integer >= DBL_MAX / 10)
-			ft_error("File Format Error");
+		if (*integer > INT_MAX / 10 || (*integer == INT_MAX && *s > '7'))
+			ft_error("File Format Error (Integer Overflow)");
 		*integer = *integer * 10 + *s - '0';
 		++s;
 	}

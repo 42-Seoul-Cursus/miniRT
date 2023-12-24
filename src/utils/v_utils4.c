@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 23:43:59 by sunko             #+#    #+#             */
-/*   Updated: 2023/12/23 20:15:47 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/23 22:51:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec3	v_unit(t_vec3 vec)
 
 	len = v_length(vec);
 	if (len == 0)
-		ft_error("0 is not divisible");
+		ft_error("Not divisible by 0");
 	vec.x /= len;
 	vec.y /= len;
 	vec.z /= len;
