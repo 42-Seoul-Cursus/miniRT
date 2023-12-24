@@ -63,6 +63,7 @@ static t_bool	hit_cone_body(t_cone *cone, t_ray *r, t_hit_record *rec)
 		rec->color = cone->r_rgb;
 		rec->p = p;
 		set_cone_normal(cone, r, rec);
+		return (TRUE);
 	}
 	rec->t = t_sm;
 	rec->color = cone->r_rgb;
