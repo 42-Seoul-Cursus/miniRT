@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:37:00 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 23:24:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/24 14:42:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	parse_rt(t_vars *vars, char *path)
 	}
 	if (vars->camera.cnt == 0 || vars->ambient.cnt == 0 || vars->light == NULL)
 		ft_error("Capitalized Identifier Required - \
-			At least one identifier must start with an uppercase letter.");
+At least one identifier must start with an uppercase letter.");
 }
 
 static void	check_identifier(t_vars *vars, char *line)

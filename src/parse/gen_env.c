@@ -6,14 +6,17 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:36:54 by seunan            #+#    #+#             */
-/*   Updated: 2023/12/23 23:03:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/12/24 14:40:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "parse.h"
 #include "utils.h"
 #include "render.h"
 #include "libft.h"
+
+static int	ft_lstsize(t_list *lst);
 
 void	gen_ambient(t_ambient *ambient, char *line)
 {
@@ -60,4 +63,19 @@ void	gen_light(t_list **light, char *line)
 	new->r_rgb = \
 		vt_mul(get_color_int_to_real(new->i_rgb), new->brightness_ratio);
 	ft_lstadd_back(light, ft_lstnew(new, LIGHT));
+	if (ft_lstsize(*light) > 1)
+		ft_error("L: Must be Singular");
+}
+
+static int	ft_lstsize(t_list *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		++size;
+	}
+	return (size);
 }
